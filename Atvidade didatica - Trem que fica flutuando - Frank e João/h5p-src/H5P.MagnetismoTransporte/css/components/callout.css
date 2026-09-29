@@ -1,0 +1,10 @@
+/* Highlighted note used on pages 1, 5 and 8. */
+
+.mt-callout {
+  padding: 1rem 1.15rem;
+  border: 1px solid #b9e9f2;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+.mt-callout--soft { border-color: var(--border); border-left-color: var(--primary); background: var(--card); }

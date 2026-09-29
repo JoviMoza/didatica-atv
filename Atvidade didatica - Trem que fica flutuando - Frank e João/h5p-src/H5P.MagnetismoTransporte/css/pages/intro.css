@@ -1,0 +1,61 @@
+/* ------------------------------ page 1 ------------------------------ */
+
+.mt-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  background: linear-gradient(135deg, #fff 0%, #f1f5ff 100%);
+  box-shadow: var(--shadow);
+}
+.mt-hero__copy { display: flex; flex-direction: column; gap: 0.75rem; }
+.mt-hero__eyebrow { color: var(--primary); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.mt-hero__art svg { display: block; width: 100%; height: auto; }
+.mt-hero__float { animation: mt-float 3.2s ease-in-out infinite; }
+.mt-hero__gap { animation: mt-gap 3.2s ease-in-out infinite; }
+@keyframes mt-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes mt-gap { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+.mt-checklist,
+.mt-howto { display: flex; flex-direction: column; gap: 0.55rem; margin: 0; padding: 0; list-style: none; }
+.mt-checklist li { position: relative; padding-left: 1.75rem; }
+.mt-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  display: grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--success);
+  background: var(--success-soft);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+.mt-howto { counter-reset: howto; }
+.mt-howto li { position: relative; padding-left: 2rem; counter-increment: howto; }
+.mt-howto li::before {
+  content: counter(howto);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  display: grid;
+  width: 1.4rem;
+  height: 1.4rem;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+@media (max-width: 720px) {
+  .mt-hero { grid-template-columns: 1fr; }
+  .mt-hero__art { order: -1; max-width: 360px; }
+}

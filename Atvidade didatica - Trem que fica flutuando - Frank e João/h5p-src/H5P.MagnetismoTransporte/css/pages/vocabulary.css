@@ -1,0 +1,58 @@
+/* ------------------------------ page 2 ------------------------------ */
+
+.mt-token-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.85rem;
+  border: 1px dashed var(--input);
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+}
+.mt-token {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #c8d3ff;
+  border-radius: 999px;
+  color: var(--primary);
+  background: #fff;
+  font-weight: 650;
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  touch-action: manipulation;
+}
+.mt-token:hover { border-color: var(--primary); }
+.mt-token.is-selected { color: #fff; background: var(--primary); box-shadow: 0 0 0 4px rgba(31, 63, 209, 0.2); }
+
+.mt-reading { font-size: 1.07rem; line-height: 2.35; }
+.mt-slot {
+  display: inline-block;
+  min-width: 8.5rem;
+  margin: 0 0.15rem;
+  padding: 0.05rem 0.7rem;
+  border: 0;
+  border-bottom: 2px dashed var(--primary);
+  border-radius: 8px 8px 0 0;
+  color: var(--muted-foreground);
+  background: var(--primary-soft);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.7;
+  cursor: pointer;
+}
+.mt-slot.is-target { animation: mt-blink 1.2s ease-in-out infinite; }
+.mt-slot.is-drag-over { background: #d6e0ff; }
+.mt-slot.is-correct { border-bottom: 2px solid var(--success); color: var(--success); background: var(--success-soft); font-style: normal; font-weight: 700; cursor: default; opacity: 1; }
+.mt-slot.is-skipped { border-bottom: 2px solid var(--warning); color: var(--warning); background: var(--warning-soft); font-style: normal; font-weight: 700; cursor: default; opacity: 1; }
+.mt-slot.is-wrong { animation: mt-shake 0.35s; background: var(--danger-soft); }
+@keyframes mt-blink { 50% { background: #d6e0ff; } }
+@keyframes mt-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+@media (max-width: 520px) {
+  .mt-reading { line-height: 2.2; }
+  .mt-slot { min-width: 6.5rem; }
+}
+
+@media (forced-colors: active) {
+  .mt-slot.is-correct { border-width: 3px; }
+  .mt-slot.is-skipped { border-width: 3px; }
+}

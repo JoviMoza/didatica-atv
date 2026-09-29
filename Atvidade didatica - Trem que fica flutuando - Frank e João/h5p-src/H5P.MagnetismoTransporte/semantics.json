@@ -1,0 +1,178 @@
+[
+  {
+    "name": "title",
+    "type": "text",
+    "label": "Nome do projeto",
+    "importance": "high",
+    "default": "Magnetismo e Transporte"
+  },
+  {
+    "name": "subtitle",
+    "type": "text",
+    "label": "Subtítulo",
+    "importance": "medium",
+    "optional": true,
+    "default": "Missão MagLev · o trem que flutua"
+  },
+  {
+    "name": "introText",
+    "type": "text",
+    "widget": "html",
+    "label": "Texto de abertura",
+    "importance": "high",
+    "default": "Imagine um trem sem rodas no trilho, deslizando alguns centímetros acima da via, sem encostar em nada. Como isso é possível?\n\nAssista ao vídeo abaixo. Nesta missão você vai descobrir, passo a passo, como os ímãs funcionam, como a eletricidade vira magnetismo e como os trens Maglev usam isso para flutuar e andar.",
+    "tags": [
+      "p",
+      "strong",
+      "em",
+      "br"
+    ]
+  },
+  {
+    "name": "media",
+    "type": "group",
+    "label": "Vídeos",
+    "importance": "high",
+    "fields": [
+      {
+        "name": "introVideoUrl",
+        "type": "text",
+        "label": "Vídeo de abertura",
+        "default": "https://www.youtube.com/watch?v=101Vm_k920E"
+      },
+      {
+        "name": "introVideoTitle",
+        "type": "text",
+        "label": "Título do vídeo de abertura",
+        "default": "Como funciona o experimento"
+      },
+      {
+        "name": "introVideoDescription",
+        "type": "text",
+        "widget": "textarea",
+        "label": "Audiodescrição do vídeo de abertura (página 1)",
+        "importance": "medium",
+        "optional": true,
+        "description": "Texto do botão \"Audiodescrição e resumo do vídeo\", também lido em voz alta pelo botão \"Ouvir\". Uma linha em branco separa parágrafos; linhas no formato \"1:05 — texto\" viram a linha do tempo.",
+        "default": "Resumo: no vídeo do canal Manual do Mundo, o Iberê mostra o Levitron, um brinquedo em que um pião de ímã flutua girando sobre uma base de ímãs. Ele explica por que um ímã sozinho não fica parado no ar, consegue fazer o pião flutuar depois de muitas tentativas e abre dois modelos do aparelho para mostrar o que há dentro.\n\n0:00 — O Iberê apresenta um aparelho de levitação magnética e diz que vai mostrar como ele funciona e o que tem dentro.\n0:44 — Ele mostra dois modelos de Levitron: um comum, que usa só ímãs, e um eletrônico, que usa ímãs e eletroímãs.\n1:04 — Relembra a regra dos ímãs: polos diferentes se atraem e polos iguais se repelem.\n1:45 — Tenta deixar um ímã flutuando sobre outro, com polos iguais frente a frente. O ímã de cima vira e cai. Ele compara com tentar deixar uma chave de fenda em pé: o ponto de equilíbrio perfeito é praticamente impossível de achar.\n2:28 — Explica a solução do Levitron: fazer o ímã de cima girar, como um pião. Algo que gira resiste a mudar a direção do eixo; isso é o efeito giroscópio, o mesmo que dá estabilidade à Terra.\n3:19 — Mostra os ajustes: a base tem três pés com parafusos para deixá-la na horizontal, e o pião recebe arruelas de plástico ou de metal para ficar mais leve ou mais pesado.\n3:58 — Explica que não é \"antigravidade\": a repulsão da base empurra o pião para cima e o peso puxa para baixo. Na altura certa, as duas forças se equilibram, como um cabo de guerra empatado.\n4:45 — Começa as tentativas, com um cronômetro. No início, o pião sai voando, e ele vai acrescentando e tirando peso.\n6:06 — Depois de cerca de 22 minutos e 27 segundos de tentativas, o pião finalmente gira flutuando sobre a base.\n7:12 — Resume: a base empurra o pião para cima, a gravidade puxa para baixo, e o giro dá a estabilidade.\n9:05 — Abre a base do Levitron comum. Dentro há um ímã grande. Com uma folha que mostra o campo magnético, ele vê várias faixas: o ímã tem vários polos norte e sul, e não só dois.\n10:52 — Liga o Levitron eletrônico na tomada. A base tem quatro luzes que ficam mais fortes quando o ímã está na posição certa, e o aparelho se ajusta sozinho, mesmo com peso extra em cima.\n12:25 — Desmonta o modelo eletrônico: há um ímã comum e quatro eletroímãs. Sensores percebem a posição do ímã de cima e deixam os eletroímãs mais fortes ou mais fracos.\n13:20 — Com um detector de campo magnético, mostra que o campo muda quando o aparelho é ligado e desligado da tomada.\n\nLigação com a missão: o modelo eletrônico usa a mesma ideia do trem Maglev de Xangai. Sensores medem a posição, e o computador ajusta a corrente dos eletroímãs para manter o equilíbrio."
+      },
+      {
+        "name": "meissnerVideoUrl",
+        "type": "text",
+        "label": "Vídeo da Página 6",
+        "default": "https://www.youtube.com/watch?v=wPxQm8mdUi8"
+      },
+      {
+        "name": "meissnerVideoTitle",
+        "type": "text",
+        "label": "Título do vídeo da Página 6",
+        "default": "MAGLEVS - Trens de Levitação Magnética"
+      },
+      {
+        "name": "meissnerVideoDescription",
+        "type": "text",
+        "widget": "textarea",
+        "label": "Audiodescrição do vídeo da página 6",
+        "importance": "medium",
+        "optional": true,
+        "description": "Texto do botão \"Audiodescrição e resumo do vídeo\", também lido em voz alta pelo botão \"Ouvir\". Uma linha em branco separa parágrafos; linhas no formato \"1:05 — texto\" viram a linha do tempo.",
+        "default": "Resumo: vídeo do canal Gerando Respostas, projeto de extensão da Universidade Federal do ABC (UFABC). Um narrador explica como os trens de levitação magnética (Maglev) flutuam e andam, onde eles funcionam hoje e quais são suas vantagens e desvantagens. A narração é acompanhada de imagens de trens Maglev.\n\n0:00 — O narrador pergunta como seria viajar a mais de 600 km/h flutuando e apresenta o tema: a levitação magnética e os trens mais rápidos do mundo.\n0:16 — Relembra a regra dos ímãs: polos opostos se atraem e polos iguais se repelem. Diz que é essa força que faz os Maglev flutuarem sem tocar nos trilhos.\n0:34 — Apresenta os três sistemas de um Maglev: a levitação, que mantém o trem suspenso e elimina o atrito; o guiamento, que mantém o trem alinhado na via, sem se deslocar para os lados; e a propulsão, feita por motores lineares. O motor linear é como um motor elétrico desdobrado ao longo dos trilhos: os campos magnéticos se alternam e puxam ou empurram o trem.\n1:00 — Diz que há dois tipos principais de levitação: a suspensão eletromagnética (EMS) e a suspensão eletrodinâmica (EDS).\n1:08 — EMS: eletroímãs na parte de baixo do trem são atraídos por trilhos metálicos da via e mantêm o trem suspenso a cerca de 15 mm. Sensores medem a distância o tempo todo, e um sistema de controle ajusta a corrente milhares de vezes por segundo para o trem não encostar no trilho, mesmo em curvas e inclinações.\n1:48 — O exemplo mais famoso é o Maglev de Xangai, na China. Ele chega a 431 km/h, levita desde a partida e não usa rodas em nenhum momento. Depois de mais de 17 anos de operação, a velocidade foi reduzida para 300 km/h, para durar mais e ser mais eficiente.\n2:07 — EDS: supercondutores ou ímãs permanentes interagem com bobinas instaladas na via. Quando o trem se move, a variação do campo magnético gera correntes nas bobinas, que criam campos opostos e empurram o trem para cima. É a indução eletromagnética.\n2:30 — Diferente do EMS, o EDS só levita com o trem em movimento. Em baixa velocidade, ele usa rodas auxiliares; a partir de cerca de 100 km/h, a repulsão basta para acabar com o contato com os trilhos.\n2:45 — O maior exemplo é o Maglev japonês, que usa supercondutores de nióbio-titânio resfriados com hélio líquido. Nos testes, passou de 600 km/h.\n3:01 — Hoje, trens Maglev com passageiros só funcionam na China e no Japão. Reino Unido e Coreia do Sul já tiveram linhas comerciais, mas elas foram desativadas por custos altos, falta de peças, pouca demanda e riscos técnicos.\n3:44 — A única linha Maglev de alta velocidade em operação no mundo é a de Xangai, que liga o aeroporto de Pudong a uma estação de metrô da cidade.\n3:52 — O Japão constrói, desde 2014, a linha Chuo Shinkansen. A primeira etapa vai ligar Tóquio a Nagoia: 286 km em cerca de 40 minutos, com trens a até 505 km/h e 90% do trajeto em túneis.\n4:14 — Vantagens: velocidades muito maiores que as dos trens comuns; menor consumo de energia, porque só há a resistência do ar, sem atrito com o trilho; menos manutenção e desgaste, já que o trem não encosta na via; e pouco ruído, menos que trens tradicionais e aviões.\n4:50 — Desvantagens: construir a via é muito mais caro que uma ferrovia comum, por causa do controle magnético de alta precisão e da estrutura própria. Além disso, o Maglev não pode usar os trilhos existentes, e toda a linha precisa ser construída do zero.\n5:22 — Impactos: o Maglev pode ser uma alternativa ao avião em médias distâncias, desafogar rodovias e aeroportos e impulsionar áreas da engenharia, como elétrica, automação, materiais e criogenia, usada para resfriar os supercondutores.\n5:49 — Conclui que a levitação magnética já está mudando o transporte, num salto comparável à invenção dos trens e dos aviões. O vídeo termina com a apresentação do Gerando Respostas, em que estudantes de Engenharia de Energia respondem a perguntas.\n\nLigação com a missão: o EMS é o sistema de Xangai e o EDS é o do Japão, os dois apresentados logo abaixo. O motor linear é o mesmo explicado no fim desta página."
+      },
+      {
+        "name": "cobraVideoUrl",
+        "type": "text",
+        "label": "Vídeo do MagLev-Cobra (UFRJ)",
+        "default": "https://www.youtube.com/watch?v=MnR7iTjmSPg&t=63s"
+      },
+      {
+        "name": "cobraVideoTitle",
+        "type": "text",
+        "label": "Título do vídeo do MagLev-Cobra",
+        "default": "01. Maglev Cobra"
+      },
+      {
+        "name": "cobraVideoDescription",
+        "type": "text",
+        "widget": "textarea",
+        "label": "Audiodescrição do vídeo do MagLev-Cobra (página 5)",
+        "importance": "medium",
+        "optional": true,
+        "description": "Texto do botão \"Audiodescrição e resumo do vídeo\", também lido em voz alta pelo botão \"Ouvir\". Uma linha em branco separa parágrafos; linhas no formato \"1:05 — texto\" viram a linha do tempo.",
+        "default": "Resumo: vídeo de apresentação do MagLev-Cobra, trem de levitação magnética desenvolvido no Brasil pela COPPE, da UFRJ. Um narrador descreve o trem, com música ao fundo. Nesta atividade, o vídeo começa em 1:03.\n\n0:00 — Música de abertura.\n0:05 — O narrador apresenta o MagLev-Cobra: compacto, leve e elegante, o primeiro trem de levitação magnética da América Latina, feito para o transporte dentro das cidades e desenvolvido pelo laboratório de supercondutores da COPPE/UFRJ.\n0:22 — O trem não tem rodas e flutua em silêncio sobre os trilhos, a 70 km/h, a mesma velocidade do metrô do Rio de Janeiro.\n0:38 — Não solta poluentes e anda sobre vias elevadas, o que ajuda a desafogar o trânsito. A construção dispensa as obras caras e complicadas dos metrôs e trens comuns.\n1:05 — Diferente dos trens magnéticos de outros países, que usam eletroímãs, o MagLev-Cobra flutua com ímãs permanentes e supercondutores: materiais que, quando resfriados a temperaturas muito baixas, conduzem corrente elétrica sem resistência.\n1:33 — O veículo é formado por módulos ligados entre si, e o conjunto pode crescer conforme o número de passageiros.\n1:46 — O narrador chama o trem de uma resposta ousada ao problema da mobilidade nas grandes cidades. O vídeo termina com a palavra \"sustentável\"."
+      }
+    ]
+  },
+  {
+    "name": "page6Transcript",
+    "type": "text",
+    "widget": "html",
+    "label": "Texto de apoio da Página 6 (o que o vídeo mostra)",
+    "importance": "high",
+    "default": "No vídeo, o canal Gerando Respostas, da UFABC, explica que um trem Maglev depende de três sistemas: a levitação, que mantém o trem suspenso sem atrito com o trilho; o guiamento, que o mantém alinhado na via, sem escapar para os lados; e a propulsão, feita por um motor linear.\n\nExistem dois jeitos principais de levitar. Na suspensão eletromagnética (EMS), usada em Xangai, eletroímãs do trem são atraídos pelo trilho, e sensores ajustam a corrente milhares de vezes por segundo para manter a folga; esse trem flutua desde a partida. Na suspensão eletrodinâmica (EDS), usada no Japão, ímãs supercondutores em movimento induzem correntes nas bobinas da via, que empurram o trem para cima; por isso, ele usa rodas até ganhar velocidade.\n\nHoje, só a China e o Japão têm trens Maglev levando passageiros. O vídeo termina comparando os pontos fortes e fracos dessa tecnologia, que você vê no fim desta página.",
+    "tags": [
+      "p",
+      "strong",
+      "em",
+      "br"
+    ]
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Comportamento",
+    "importance": "medium",
+    "fields": [
+      {
+        "name": "allowRetry",
+        "type": "boolean",
+        "label": "Permitir novas práticas após concluir uma atividade",
+        "default": true
+      },
+      {
+        "name": "reviewAlwaysOpen",
+        "type": "boolean",
+        "label": "Revisão estendida disponível desde o início",
+        "description": "Desativado: a aba abre quando o aluno termina a página 7.",
+        "default": false
+      },
+      {
+        "name": "libras",
+        "type": "boolean",
+        "label": "Mostrar o botão Libras (VLibras)",
+        "description": "Botão no topo que abre o VLibras, tradutor para Libras do Governo Federal. Ele só é carregado de vlibras.gov.br quando o aluno clica, e precisa de internet.",
+        "default": true
+      },
+      {
+        "name": "themes",
+        "type": "boolean",
+        "label": "Mostrar o botão Aparência (temas visuais)",
+        "description": "Botão no topo em que o aluno escolhe o visual: Padrão (o original), Noturno, Caderno ou Sinalização. A escolha fica salva e não muda o progresso.",
+        "default": true
+      },
+      {
+        "name": "language",
+        "type": "select",
+        "label": "Idioma inicial da interface",
+        "description": "O aluno pode trocar a qualquer momento pelo botão PT-BR / EN-US no topo; a escolha fica salva. Os textos deste editor são em português; a versão em inglês fica em js/data/params-en.js.",
+        "options": [
+          { "value": "pt-BR", "label": "Português (Brasil)" },
+          { "value": "en-US", "label": "English (US)" }
+        ],
+        "default": "pt-BR"
+      },
+      {
+        "name": "showMockButton",
+        "type": "boolean",
+        "label": "Exibir botão de resultados simulados",
+        "description": "Ative somente para validação. Também é possível ativar com ?maglevMock=1.",
+        "default": false
+      },
+      {
+        "name": "storageKey",
+        "type": "text",
+        "label": "Prefixo da chave local",
+        "default": "h5p.magnetismo-transporte"
+      }
+    ]
+  }
+]

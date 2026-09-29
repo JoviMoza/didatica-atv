@@ -1,0 +1,16 @@
+# Banco local, segredo de sessão e ambiente: nunca commitar
+portal.db
+portal.db-*
+.secret.key
+.env
+__pycache__/
+*.pyc
+
+# Sistema / editores
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.tmp
+*.log

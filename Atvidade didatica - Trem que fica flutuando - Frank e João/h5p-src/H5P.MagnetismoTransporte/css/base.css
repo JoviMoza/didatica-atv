@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Magnetismo e Transporte — v2
+   Design tokens follow the shadcn/ui semantic naming (background, card,
+   primary, muted, border, ring…) so the visual language stays consistent,
+   but everything is plain CSS: the H5P package has no build step.
+   Palette: light background + deep blue + electric cyan + white.
+   ========================================================================== */
+
+.h5p-mt-host {
+  min-height: 100%;
+  margin: 0;
+  background: #f5f7fb;
+}
+
+.h5p-mt {
+  --background: #f5f7fb;
+  --foreground: #0b1530;
+  --card: #ffffff;
+  --muted: #eef2f8;
+  --muted-foreground: #55627a;
+  --border: #dfe5ef;
+  --input: #cfd8e6;
+  --primary: #1f3fd1;
+  --primary-hover: #1833b0;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e8edff;
+  --deep: #0b1a4a;
+  --accent: #06b6d4;
+  --accent-soft: #e0f8fc;
+  --success: #0f7a4f;
+  --success-soft: #e6f7ef;
+  --danger: #c0321f;
+  --danger-soft: #fdecea;
+  --warning: #8a5a00;
+  --warning-soft: #fff5dc;
+  --ring: #f59e0b;
+  --pole-n: #e2463c;
+  --pole-s: #3c5a9a;
+  --field: #2d5bff;
+  --probe: #f5b301;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(11, 21, 48, 0.06);
+  --shadow: 0 1px 3px rgba(11, 21, 48, 0.06), 0 8px 24px -12px rgba(11, 21, 48, 0.18);
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.h5p-mt *,
+.h5p-mt *::before,
+.h5p-mt *::after {
+  box-sizing: border-box;
+}
+
+/* :where() keeps this reset at class-level specificity, so component
+   classes such as .mt-btn--primary can set their own colors. */
+.h5p-mt :where(button, input, select) {
+  font: inherit;
+  color: inherit;
+}
+
+.h5p-mt h1,
+.h5p-mt h2,
+.h5p-mt h3 {
+  margin: 0;
+  color: var(--foreground);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.h5p-mt h2 { font-size: 1.15rem; font-weight: 700; }
+.h5p-mt h3 { font-size: 1rem; font-weight: 700; }
+.h5p-mt p { margin: 0; }
+
+.h5p-mt a { color: var(--primary); font-weight: 600; text-underline-offset: 3px; }
+
+.h5p-mt :focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.h5p-mt [hidden] { display: none !important; }
+
+.mt-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mt-muted { color: var(--muted-foreground); }
+.mt-small { font-size: 0.875rem; }
+
+.mt-skip {
+  position: absolute;
+  z-index: 50;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  color: #fff !important;
+  background: var(--deep);
+  transform: translateY(-200%);
+}
+.mt-skip:focus { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .h5p-mt *,
+  .h5p-mt *::before,
+  .h5p-mt *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Headings receive focus from code (page changes); keep them outline-free.
+   Interactive controls keep the visible focus ring. */
+.h5p-mt :is(h1, h2)[tabindex="-1"]:focus,
+.h5p-mt :is(h1, h2)[tabindex="-1"]:focus-visible { outline: none; }

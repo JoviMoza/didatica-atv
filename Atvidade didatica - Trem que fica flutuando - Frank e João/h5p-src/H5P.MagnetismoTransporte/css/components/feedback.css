@@ -1,0 +1,8 @@
+/* ------------------------------ feedback ------------------------------ */
+
+.mt-feedback { min-height: 1.5rem; color: var(--muted-foreground); outline: none; }
+.mt-feedback:empty { display: none; }
+.mt-feedback.is-success,
+.mt-feedback.is-error { padding: 0.75rem 0.9rem; border: 1px solid; border-radius: var(--radius-sm); }
+.mt-feedback.is-success { border-color: #b7e4cc; color: #0b5c3b; background: var(--success-soft); }
+.mt-feedback.is-error { border-color: #f5c2bb; color: #8f2415; background: var(--danger-soft); }

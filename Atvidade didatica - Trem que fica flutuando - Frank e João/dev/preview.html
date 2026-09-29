@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Prévia — Magnetismo e Transporte</title>
+  <style>
+    html, body { min-height: 100%; margin: 0; }
+    body { background: #f5f7fb; }
+    .preview-loading { max-width: 50rem; margin: 4rem auto; padding: 1rem; font: 1rem/1.5 system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="h5p-preview" class="h5p-mt-host">
+    <p class="preview-loading" role="status">Carregando a prévia de Magnetismo e Transporte…</p>
+  </div>
+  <script>
+    // Loads CSS and JS in the order declared in library.json (single source
+    // of truth), then preview.js. Needs http://: run scripts/preview.ps1.
+    (function () {
+      'use strict';
+      var base = '../h5p-src/H5P.MagnetismoTransporte/';
+      var host = document.getElementById('h5p-preview');
+
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          var script = document.createElement('script');
+          script.src = src;
+          script.onload = resolve;
+          script.onerror = function () { reject(new Error('Falha ao carregar ' + src)); };
+          document.body.appendChild(script);
+        });
+      }
+
+      if (window.location.protocol === 'file:') {
+        host.innerHTML = '<p class="preview-loading"><strong>Abra a prévia pelo servidor local.</strong> Rode <code>powershell -ExecutionPolicy Bypass -File .\\scripts\\preview.ps1</code> na pasta do projeto: ele abre <code>http://localhost:8080/dev/preview.html</code>.</p>';
+        return;
+      }
+
+      fetch(base + 'library.json', { cache: 'no-store' })
+        .then(function (response) { return response.json(); })
+        .then(function (library) {
+          library.preloadedCss.forEach(function (style) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = base + style.path;
+            document.head.appendChild(link);
+          });
+          // ?design=<folder>: alternative theme from designs/ (loaded last).
+          var design = new URLSearchParams(window.location.search).get('design');
+          if (design && /^[a-z0-9-]+$/.test(design)) {
+            var theme = document.createElement('link');
+            theme.rel = 'stylesheet';
+            theme.href = '../designs/' + design + '/tema.css';
+            document.head.appendChild(theme);
+          }
+          return library.preloadedJs.reduce(function (chain, script) {
+            return chain.then(function () { return loadScript(base + script.path); });
+          }, Promise.resolve());
+        })
+        .then(function () { return loadScript('preview.js'); })
+        .catch(function (error) {
+          host.innerHTML = '<p class="preview-loading"><strong>Não foi possível abrir a prévia.</strong> Consulte o console do navegador para obter o erro.</p>';
+          throw error;
+        });
+    })();
+  </script>
+</body>
+</html>

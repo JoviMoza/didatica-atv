@@ -1,0 +1,76 @@
+/* stepper: purely informative, never clickable */
+.mt-stepper {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.35rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.75rem clamp(1rem, 3vw, 2rem) 1rem;
+  list-style: none;
+}
+
+.mt-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  color: #9fb0e8;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.mt-step::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 50%;
+  width: calc(100% + 0.35rem);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  z-index: 0;
+}
+.mt-step:first-child::before { display: none; }
+.mt-step.is-done::before,
+.mt-step.is-current::before,
+.mt-step.is-open::before { background: var(--accent); }
+
+.mt-step__dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: #16296e;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.mt-step__label { overflow: hidden; max-width: 100%; text-overflow: ellipsis; white-space: nowrap; }
+
+.mt-step.is-done { color: #d6e0ff; }
+.mt-step.is-done .mt-step__dot { border-color: var(--accent); color: var(--deep); background: var(--accent); }
+.mt-step.is-open { color: #d6e0ff; }
+.mt-step.is-open .mt-step__dot { border-color: var(--accent); color: #fff; }
+.mt-step.is-current { color: #fff; font-weight: 700; }
+.mt-step.is-current .mt-step__dot {
+  border-color: #fff;
+  color: var(--deep);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.45);
+}
+.mt-step.is-locked { opacity: 0.6; }
+
+@media (max-width: 720px) {
+  .mt-step__label { display: none; }
+  .mt-step.is-current .mt-step__label { display: block; position: absolute; top: 34px; white-space: nowrap; }
+  .mt-stepper { padding-bottom: 1.6rem; }
+}
+
+@media (forced-colors: active) {
+  .mt-step.is-current .mt-step__dot { outline: 2px solid CanvasText; }
+}

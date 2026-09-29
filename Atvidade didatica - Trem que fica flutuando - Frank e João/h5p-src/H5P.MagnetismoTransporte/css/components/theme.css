@@ -1,0 +1,68 @@
+/* "Aparência" button in the header and its menu of themes (js/ui/themes.js).
+   The trigger reuses .mt-a11y-btn (Libras); the menu is a card that opens
+   below it and follows the tokens, so every theme restyles it too. */
+
+.mt-theme { position: relative; }
+
+.mt-theme__toggle[aria-expanded="true"] { background: rgba(255, 255, 255, 0.26); }
+
+.mt-theme__menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  display: grid;
+  gap: 0.35rem;
+  width: min(20rem, calc(100vw - 2rem));
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  background: var(--card);
+  box-shadow: var(--shadow-lg, 0 12px 32px -8px rgba(11, 21, 48, 0.35));
+}
+
+.mt-theme__option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.5rem 0.65rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mt-theme__option:hover { background: var(--muted); }
+.mt-theme__option:focus-visible { outline: 3px solid var(--ring); outline-offset: 1px; }
+.mt-theme__option[aria-pressed="true"] { border-color: var(--primary); background: var(--primary-soft); }
+
+.mt-theme__swatches {
+  display: inline-flex;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--input);
+  border-radius: 999px;
+}
+.mt-theme__swatches span { width: 0.85rem; height: 1.7rem; }
+
+.mt-theme__text { display: flex; flex-direction: column; gap: 0.05rem; min-width: 0; }
+.mt-theme__text strong { font-size: 0.92rem; }
+.mt-theme__text span { color: var(--muted-foreground); font-size: 0.8rem; line-height: 1.3; }
+.mt-theme__option[aria-pressed="true"] .mt-theme__text strong::after { content: " ✓"; color: var(--primary); }
+
+/* Phones: the tools row spans the width (header.css); the menu takes the
+   whole row instead of hanging off the button, so it never leaves the screen. */
+@media (max-width: 520px) {
+  .mt-top__tools { position: relative; }
+  .mt-theme { position: static; }
+  .mt-theme__menu { right: 0; left: 0; width: auto; }
+}
+
+@media (forced-colors: active) {
+  .mt-theme__option[aria-pressed="true"] { outline: 2px solid CanvasText; }
+  .mt-theme__swatches { forced-color-adjust: none; }
+}

@@ -1,0 +1,195 @@
+/* ==========================================================================
+   Tema 3 — Sinalização Ferroviária (alto contraste)
+   Inspirado em placas de estação e mapas de metrô: branco, preto e amarelo
+   de segurança, bordas grossas, cantos retos e títulos em caixa alta. O
+   progresso vira um mapa de linha, com estações. É o tema de maior
+   contraste (texto 16:1, amarelo sobre preto 13:1), bom para projetor e
+   para quem tem baixa visão.
+   Carregue DEPOIS de todo o CSS de library.json (ver designs/README.md).
+   Seletores com :where(.h5p-mt) mantêm a especificidade do CSS original.
+   ========================================================================== */
+
+.h5p-mt-host { background: #ffffff; }
+
+.h5p-mt {
+  --background: #ffffff;
+  --foreground: #111111;
+  --card: #ffffff;
+  --muted: #f2f2f2;
+  --muted-foreground: #3d3d3d;
+  --border: #111111;
+  --input: #111111;
+  --primary: #111111;
+  --primary-hover: #333333;
+  --primary-foreground: #ffcc00;
+  --primary-soft: #fff4c4;
+  --deep: #111111;
+  --accent: #ffcc00;
+  --accent-soft: #fff4c4;
+  --success: #00703c;
+  --success-soft: #dff3e8;
+  --danger: #c4001a;
+  --danger-soft: #fde2e5;
+  --warning: #6b4e00;
+  --warning-soft: #fff4c4;
+  --ring: #0057d9;
+  --pole-n: #d7141a;
+  --pole-s: #1b4fb8;
+  --probe: #ffcc00;
+  --radius: 0px;
+  --radius-sm: 0px;
+  --shadow-sm: none;
+  --shadow: none;
+  --font: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+}
+
+/* ---------- typography: signage ---------- */
+:where(.h5p-mt) .mt-page__header h1,
+:where(.h5p-mt) .mt-hero h1,
+:where(.h5p-mt) .mt-review-view h1 { font-weight: 900; letter-spacing: 0.01em; text-transform: uppercase; }
+:where(.h5p-mt) .mt-page__kicker,
+:where(.h5p-mt) .mt-eyebrow,
+:where(.h5p-mt) .mt-hero__eyebrow { color: #111111; font-weight: 900; }
+:where(.h5p-mt) .mt-page__kicker > span:first-child { padding: 0.15rem 0.5rem; color: #ffcc00; background: #111111; }
+:where(.h5p-mt) a { color: #0047b3; }
+:where(.h5p-mt) .mt-link { color: #0047b3; }
+:where(.h5p-mt) .mt-link--danger { color: var(--danger); }
+
+/* ---------- header: station sign ---------- */
+:where(.h5p-mt) .mt-top {
+  border-bottom: 8px solid #ffcc00;
+  background: #111111;
+}
+:where(.h5p-mt) .mt-brand__mark { border: 2px solid #ffcc00; border-radius: 0; color: #111111; background: #ffcc00; }
+:where(.h5p-mt) .mt-brand__text strong { font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; }
+:where(.h5p-mt) .mt-brand__text span,
+:where(.h5p-mt) .mt-top__save { color: #e6e6e6; }
+:where(.h5p-mt) .mt-tab,
+:where(.h5p-mt) .mt-a11y-btn,
+:where(.h5p-mt) .mt-lang,
+:where(.h5p-mt) .mt-lang__btn { border-radius: 0; }
+:where(.h5p-mt) .mt-tab { border: 2px solid #ffffff; color: #ffffff; font-weight: 800; text-transform: uppercase; }
+:where(.h5p-mt) .mt-tab.is-active,
+:where(.h5p-mt) .mt-lang__btn[aria-pressed="true"] { border-color: #ffcc00; color: #111111; background: #ffcc00; }
+:where(.h5p-mt) .mt-a11y-btn,
+:where(.h5p-mt) .mt-lang { border: 2px solid #ffffff; background: transparent; }
+
+/* Stepper = metro line map: thick yellow line, white stations. */
+:where(.h5p-mt) .mt-step { color: #cfcfcf; font-weight: 700; text-transform: uppercase; }
+:where(.h5p-mt) .mt-step::before { top: 11px; height: 8px; background: #555555; }
+:where(.h5p-mt) .mt-step.is-done::before,
+:where(.h5p-mt) .mt-step.is-current::before,
+:where(.h5p-mt) .mt-step.is-open::before { background: #ffcc00; }
+:where(.h5p-mt) .mt-step__dot { border: 4px solid #555555; color: #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-step.is-done .mt-step__dot,
+:where(.h5p-mt) .mt-step.is-open .mt-step__dot { border-color: #ffcc00; color: #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-step.is-current .mt-step__dot { border-color: #ffffff; color: #111111; background: #ffcc00; box-shadow: 0 0 0 3px #111111, 0 0 0 6px #ffcc00; }
+:where(.h5p-mt) .mt-step.is-current,
+:where(.h5p-mt) .mt-step.is-done,
+:where(.h5p-mt) .mt-step.is-open { color: #ffffff; }
+
+:where(.h5p-mt) .mt-nav { border-top: 4px solid #111111; background: #ffffff; backdrop-filter: none; }
+
+/* ---------- surfaces ---------- */
+:where(.h5p-mt) .mt-card,
+:where(.h5p-mt) .mt-hero,
+:where(.h5p-mt) .mt-video { border: 3px solid #111111; }
+:where(.h5p-mt) .mt-hero { border-radius: 0; background: #ffffff; }
+:where(.h5p-mt) .mt-hero__art svg > rect:first-of-type { fill: #ffcc00; }
+:where(.h5p-mt) .mt-card--tint { border-color: #111111; background: repeating-linear-gradient(-45deg, #ffcc00 0 10px, #111111 10px 20px) top / 100% 8px no-repeat, #fffbe6; padding-top: calc(clamp(1rem, 2.5vw, 1.5rem) + 8px); }
+:where(.h5p-mt) .mt-badge { border: 2px solid #111111; border-radius: 0; color: #111111; background: #ffcc00; font-weight: 900; text-transform: uppercase; }
+:where(.h5p-mt) .mt-chip { border: 2px solid #111111; border-radius: 0; color: #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-chip--success { border-color: var(--success); color: #ffffff; background: var(--success); }
+:where(.h5p-mt) .mt-callout { border: 3px solid #111111; border-left: 12px solid #ffcc00; background: #ffffff; }
+:where(.h5p-mt) .mt-callout--soft { border-left-color: #111111; }
+:where(.h5p-mt) .mt-details { border: 2px solid #111111; }
+:where(.h5p-mt) .mt-checklist li::before { border-radius: 0; color: #ffffff; background: var(--success); }
+:where(.h5p-mt) .mt-howto li::before { border-radius: 0; color: #ffcc00; background: #111111; }
+
+/* ---------- buttons ---------- */
+:where(.h5p-mt) .mt-btn { border-width: 3px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; }
+:where(.h5p-mt) .mt-btn--primary { border-color: #111111; color: #ffcc00; background: #111111; }
+:where(.h5p-mt) .mt-btn--primary:hover:not(:disabled) { color: #111111; background: #ffcc00; }
+:where(.h5p-mt) .mt-btn--secondary { border-color: #111111; }
+:where(.h5p-mt) .mt-btn--secondary:hover:not(:disabled) { background: #ffcc00; }
+:where(.h5p-mt) .mt-icon-btn { border: 3px solid #111111; border-radius: 0; }
+:where(.h5p-mt) .mt-icon-btn:hover { border-color: #111111; color: #111111; background: #ffcc00; }
+
+/* ---------- feedback and choices ---------- */
+:where(.h5p-mt) .mt-feedback.is-success,
+:where(.h5p-mt) .mt-feedback.is-error { border-width: 3px; border-left-width: 12px; }
+:where(.h5p-mt) .mt-feedback.is-success { border-color: var(--success); color: #00502b; }
+:where(.h5p-mt) .mt-feedback.is-error { border-color: var(--danger); color: #8a0012; }
+:where(.h5p-mt) .mt-choice { border: 3px solid #111111; }
+:where(.h5p-mt) .mt-choice:hover { background: #fff4c4; }
+:where(.h5p-mt) .mt-choice:has(input:checked) { background: #ffcc00; box-shadow: none; }
+:where(.h5p-mt) .mt-choice:has(input:checked) .mt-choice__letter,
+:where(.h5p-mt) .mt-choice:has(input:checked) .mt-choice__tf { color: #ffcc00; background: #111111; }
+:where(.h5p-mt) .mt-choice__letter,
+:where(.h5p-mt) .mt-choice__tf { border: 2px solid #111111; border-radius: 0; color: #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-statement { border-left: 12px solid #ffcc00; border-radius: 0; }
+:where(.h5p-mt) .mt-qprogress__dots span { height: 8px; border-radius: 0; background: #cccccc; }
+:where(.h5p-mt) .mt-qprogress__dots .is-current { background: #ffcc00; }
+:where(.h5p-mt) .mt-qprogress__dots .is-done { background: #111111; }
+:where(.h5p-mt) .mt-review li { border: 2px solid #111111; border-radius: 0; }
+:where(.h5p-mt) .mt-review .is-wrong { border-color: var(--danger); background: #fff5f6; }
+:where(.h5p-mt) .mt-ring { background: conic-gradient(#111111 calc(var(--p) * 1%), #dddddd 0); }
+:where(.h5p-mt) .mt-alert--warn,
+:where(.h5p-mt) .mt-devbar,
+:where(.h5p-mt) .mt-video__notice { border: 3px solid #111111; }
+
+/* ---------- page-specific ---------- */
+:where(.h5p-mt) .mt-token-bank { border: 3px dashed #111111; }
+:where(.h5p-mt) .mt-token { border: 3px solid #111111; border-radius: 0; color: #111111; background: #ffffff; font-weight: 800; box-shadow: none; }
+:where(.h5p-mt) .mt-token.is-selected { color: #ffcc00; background: #111111; box-shadow: 0 0 0 3px #ffcc00; }
+:where(.h5p-mt) .mt-slot { border-bottom: 3px dashed #111111; border-radius: 0; color: #3d3d3d; background: #fff4c4; }
+:where(.h5p-mt) .mt-slot.is-drag-over { background: #ffcc00; }
+:where(.h5p-mt) .mt-slot.is-correct { border-bottom-width: 3px; }
+:where(.h5p-mt) .mt-lab__stage { border: 3px solid #111111; background: #111111; }
+:where(.h5p-mt) .mt-lab__bg { fill: #161616; }
+:where(.h5p-mt) .mt-lab__gridline { stroke: rgba(255, 255, 255, 0.08); }
+:where(.h5p-mt) .mt-lab__lines path { stroke: #ffffff; opacity: 0.8; }
+:where(.h5p-mt) .mt-lab__lines .mt-lab__arrow { fill: #ffffff; }
+:where(.h5p-mt) .mt-dot--line { background: #111111; }
+:where(.h5p-mt) .mt-lab__legend { border-top: 3px solid #ffcc00; color: #ffffff; }
+:where(.h5p-mt) .mt-magnet__ring { stroke: rgba(255, 255, 255, 0.4); }
+:where(.h5p-mt) .mt-magnet__cue { stroke: #ffcc00; }
+:where(.h5p-mt) .mt-lab__panel { border: 3px solid #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-meter__bar { border: 2px solid #111111; border-radius: 0; }
+:where(.h5p-mt) .mt-meter__bar span { border-radius: 0; }
+:where(.h5p-mt) .mt-rot { border: 3px solid #111111; }
+:where(.h5p-mt) .mt-mission__marker { border: 3px solid #111111; border-radius: 0; }
+:where(.h5p-mt) .mt-mission.is-active .mt-mission__marker { border-color: #111111; color: #ffcc00; background: #111111; box-shadow: 0 0 0 3px #ffcc00; }
+:where(.h5p-mt) .mt-mission:not(:last-child)::before { width: 6px; left: 0.8rem; background: #cccccc; }
+:where(.h5p-mt) .mt-mission.is-done:not(:last-child)::before { background: var(--success); }
+:where(.h5p-mt) .mt-challenge { border: 3px dashed #111111; background: #fff4c4; }
+:where(.h5p-mt) .mt-challenge__icon { color: #111111; }
+:where(.h5p-mt) .mt-science { border-left: 12px solid #ffcc00; color: #ffffff; background: #111111; }
+:where(.h5p-mt) .mt-mcard__back { border: 3px solid #111111; color: #111111; background: repeating-linear-gradient(-45deg, #ffcc00 0 12px, #111111 12px 24px); }
+:where(.h5p-mt) .mt-mcard__back svg { padding: 6px; background: #ffcc00; }
+:where(.h5p-mt) .mt-mcard__front { border: 3px solid #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-matching select { border: 2px solid #111111; border-radius: 0; background: #ffffff; }
+:where(.h5p-mt) .mt-system { border: 3px solid #111111; background: #ffffff; }
+:where(.h5p-mt) .mt-system__tag { border-radius: 0; color: #ffcc00; background: #111111; }
+:where(.h5p-mt) .mt-system:nth-child(2) .mt-system__tag { color: #ffffff; background: var(--pole-n); }
+:where(.h5p-mt) .mt-system:nth-child(3) .mt-system__tag { color: #111111; background: #ffcc00; }
+:where(.h5p-mt) .mt-transcript__icon { border: 3px solid #111111; border-radius: 0; background: #ffcc00; }
+:where(.h5p-mt) .mt-score-hero { border-left: 16px solid #ffcc00; border-radius: 0; color: #ffffff; background: #111111; }
+:where(.h5p-mt) .mt-ring--lg { background: conic-gradient(#ffcc00 calc(var(--p) * 1%), #444444 0); }
+:where(.h5p-mt) .mt-ring--lg > span { color: #e6e6e6; background: #111111; }
+:where(.h5p-mt) .mt-eyebrow--light { color: #ffcc00; }
+:where(.h5p-mt) .mt-bar { border: 2px solid #111111; border-radius: 0; }
+:where(.h5p-mt) .mt-bar span { border-radius: 0; background: #111111; }
+:where(.h5p-mt) .mt-bar.is-low span { background: #c4001a; }
+:where(.h5p-mt) .mt-concept { border: 2px solid #111111; }
+:where(.h5p-mt) .mt-concept.is-priority { border-color: #111111; background: #fff4c4; }
+:where(.h5p-mt) .mt-concept__rank,
+:where(.h5p-mt) .mt-toc__item.is-priority span { border-radius: 0; color: #ffcc00; background: #111111; }
+:where(.h5p-mt) .mt-toc__item span { border-radius: 0; color: #111111; background: #ffcc00; }
+:where(.h5p-mt) .mt-rsec__num { border-radius: 0; color: #ffcc00; background: #111111; }
+:where(.h5p-mt) .mt-rsec__summary { border-left: 12px solid #ffcc00; border-radius: 0; background: #fffbe6; }
+:where(.h5p-mt) .mt-rsec__box { border: 2px solid #111111; }
+:where(.h5p-mt) .mt-rsec__box strong { color: #111111; }
+:where(.h5p-mt) .mt-video__poster { border-bottom: 3px solid #111111; background: repeating-linear-gradient(-45deg, rgba(255, 204, 0, 0.12) 0 14px, transparent 14px 28px), #111111; }
+:where(.h5p-mt) .mt-video__play { border-radius: 0; color: #111111; background: #ffcc00; box-shadow: 0 0 0 6px rgba(255, 204, 0, 0.3); }
+:where(.h5p-mt) .mt-vdesc__panel { border: 2px solid #111111; border-left: 8px solid #ffcc00; }

@@ -1,0 +1,42 @@
+/* Language switch in the header (PT-BR / EN-US), next to the Libras button.
+   A segmented control: the pressed button is the current language. */
+
+.mt-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 40px;
+  padding: 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.mt-lang__icon { flex: 0 0 auto; margin: 0 0.2rem 0 0.35rem; opacity: 0.85; }
+
+.mt-lang__btn {
+  min-width: 3.4rem;
+  min-height: 32px;
+  padding: 0.2rem 0.6rem;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+.mt-lang__btn:hover { background: rgba(255, 255, 255, 0.16); }
+.mt-lang__btn[aria-pressed="true"] { color: var(--deep); background: #fff; cursor: default; }
+.mt-lang__btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+@media (max-width: 520px) {
+  .mt-lang__icon { display: none; }
+  .mt-lang__btn { min-width: 2.9rem; padding-inline: 0.45rem; }
+}
+
+@media (forced-colors: active) {
+  .mt-lang__btn[aria-pressed="true"] { outline: 2px solid CanvasText; }
+}

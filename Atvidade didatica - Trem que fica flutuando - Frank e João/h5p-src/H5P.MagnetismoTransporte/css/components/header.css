@@ -1,0 +1,53 @@
+/* ------------------------------ header ------------------------------ */
+
+.mt-top {
+  color: #fff;
+  background:
+    radial-gradient(60rem 18rem at 85% -40%, rgba(6, 182, 212, 0.45), transparent 60%),
+    linear-gradient(120deg, var(--deep) 0%, #132a7a 60%, #1f3fd1 100%);
+}
+
+.mt-top__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1rem clamp(1rem, 3vw, 2rem) 0.5rem;
+}
+
+.mt-brand { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+
+.mt-brand__mark {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mt-brand__text { display: flex; flex-direction: column; min-width: 0; }
+.mt-brand__text strong { font-size: clamp(1rem, 2.4vw, 1.2rem); line-height: 1.2; letter-spacing: -0.01em; }
+.mt-brand__text span { color: #b9c8ff; font-size: 0.85rem; }
+
+.mt-top__meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.1rem; flex-shrink: 0; }
+.mt-top__counter { font-weight: 800; font-variant-numeric: tabular-nums; }
+.mt-top__save { color: #b9c8ff; font-size: 0.78rem; }
+.mt-top__save::before { content: "● "; color: #34d399; }
+.mt-top__save.is-error::before { color: #fca5a5; }
+
+@media (max-width: 720px) {
+  .mt-top__save { display: none; }
+}
+
+/* Phones: the tools (language, Libras, counter) move to a second row so
+   the project name keeps the full width. */
+@media (max-width: 520px) {
+  .mt-top__inner { flex-wrap: wrap; row-gap: 0.6rem; }
+  .mt-top__tools { width: 100%; justify-content: space-between; }
+}

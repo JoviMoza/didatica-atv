@@ -1,0 +1,164 @@
+/* GERADO por scripts/gerar-temas.ps1 a partir de designs/2-caderno/tema.css.
+   NÃ£o edite: altere o tema em designs/ e rode o build. */
+
+/* ==========================================================================
+   Tema 2 — Caderno de Laboratório
+   Papel quadriculado creme, tinta azul de caneta, margem vermelha e
+   marca-texto amarelo. Títulos em serifa do sistema (Georgia / Cambria /
+   Palatino, sem fonte web), cantos pouco arredondados e sombras "carimbadas".
+   Lembra o caderno onde o aluno anota o experimento.
+   Carregue DEPOIS de todo o CSS de library.json (ver designs/README.md).
+   Seletores com :where(.h5p-mt[data-mt-theme="caderno"]) mantêm a especificidade do CSS original:
+   estados como is-selected, :checked e is-correct continuam vencendo.
+   ========================================================================== */
+
+.h5p-mt-host:where([data-mt-theme="caderno"]) { background: #f6f0e1; }
+
+.h5p-mt:where([data-mt-theme="caderno"]) {
+  --background: #f6f0e1;
+  --foreground: #1c2340;
+  --card: #fffdf7;
+  --muted: #f1ead8;
+  --muted-foreground: #5a5646;
+  --border: #d8ccb0;
+  --input: #bfb193;
+  --primary: #1d3f9e;
+  --primary-hover: #152f78;
+  --primary-foreground: #fffdf7;
+  --primary-soft: #e3e8f7;
+  --deep: #1c2340;
+  --accent: #d6453d;
+  --accent-soft: #fbe7dc;
+  --success: #1f7a45;
+  --success-soft: #e3f3e3;
+  --danger: #b3261e;
+  --danger-soft: #fbe3df;
+  --warning: #7a5500;
+  --warning-soft: #fff4c2;
+  --ring: #e0a100;
+  --pole-n: #d6453d;
+  --pole-s: #2f55a8;
+  --probe: #f2b300;
+  --highlight: #ffe86b;
+  --serif: Georgia, Cambria, "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+  --radius: 6px;
+  --radius-sm: 4px;
+  --shadow-sm: 2px 2px 0 rgba(28, 35, 64, 0.1);
+  --shadow: 4px 4px 0 rgba(28, 35, 64, 0.14);
+
+  /* 24 px grid, like graph paper. */
+  background-color: var(--background);
+  background-image:
+    linear-gradient(rgba(29, 63, 158, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 63, 158, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ---------- typography ---------- */
+:where(.h5p-mt[data-mt-theme="caderno"]) :is(h1, h2, h3) { font-family: var(--serif); letter-spacing: 0; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-page__header h1,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-hero h1,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-review-view h1 { font-weight: 700; letter-spacing: -0.01em; }
+/* Highlighter stroke under the title; text-decoration follows every line. */
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-page__header h1 {
+  text-decoration: underline;
+  text-decoration-color: var(--highlight);
+  text-decoration-thickness: 0.4em;
+  text-underline-offset: -0.18em;
+  text-decoration-skip-ink: none;
+}
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-page__kicker,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-eyebrow,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-hero__eyebrow { color: var(--accent); letter-spacing: 0.08em; }
+
+/* ---------- header: notebook cover ---------- */
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-top {
+  border-bottom: 3px solid var(--accent);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 6px),
+    #1c2340;
+}
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-brand__text strong { font-family: var(--serif); font-size: clamp(1.05rem, 2.6vw, 1.3rem); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-brand__mark { border-radius: 50%; border: 2px dashed rgba(255, 255, 255, 0.4); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step__dot { background: #2a3358; border-radius: 4px; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-done .mt-step__dot,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-open .mt-step__dot { border-color: var(--highlight); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-done .mt-step__dot { color: #1c2340; background: var(--highlight); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-done::before,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-current::before,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-open::before { background: var(--highlight); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-step.is-current .mt-step__dot { box-shadow: 0 0 0 4px rgba(255, 232, 107, 0.45); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-tab,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-a11y-btn,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lang,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lang__btn { border-radius: var(--radius-sm); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-nav { border-top: 2px solid var(--border); background: rgba(255, 253, 247, 0.95); }
+
+/* ---------- surfaces: paper cards with a red margin ---------- */
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-card,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-hero,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-video { border: 1.5px solid #cbbd9d; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-card { position: relative; padding-left: clamp(1.4rem, 3vw, 2rem); box-shadow: var(--shadow); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-card::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0.7rem; width: 2px; background: rgba(214, 69, 61, 0.45); pointer-events: none; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-hero { background: var(--card); box-shadow: var(--shadow); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-hero__art svg > rect:first-of-type { fill: #efe6cf; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-card--tint { border-color: #cbbd9d; background: repeating-linear-gradient(transparent 0 27px, rgba(29, 63, 158, 0.12) 27px 28px), var(--card); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-badge { border: 0; border-radius: 2px; color: #1c2340; background: var(--highlight); transform: rotate(-1.5deg); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-chip { border-radius: 3px; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-chip--success { border-color: #9fcfa9; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-callout { border: 1.5px dashed var(--accent); border-left: 6px solid var(--accent); background: #fff6e8; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-callout--soft { border-color: var(--border); border-left-color: var(--primary); background: var(--card); }
+
+/* ---------- buttons: stamped ---------- */
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-btn { border-radius: var(--radius-sm); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-btn--primary { border: 2px solid #1c2340; box-shadow: 3px 3px 0 #1c2340; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-btn--primary:active:not(:disabled) { box-shadow: 1px 1px 0 #1c2340; transform: translate(2px, 2px); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-btn--secondary { border: 2px solid #1c2340; box-shadow: 2px 2px 0 rgba(28, 35, 64, 0.35); }
+
+/* ---------- feedback and choices ---------- */
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-feedback.is-success { border-color: #9fcfa9; color: #175c34; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-feedback.is-error { border-color: #eab0a8; color: #8a1d16; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-choice:hover { background: #fff8e2; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-choice__letter,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-choice__tf { border-radius: 50%; font-family: var(--serif); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-statement { border-left-color: var(--accent); font-family: var(--serif); font-style: italic; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-review .is-wrong { border-color: #eab0a8; background: #fff5f2; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-alert--warn,
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-video__notice { border-color: #e7cf7a; }
+
+/* ---------- page-specific ---------- */
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-token { border: 1.5px solid #1c2340; border-radius: 3px; color: #1c2340; background: var(--highlight); box-shadow: 2px 2px 0 rgba(28, 35, 64, 0.25); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-token.is-selected { color: #fffdf7; background: var(--primary); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-reading { font-family: var(--serif); font-size: 1.12rem; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-slot { border-radius: 0; background: transparent; font-family: var(--font); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-slot.is-drag-over { background: rgba(255, 232, 107, 0.6); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__stage { border: 1.5px solid #1c2340; background: #fbf6e9; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__bg { fill: #fbf6e9; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__gridline { stroke: rgba(29, 63, 158, 0.14); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__lines path { stroke: #1d3f9e; opacity: 0.75; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__lines .mt-lab__arrow { fill: #1d3f9e; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__legend { border-top-color: #cbbd9d; color: var(--muted-foreground); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-dot--line { background: #1d3f9e; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-magnet__ring { stroke: rgba(28, 35, 64, 0.35); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-magnet__cue { stroke: rgba(28, 35, 64, 0.5); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-magnet__shadow { fill: rgba(28, 35, 64, 0.2); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-needle circle { fill: rgba(255, 255, 255, 0.7); stroke: rgba(28, 35, 64, 0.3); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-needle__s { fill: #8a8f9f; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-probe__text { fill: #7a5500; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-probe .mt-probe__zero { stroke: #b58300; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lab__panel { border: 1.5px solid #cbbd9d; background: var(--card); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-challenge { border: 1.5px dashed #c9a227; background: #fff8d6; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-science { border: 1.5px solid #1c2340; color: #e9ecf8; background: #1c2340; box-shadow: var(--shadow); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-mcard__back { border: 1.5px solid #1c2340; color: #1c2340; background: repeating-linear-gradient(transparent 0 11px, rgba(29, 63, 158, 0.2) 11px 12px), var(--highlight); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-mcard__front { background: var(--card); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-matching select { background: var(--card); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-system { border: 1.5px solid #cbbd9d; background: var(--card); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-system__tag { border-radius: 2px; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-system:nth-child(3) .mt-system__tag { background: #1f7a45; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-score-hero { border: 1.5px solid #1c2340; background: #1c2340; box-shadow: var(--shadow); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-ring--lg { background: conic-gradient(var(--highlight) calc(var(--p) * 1%), rgba(255, 255, 255, 0.18) 0); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-concept.is-priority { border-color: #e7cf7a; background: #fff8d6; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-rsec__num { border-radius: 50%; background: var(--accent); font-family: var(--serif); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-rsec__summary { border-left-color: var(--accent); background: linear-gradient(transparent 0, rgba(255, 232, 107, 0.45) 0); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-video__poster { background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 6px), #1c2340; }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-video__play { color: #1c2340; background: var(--highlight); }

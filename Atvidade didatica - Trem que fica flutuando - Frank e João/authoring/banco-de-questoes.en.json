@@ -1,0 +1,475 @@
+{
+  "_instrucoes": [
+    "Tradução em inglês (en-US) de banco-de-questoes.json. Este arquivo também NÃO entra no pacote .h5p.",
+    "As chaves são os ids do arquivo em português. 'options' precisa ter as alternativas NA MESMA ORDEM do arquivo em português (o índice 'correct' é o de lá).",
+    "dragWords.terms: id do termo -> texto em inglês. sentence tem um item a mais que as lacunas, como no original. Os artigos (a/an) ficam dentro do termo, para não denunciar a resposta.",
+    "Item sem tradução aparece em português no modo English. Depois de editar, rode scripts/build-h5p.ps1 (ou scripts/gerar-banco.ps1)."
+  ],
+  "dragWords": {
+    "sentence": [
+      "Every magnet has two ",
+      ": north and south. Like poles repel and opposite poles attract. Inside the magnet, billions of tiny atomic magnets, grouped into ",
+      ", point in the same direction. Around the magnet there is ",
+      ", which we draw with lines that leave the north pole and enter the south pole. When an electric current flows through a coil, it becomes ",
+      ", whose strength can be adjusted. In the Maglev train, coils in the track keep switching poles and form ",
+      ", which pulls and pushes the train forward."
+    ],
+    "terms": {
+      "polos": "poles",
+      "dominios": "magnetic domains",
+      "campo": "a magnetic field",
+      "eletroima": "an electromagnet",
+      "motor-linear": "a linear motor",
+      "atrito": "friction",
+      "roda": "a wheel"
+    }
+  },
+  "lab": {
+    "q1": {
+      "prompt": "In the starting position, the magnet in the bottom right corner is lying on its side. What does this do to the field pattern?",
+      "options": [
+        "The pattern becomes asymmetric: near that magnet the lines take another direction",
+        "The field lines of all the magnets disappear",
+        "Nothing changes: the orientation of a magnet does not affect the field"
+      ],
+      "success": "That's right. The field at each point is the vector sum of the contributions of the four magnets. Rotating one of them changes its contribution, and the whole pattern loses its symmetry.",
+      "retry": "Not yet. Look at the blue lines near the bottom right corner and compare them with the other corners. Use “Starting position” if you have already rotated a magnet."
+    },
+    "q2": {
+      "prompt": "Now that the four magnets point their N pole the same way, what does the field look like?",
+      "options": [
+        "Symmetric and orderly: the contributions add up in a regular way",
+        "The field lines disappeared",
+        "The field became zero everywhere"
+      ],
+      "success": "Exactly! With the magnets aligned, the pattern is mirrored and the arrow at the center points the same way as the magnets. On a MagLev track, organized magnets produce a regular field along the whole guideway.",
+      "retry": "Look again: the lines are still there. Notice the symmetry between the left and right halves of the pattern and the yellow arrow at the center."
+    }
+  },
+  "singleChoice": {
+    "sc-polos-iguais": {
+      "question": "What happens when we bring the north pole of one magnet close to the north pole of another magnet?",
+      "options": ["They repel each other", "They attract each other", "Nothing happens", "Both lose their magnetism"],
+      "explanation": "Like poles repel and opposite poles attract. This repulsion is what Iberê feels when he pushes one magnet against the other."
+    },
+    "sc-quebrar": {
+      "question": "If you break a bar magnet in half, what do you get?",
+      "options": ["Two smaller magnets, each with a north pole and a south pole", "One piece with only a north pole and another with only a south pole", "Two pieces with no magnetism at all", "A magnet and a piece of ordinary iron"],
+      "explanation": "The poles do not separate: each piece becomes a complete magnet, with a north and a south pole."
+    },
+    "sc-prego": {
+      "question": "Why does an ordinary iron nail not behave like a magnet?",
+      "options": ["Its magnetic domains point in every direction and cancel each other out", "Iron has no electrons", "Iron is never attracted by magnets", "The nail is too small to have magnetism"],
+      "explanation": "In ordinary iron the domains are jumbled and cancel each other's effect. In a magnet, they are aligned."
+    },
+    "sc-neodimio": {
+      "question": "What makes a neodymium magnet so strong?",
+      "options": ["Its magnetic domains are aligned in the same direction", "It stores electric charge", "It is made of a heavier metal", "It has to be plugged into the outlet"],
+      "explanation": "The alignment of billions of tiny atomic magnets adds up their effects and creates strong poles."
+    },
+    "sc-densidade": {
+      "question": "Looking at the field lines of a magnet, where is the field strongest?",
+      "options": ["Where the lines are closest to one another", "Where the lines are farthest apart", "Far away from the magnet", "It is the same everywhere"],
+      "explanation": "Lines closer together indicate a stronger field. That is why the force grows so much when the magnets get very close."
+    },
+    "sc-sentido": {
+      "question": "Outside the magnet, magnetic field lines…",
+      "options": ["leave the north pole and enter the south pole", "leave the south pole and enter the north pole", "exist only around the north pole", "have no defined direction"],
+      "explanation": "By convention, the lines leave the north pole and enter the south pole, outside the magnet."
+    },
+    "sc-bussola": {
+      "question": "What is a compass used for in an experiment with magnets?",
+      "options": ["To show the direction of the magnetic field at that point", "To measure the temperature of the magnet", "To measure the mass of the magnet", "To create a new magnetic field"],
+      "explanation": "The compass needle is a small magnet that lines up with the field, as in the Magnet lab."
+    },
+    "sc-equilibrio": {
+      "question": "For an object to float still in the air, the upward magnetic force must be…",
+      "options": ["equal in size to the weight of the object", "greater than the weight", "smaller than the weight", "zero"],
+      "explanation": "Still means zero net force: the upward magnetic force cancels the downward weight."
+    },
+    "sc-earnshaw": {
+      "question": "Why does a magnet placed above another, with like poles facing each other, slide to the side instead of floating still?",
+      "options": ["With permanent magnets alone there is no stable equilibrium (Earnshaw's theorem)", "Because gravity disappears", "Because the two magnets attract each other", "Because the air pushes the top magnet"],
+      "explanation": "Samuel Earnshaw showed that permanent magnets alone cannot hold an object still: it always finds a way to escape to the side."
+    },
+    "sc-vantagem": {
+      "question": "What is the big advantage of an electromagnet over a permanent magnet?",
+      "options": ["Its strength can be adjusted or switched off by changing the electric current", "It never uses energy", "It is always lighter", "It does not produce a magnetic field"],
+      "explanation": "Changing the current changes the force instantly. This is how Maglev trains correct their position."
+    },
+    "sc-oersted": {
+      "question": "What did Oersted observe in his famous experiment?",
+      "options": ["The electric current in a wire deflects the needle of a compass", "Magnets lose strength in the heat", "Magnets attract all metals", "Light is a wave"],
+      "explanation": "Oersted discovered that electric current produces a magnetic field: it is the link between electricity and magnetism."
+    },
+    "sc-eds": {
+      "question": "In the Japanese Maglev (EDS system), what makes the train rise?",
+      "options": ["The motion of the train's magnets induces currents in the track coils, which repel it", "Small jet engines under the train", "Very thin wheels", "Compressed air blown by the track"],
+      "explanation": "The moving magnet induces current in the coils (Faraday's Law). This current creates a field that pushes the train upward."
+    },
+    "sc-rodas": {
+      "question": "Why does the Japanese Maglev use rubber wheels at the start of the trip?",
+      "options": ["Because it only levitates after gaining speed, around 100 to 150 km/h", "To save energy at the station", "Because the track is made of rubber", "To be able to brake"],
+      "explanation": "The induced current depends on motion. When the train is stopped or slow, the current is too weak to lift it."
+    },
+    "sc-ems": {
+      "question": "On the Shanghai train (EMS system), how does the train stay floating?",
+      "options": ["Electromagnets under the rail are attracted upward, and sensors keep adjusting the current", "Magnets push the rail from below", "The train hangs from steel cables", "A layer of air holds the train up"],
+      "explanation": "The train's arms wrap around the rail from below. The attraction pulls the train up, and the computer controls the current so it neither sticks nor falls."
+    },
+    "sc-motor": {
+      "question": "How does the Maglev move forward without driving wheels?",
+      "options": ["With a linear motor: coils in the track switch poles and pull and push the train", "With a propeller at the back", "With the wind", "Only by using downhill slopes"],
+      "explanation": "The coil ahead attracts, the one behind repels, and this magnetic wave travels along the track, carrying the train with it."
+    },
+    "sc-nitrogenio": {
+      "question": "In the MagLev-Cobra, what is liquid nitrogen used for?",
+      "options": ["To cool the superconductors so they work", "To increase the weight of the train", "To lubricate the track", "As fuel"],
+      "explanation": "The superconductor only works when very cold. Liquid nitrogen, at about −196 °C, does this cooling."
+    },
+    "sc-supercondutor": {
+      "question": "What does a cooled superconductor do near a magnet?",
+      "options": ["It expels part of the field and \"locks\" the magnet's position, allowing stable floating", "It becomes an ordinary magnet", "It heats up until it melts", "It attracts any metal nearby"],
+      "explanation": "The superconductor expels the field (Meissner effect) and traps part of it, which gives stability with no need for a computer."
+    },
+    "sc-cobra": {
+      "question": "Where was the MagLev-Cobra developed?",
+      "options": ["At UFRJ, in Rio de Janeiro", "In Japan", "In Germany", "In China"],
+      "explanation": "The MagLev-Cobra is developed at the Laboratory of Superconductor Applications (LASUP) of COPPE/UFRJ."
+    },
+    "sc-polos-sul-sul": {
+      "question": "What happens when we bring the south pole of one magnet close to the south pole of another magnet?",
+      "options": ["They repel each other", "They attract each other", "They stick together and never come apart", "Nothing happens because only the north pole has force"],
+      "explanation": "Like poles repel, whether they are two north poles or two south poles. It is the same rule that applies to north with north."
+    },
+    "sc-polos-norte-sul": {
+      "question": "What happens when we bring the north pole of one magnet close to the south pole of another magnet?",
+      "options": ["They attract each other", "They repel each other", "Both lose their magnetism", "Nothing happens"],
+      "explanation": "Opposite poles attract. That is why one magnet sticks to the other when we flip one of them."
+    },
+    "sc-polos-onde-forca": {
+      "question": "In a bar magnet, where is the magnetic force strongest?",
+      "options": ["Near the poles, at the ends", "In the middle of the bar", "The same at every point", "Far from the magnet"],
+      "explanation": "The poles are the regions with the strongest effect. In the middle of the bar the force is much smaller."
+    },
+    "sc-polos-bussola-gira": {
+      "question": "If you hang a bar magnet from a string tied to its middle, what does it do?",
+      "options": ["It turns until one pole points to geographic north", "It stays in any position, without moving", "It loses its magnetism immediately", "It becomes an electromagnet"],
+      "explanation": "The magnet lines up with the Earth's field, like the needle of a compass. The pole that points to geographic north is called the north pole."
+    },
+    "sc-esfregar-prego": {
+      "question": "What happens if you rub an iron nail with a magnet, always in the same direction?",
+      "options": ["The nail becomes a weak magnet", "Nothing ever happens", "The nail melts", "The magnet loses its poles"],
+      "explanation": "Rubbing always in the same direction aligns some of the nail's domains, and it attracts paper clips for a while."
+    },
+    "sc-aquecer-ima": {
+      "question": "What happens if a magnet is heated a lot?",
+      "options": ["It gets weaker, because the domains get jumbled", "It gets stronger", "It becomes an electromagnet", "Nothing changes"],
+      "explanation": "Heat shakes the atoms and misaligns the domains. That is why magnets should not go into a fire."
+    },
+    "sc-materiais-atraidos": {
+      "question": "Which object can an ordinary magnet attract?",
+      "options": ["An iron nail", "A plastic spoon", "An aluminum coin", "A piece of wood"],
+      "explanation": "A magnet attracts ferromagnetic materials, such as iron, nickel and cobalt. Aluminum, plastic and wood are not attracted."
+    },
+    "sc-queda-desmagnetiza": {
+      "question": "Why is dropping a magnet on the floor many times a bad idea?",
+      "options": ["The impacts jumble the domains and it gets weaker", "It loses its poles to the floor", "It turns into wood", "It creates dangerous electric charge"],
+      "explanation": "Strong impacts misalign the domains, just as heat does. The magnet is still a magnet, but it gets weaker."
+    },
+    "sc-campo-perto-longe": {
+      "question": "Two magnets repel each other slightly at a certain distance. What happens if you bring them closer?",
+      "options": ["The repulsion gets much stronger", "The repulsion disappears", "They start to attract each other", "Nothing changes"],
+      "explanation": "Near the magnet the field is stronger, because the lines are closer together. The force grows quickly as they get closer."
+    },
+    "sc-campo-direcao": {
+      "question": "What does a compass show when we bring it near a magnet?",
+      "options": ["The direction of the magnetic field at that point", "The color of the field", "The weight of the magnet", "The temperature of the air"],
+      "explanation": "The needle is a small magnet and lines up with the local field. When you move it, it points in another direction."
+    },
+    "sc-linhas-cruzam": {
+      "question": "Which statement about magnetic field lines is correct?",
+      "options": ["They never cross", "They cross all the time", "They only exist inside the magnet", "They are made of iron"],
+      "explanation": "The lines are a drawing of the field: at each point the field has only one direction, so the lines do not cross."
+    },
+    "sc-peso-puxa": {
+      "question": "When an object floats still in the air, which force pulls it down?",
+      "options": ["The weight of the object", "The wind", "Light", "Sound"],
+      "explanation": "Weight always pulls down. To float, another force must balance it."
+    },
+    "sc-resultante-zero": {
+      "question": "An object is floating still. What is the net force on it?",
+      "options": ["Zero", "Equal to its weight", "Very large and upward", "Very large and downward"],
+      "explanation": "Still means equilibrium: the forces cancel out. This is Newton's First Law."
+    },
+    "sc-forca-maior-sobe": {
+      "question": "If the upward magnetic force becomes greater than the weight, what happens?",
+      "options": ["The object rises", "It stays still", "It goes down", "It loses its weight"],
+      "explanation": "The net force points up and the object rises. To stay still, the two forces must be equal."
+    },
+    "sc-forca-menor-desce": {
+      "question": "If the upward magnetic force becomes smaller than the weight, what happens?",
+      "options": ["The object goes down", "It stays still", "It rises", "It floats sideways without falling"],
+      "explanation": "The net force points down and the object goes down. This is what happens when the Maglev is switched off."
+    },
+    "sc-balanca-equilibrio": {
+      "question": "Which situation is similar to floating still in equilibrium?",
+      "options": ["A balance scale at rest with equal weights on both sides", "A ball rolling downhill", "A car speeding up", "A kite pulled by a strong wind"],
+      "explanation": "In both cases the forces cancel out and nothing moves. Equilibrium means zero net force."
+    },
+    "sc-levitron-giro": {
+      "question": "Why does the Levitron top only float while it is spinning?",
+      "options": ["The spin keeps it from flipping over and escaping to the side", "The spin creates a wind that holds it up", "The spin switches off gravity", "The spin heats up the magnet"],
+      "explanation": "With still magnets alone there is no stable equilibrium. The spin works like a support that holds the position."
+    },
+    "sc-fuga-lado": {
+      "question": "You try to make a magnet float still above another, with like poles facing each other. What does it tend to do?",
+      "options": ["Slide to the side and flip over", "Stay still forever", "Stick downward", "Lose its poles"],
+      "explanation": "This is Earnshaw's theorem: without control or spin, the top magnet finds a way to escape to the side."
+    },
+    "sc-solucao-trens": {
+      "question": "How do Maglev trains solve the problem pointed out by Earnshaw?",
+      "options": ["By using computer-controlled electromagnets or superconductors", "By using bigger magnets and hoping it works", "By switching off gravity", "By using invisible glue"],
+      "explanation": "The control adjusts the force all the time, or the superconductor locks the position. Still magnets alone are not enough."
+    },
+    "sc-apoio-eixo": {
+      "question": "Why do some levitating toys have an axis or a guide?",
+      "options": ["To keep the object from escaping to the side", "To make it look nicer", "To increase its weight", "To hide a battery"],
+      "explanation": "The axis plays the role of the support that is missing in an equilibrium with magnets alone. Without it, the object slides away."
+    },
+    "sc-earnshaw-ideia": {
+      "question": "What does Earnshaw's theorem say, in simple words?",
+      "options": ["You cannot hold an object still in the air with permanent magnets alone", "Magnets do not work during the day", "Every magnet loses its strength within a week", "Gravity does not exist"],
+      "explanation": "In 1842, Samuel Earnshaw showed that permanent magnets alone do not create a stable equilibrium point."
+    },
+    "sc-nucleo-ferro": {
+      "question": "What is the iron core inside many electromagnets for?",
+      "options": ["To make the field stronger", "To decorate the coil", "To cool the wire", "To stop the current from flowing"],
+      "explanation": "Iron concentrates the field lines. With the core, the same wire with the same current attracts more strongly."
+    },
+    "sc-mais-corrente": {
+      "question": "What happens if we increase the electric current in an electromagnet?",
+      "options": ["The magnetic force increases", "The force disappears", "The poles disappear forever", "It turns into wood"],
+      "explanation": "The strength of the electromagnet follows the current. This is how the Maglev adjusts its levitation."
+    },
+    "sc-inverter-polos": {
+      "question": "How can you swap the north and south poles of an electromagnet?",
+      "options": ["By reversing the direction of the electric current", "By shaking the coil", "By painting the coil another color", "By waiting an hour"],
+      "explanation": "The direction of the current defines which side is north. Reversing the battery reverses the poles."
+    },
+    "sc-guindaste-solta": {
+      "question": "A crane with an electromagnet is holding iron scrap. How does it release the load?",
+      "options": ["By switching off the electric current", "By waiting for the iron to melt", "By throwing water on it", "By blowing on it"],
+      "explanation": "Without current, the field disappears and the scrap falls. With a permanent magnet, it would not be so easy to let go."
+    },
+    "sc-faraday-ideia": {
+      "question": "What does Faraday's Law, used in the Japanese Maglev, say?",
+      "options": ["A magnet moving near a coil generates electric current", "A still magnet generates current forever", "Current disappears when there is motion", "Iron does not undergo induction"],
+      "explanation": "The motion of the magnet changes the field in the coil and induces current. When it is still, almost nothing is induced."
+    },
+    "sc-parado-sem-corrente": {
+      "question": "Why does the Japanese Maglev, when stopped, not induce a strong current in the track?",
+      "options": ["Because induction needs motion", "Because the coils switch off in the cold", "Because the train is too light", "Because the track is made of rubber"],
+      "explanation": "Without a change in the field, there is almost no induced current. That is why it needs wheels until it gains speed."
+    },
+    "sc-dinamo": {
+      "question": "Which everyday object works on the same induction principle as the Japanese Maglev?",
+      "options": ["A bicycle dynamo, which lights the headlamp as it turns", "An ordinary battery sitting in a drawer", "A glass cup", "A plastic ruler"],
+      "explanation": "In a dynamo, a magnet spins near a coil and generates current. In the Maglev, it is the train's magnets passing by the track coils."
+    },
+    "sc-altura-eds": {
+      "question": "While levitating, how high does the Japanese Maglev (EDS) float?",
+      "options": ["About 10 cm above the guideway", "Stuck to the track, with no gap", "10 meters high", "1 km high"],
+      "explanation": "The repulsion of the induced current holds the train about 10 cm above the guideway, much higher than the 1 to 1.5 cm gap of the Shanghai train."
+    },
+    "sc-abraco-trilho": {
+      "question": "In the EMS system (Shanghai), where are the electromagnets that hold the train up?",
+      "options": ["On arms that wrap around the rail from below, pulling the train up", "On the roof, pushing down", "Only on the rubber wheels", "Outside the train, on the ground"],
+      "explanation": "The C-shaped arms are under the rail. The attraction pulls the train up, against its weight."
+    },
+    "sc-folga-1cm": {
+      "question": "What is the gap between the Shanghai train and the rail during levitation?",
+      "options": ["Between 1 and 1.5 centimeters", "About 10 centimeters", "About 10 meters", "There is no set measure; it varies without control"],
+      "explanation": "The computer keeps a gap of 1 to 1.5 cm. Too close and it sticks; too far and it falls."
+    },
+    "sc-sensor-perto": {
+      "question": "In EMS, if the train gets too close to the rail, what does the computer do?",
+      "options": ["It lowers the current to weaken the attraction", "It raises the current", "It switches off the wheels", "It increases the weight of the train"],
+      "explanation": "Less current means less attraction, and the train drops a little. The adjustment happens thousands of times per second."
+    },
+    "sc-sensor-longe": {
+      "question": "In EMS, if the train starts to fall away from the rail, what does the computer do?",
+      "options": ["It raises the current to strengthen the attraction", "It lowers the current", "It brakes with the wheels", "It waits for the driver to push"],
+      "explanation": "More current pulls the train back up. It is like balancing a broom on your hand, correcting all the time."
+    },
+    "sc-xangai-ems-tipo": {
+      "question": "Which type of levitation does the Shanghai Maglev train use?",
+      "options": ["Magnetic attraction (EMS), with electromagnets pulling upward", "Repulsion by induction, like the Japanese one", "Floating on compressed air", "Support from wheels only"],
+      "explanation": "Shanghai uses EMS: controlled attraction. The Japanese train uses EDS: repulsion by induced current."
+    },
+    "sc-frente-atrai-tras-repele": {
+      "question": "In a linear motor, what do the track coils do to the train?",
+      "options": ["The one ahead attracts and the one behind repels, pushing the train forward", "They all repel the train upward", "They all attract the train downward", "Nothing; they are just decoration on the track"],
+      "explanation": "The pull-and-push combination repeats along the track and carries the train with it, without touching."
+    },
+    "sc-corrente-alternada-motor": {
+      "question": "Why does the linear motor use alternating current?",
+      "options": ["To keep switching the poles of the coils and create a traveling wave", "Because direct current is forbidden", "To turn on the train's lights", "To heat up the track"],
+      "explanation": "Alternating current reverses the poles at the right pace. This magnetic wave carries the train."
+    },
+    "sc-sem-atrito-motor": {
+      "question": "What is the advantage of accelerating the train without touching the track?",
+      "options": ["Less friction, so it can go much faster and more quietly", "The train gets heavier", "The train uses more fuel", "The train moves more slowly"],
+      "explanation": "With no wheel scraping the track, there is almost no wear and no friction noise. That is why the Maglev goes past 400 km/h."
+    },
+    "sc-desenrolado-motor": {
+      "question": "Why do people say the linear motor is an ordinary motor that has been unrolled?",
+      "options": ["Because the spinning became straight-line motion along the track", "Because it was broken", "Because it does not use magnetism", "Because it runs on batteries"],
+      "explanation": "In an ordinary motor the field rotates and turns the axle. In the linear one, the field travels in a straight line and carries the train."
+    },
+    "sc-onda-motor": {
+      "question": "What moves the Maglev train forward?",
+      "options": ["A magnetic wave that travels along the track", "The wind", "Going down a slope", "Passengers pushing"],
+      "explanation": "The coils switch on and off in sequence. The train follows this wave the way a surfboard follows an ocean wave."
+    },
+    "sc-frio-necessario": {
+      "question": "Why does the MagLev-Cobra's superconductor need to be very cold?",
+      "options": ["Because it only works as a superconductor at very low temperatures", "Because the cold makes the train look nicer", "Because heat increases levitation", "Because ice sticks to the track"],
+      "explanation": "Without cooling, the material becomes an ordinary ceramic. Liquid nitrogen keeps the effect going."
+    },
+    "sc-meissner-ideia": {
+      "question": "What is the Meissner effect, in simple terms?",
+      "options": ["The cold superconductor expels part of the magnetic field", "The superconductor heats up the magnet", "The magnet melts the superconductor", "The field disappears forever"],
+      "explanation": "By expelling the field, the superconductor floats above the magnet. Part of the field stays trapped and gives stability."
+    },
+    "sc-estavel-sem-computador": {
+      "question": "What is the advantage of the MagLev-Cobra compared with the Shanghai system?",
+      "options": ["It floats stably with no computer adjusting everything", "It always moves more slowly", "It needs a rubber track", "It does not use magnetism"],
+      "explanation": "The superconductor locks the position on its own. In Shanghai, sensors and a computer keep correcting the current."
+    },
+    "sc-guiamento": {
+      "question": "In a Maglev train, what does the guidance system do?",
+      "options": ["It keeps the train aligned on the guideway, without shifting sideways", "It pushes the train forward", "It cools the train's magnets", "It brakes the train at stations"],
+      "explanation": "Levitation holds the train in the air, propulsion moves it forward and guidance keeps it from escaping to the sides."
+    },
+    "sc-tres-sistemas": {
+      "question": "What are the three systems every Maglev train needs?",
+      "options": ["Levitation, guidance and propulsion", "Wheels, brakes and a diesel engine", "Propeller, wings and rudder", "Boiler, piston and chimney"],
+      "explanation": "The train must stay suspended (levitation), aligned on the guideway (guidance) and be moved forward (propulsion, by the linear motor)."
+    },
+    "sc-onde-opera": {
+      "question": "According to the video on page 6, in which countries do Maglev trains carry passengers today?",
+      "options": ["China and Japan", "Brazil and Argentina", "The United States and Canada", "The United Kingdom and South Korea"],
+      "explanation": "Only China and Japan operate commercial Maglevs. The United Kingdom and South Korea had lines, but they were shut down."
+    },
+    "sc-linhas-fechadas": {
+      "question": "Why were the Maglev lines in the United Kingdom and South Korea shut down?",
+      "options": ["High costs, lack of parts and low passenger demand", "The trains were too slow", "The magnets lost their magnetism", "A law banned electric trains"],
+      "explanation": "Running a Maglev line is expensive. With few spare parts and few passengers, the lines were no longer worth it."
+    },
+    "sc-desvantagem": {
+      "question": "Which of these is a disadvantage of Maglev trains?",
+      "options": ["The guideway is very expensive and cannot reuse the tracks of regular railways", "They are noisier than an airplane", "They release a lot of smoke", "Their wheels wear out the track quickly"],
+      "explanation": "A Maglev line requires high-precision magnetic control and must be built from scratch, which makes construction much more expensive."
+    },
+    "sc-manutencao": {
+      "question": "Why does a Maglev train need less maintenance than a regular train?",
+      "options": ["Because it does not touch the track, so its parts barely wear out", "Because it always moves slowly", "Because it does not use electricity", "Because it only runs at night"],
+      "explanation": "With no wheel scraping the track, there is no wear from friction between the train and the guideway."
+    },
+    "sc-energia": {
+      "question": "Why does a Maglev use less energy than a regular train at high speed?",
+      "options": ["Because, with no friction against the track, it only has to overcome air resistance", "Because it has no passengers", "Because it switches off its magnets halfway", "Because it only runs downhill"],
+      "explanation": "The friction between the wheels and the track disappears. Only the air is left to slow the train down."
+    },
+    "sc-silencio": {
+      "question": "Why is the Maglev quieter than traditional trains?",
+      "options": ["There is no wheel friction on the track and propulsion is electric", "The cars are made of foam", "The driver asks for silence", "It only runs inside tunnels"],
+      "explanation": "Much of a train's noise comes from the wheels on the track and from the combustion engine. The Maglev has neither."
+    },
+    "sc-chuo": {
+      "question": "What is Japan building with the Chuo Shinkansen line?",
+      "options": ["A Maglev line between Tokyo and Nagoya, with trains at up to about 500 km/h", "A bridge to Brazil", "A metro with rubber wheels", "A floating airport"],
+      "explanation": "Construction began in 2014. The first stage will be 286 km long, almost all in tunnels, covered in about 40 minutes."
+    },
+    "sc-xangai-partida": {
+      "question": "Unlike the Japanese Maglev, the Shanghai train (EMS)…",
+      "options": ["levitates from the start, without ever using wheels", "uses wheels until it passes 100 km/h", "only levitates above 600 km/h", "floats on compressed air"],
+      "explanation": "In EMS, the attraction of the electromagnets works even when the train is stopped, because it does not depend on current induced by motion."
+    },
+    "sc-xangai-rota": {
+      "question": "What does the Shanghai Maglev line connect?",
+      "options": ["Pudong airport to a city metro station", "Shanghai to Tokyo", "Two cities in Brazil", "A port to an iron mine"],
+      "explanation": "It is the only high-speed Maglev line in operation in the world. It once reached 431 km/h and today runs at 300 km/h."
+    },
+    "sc-helio": {
+      "question": "In the Japanese Maglev, the superconducting magnets are cooled with…",
+      "options": ["liquid helium", "ice water", "dry ice", "the wind in the tunnels"],
+      "explanation": "The niobium-titanium superconductors of the Japanese train only work when very cold. The MagLev-Cobra uses another material, cooled with liquid nitrogen."
+    }
+  },
+  "trueFalse": {
+    "tf-atraem": { "statement": "Opposite magnetic poles (north and south) attract each other.", "feedback": "True. Opposite poles attract; like poles repel." },
+    "tf-isolar": { "statement": "You can get a north pole on its own by cutting a magnet in half.", "feedback": "False. Each piece becomes a new magnet, with a north and a south pole." },
+    "tf-ferro": { "statement": "In a piece of ordinary iron, the magnetic domains point in every direction and their effects cancel out.", "feedback": "True. That is why ordinary iron does not act as a magnet, although it is attracted by one." },
+    "tf-afastadas": { "statement": "The farther apart the field lines are, the stronger the magnetic field.", "feedback": "False. It is the opposite: lines closer together indicate a stronger field." },
+    "tf-norte-sul": { "statement": "Outside the magnet, magnetic field lines leave the north pole and enter the south pole.", "feedback": "True. This is the convention used in textbooks and in the Magnet lab." },
+    "tf-soma": { "statement": "The magnetic field at a point is the sum of the fields of all the magnets nearby.", "feedback": "True. That is what you saw when you rotated the four magnets in the lab." },
+    "tf-resultante": { "statement": "For an object to float still, the net force on it must be zero.", "feedback": "True. The upward magnetic force exactly cancels the weight." },
+    "tf-estavel": { "statement": "With permanent magnets alone, it is easy to make an object float still and stable, with no support.", "feedback": "False. Earnshaw's theorem shows this is not possible: the object escapes to the side." },
+    "tf-bobina": { "statement": "An electric current flowing through a coil produces a magnetic field.", "feedback": "True. This is the principle of the electromagnet, discovered from Oersted's experiment." },
+    "tf-fixo": { "statement": "The strength of an electromagnet cannot be changed.", "feedback": "False. Just change the electric current to increase, decrease or switch off the force." },
+    "tf-parado": { "statement": "The Japanese Maglev already floats while it is stopped at the station.", "feedback": "False. It uses rubber wheels until it gains speed, around 100 to 150 km/h; only then is the induced current strong enough." },
+    "tf-sensores": { "statement": "In the EMS system, computers adjust the current thousands of times per second so the train neither sticks nor falls.", "feedback": "True. This control keeps a gap of 1 to 1.5 centimeters between the train and the rail." },
+    "tf-xangai": { "statement": "The Shanghai Maglev train floats using magnetic attraction.", "feedback": "True. It uses the EMS system, in which electromagnets are attracted upward, toward the rail." },
+    "tf-desenrolado": { "statement": "The linear motor is like an ordinary electric motor \"unrolled\" along the track.", "feedback": "True. Instead of turning an axle, the magnetic field \"moves\" along the track and carries the train with it." },
+    "tf-rodas-giram": { "statement": "To gain speed, the Maglev needs wheels turning on the track.", "feedback": "False. What accelerates the train is the linear motor, with no contact with the track." },
+    "tf-reage": { "statement": "Liquid nitrogen reacts chemically with the superconductor to create the magnetic field.", "feedback": "False. Nitrogen only cools. The field comes from the magnets in the track." },
+    "tf-brasil": { "statement": "The MagLev-Cobra is a magnetic levitation train developed in Brazil, at UFRJ.", "feedback": "True. It is developed at LASUP, a laboratory of COPPE/UFRJ." },
+    "tf-poloforte-ponta": { "statement": "The poles, at the ends of the magnet, are the regions where magnetism is strongest.", "feedback": "True. In the middle of the bar the effect is much weaker." },
+    "tf-norte-aponta-norte": { "statement": "The north pole of a magnet that is free to turn points to the Earth's geographic north.", "feedback": "True. This is how a compass works." },
+    "tf-so-norte-atrai": { "statement": "Only the north pole attracts iron; the south pole does not.", "feedback": "False. Both poles attract iron in the same way. North and south only matter between two magnets." },
+    "tf-aluminio-nao": { "statement": "An ordinary magnet does not attract an aluminum can.", "feedback": "True. Aluminum is not ferromagnetic; iron, nickel and cobalt are." },
+    "tf-quente-fraco": { "statement": "Heating a magnet a lot can make it weaker.", "feedback": "True. Heat jumbles the domains that were aligned." },
+    "tf-todos-materiais": { "statement": "All metals are equally attracted by a magnet.", "feedback": "False. Plastic, aluminum and wood are not attracted; iron is." },
+    "tf-esfregar-nunca": { "statement": "Rubbing a nail with a magnet, always in the same direction, never changes anything in the nail.", "feedback": "False. It aligns some of the domains and the nail becomes a weak magnet for a while." },
+    "tf-perto-forte": { "statement": "The closer you are to the magnet, the stronger the magnetic field usually is.", "feedback": "True. Lines closer together indicate a stronger field." },
+    "tf-linhas-cruzam": { "statement": "Magnetic field lines can cross one another.", "feedback": "False. At each point the field has only one direction, so the lines never cross." },
+    "tf-peso-baixo": { "statement": "The weight of an object always points down.", "feedback": "True. To float, the magnetic force must point up." },
+    "tf-sobe-maior": { "statement": "If the upward force is greater than the weight, the object rises.", "feedback": "True. The net force points up." },
+    "tf-menor-parado": { "statement": "If the upward force is smaller than the weight, the object keeps floating still.", "feedback": "False. It goes down, because the net force points down." },
+    "tf-dobro-peso": { "statement": "To float still, the magnetic force must be twice the weight.", "feedback": "False. It must be equal to the weight, so the net force is zero." },
+    "tf-giro-ajuda": { "statement": "The spin of the Levitron top helps keep it floating without sliding to the side.", "feedback": "True. The spin works like the support that still magnets lack." },
+    "tf-eixo-guia": { "statement": "Levitation toys use axes or guides to keep the object from escaping to the side.", "feedback": "True. The support holds the position that magnets alone cannot hold." },
+    "tf-ima-grande-resolve": { "statement": "Using very large permanent magnets is enough to get stable levitation without control.", "feedback": "False. By Earnshaw's theorem, size does not solve it: there is always an escape to the side." },
+    "tf-earnshaw-1842": { "statement": "Earnshaw's theorem, from 1842, says that permanent magnets alone cannot sustain stable levitation.", "feedback": "True. That is why trains use electronic control or superconductors." },
+    "tf-mais-espiras": { "statement": "Winding more turns of wire in the coil, with the same current, usually makes the electromagnet stronger.", "feedback": "True. More turns add more field, like more aligned domains." },
+    "tf-inverter-pilha": { "statement": "Reversing the battery wires in an electromagnet swaps its north and south poles.", "feedback": "True. The direction of the current defines which poles are which." },
+    "tf-permanente-igual": { "statement": "An electromagnet works exactly like a permanent magnet and can never be switched off.", "feedback": "False. Without current the field disappears; that is the big advantage of the electromagnet." },
+    "tf-movimento-corrente": { "statement": "Moving a magnet toward and away from a coil generates electric current in it.", "feedback": "True. It is induction by a changing field: Faraday's Law." },
+    "tf-parado-nada": { "statement": "A completely still magnet near a coil keeps generating a strong current nonstop.", "feedback": "False. Without motion there is no change in the field, so there is almost no current." },
+    "tf-dinamo-bike": { "statement": "A bicycle dynamo lights the headlamp by induction, when the wheel turns.", "feedback": "True. It is the same principle as the Japanese Maglev, on a small scale." },
+    "tf-altura-10cm": { "statement": "While levitating, the Japanese Maglev floats about 10 cm above the guideway.", "feedback": "True. Much higher than the 1 to 1.5 cm gap of the Shanghai train." },
+    "tf-abraco-c": { "statement": "In EMS, C-shaped arms wrap around the rail from below and are pulled upward.", "feedback": "True. The attraction holds the train up against its weight." },
+    "tf-folga-1m": { "statement": "The gap of the Shanghai train during levitation is about 1 meter.", "feedback": "False. It is 1 to 1.5 centimeters, controlled by the computer." },
+    "tf-sem-computador-ems": { "statement": "The EMS system works well even without sensors or a computer.", "feedback": "False. Without adjustments thousands of times per second, the train would stick or fall." },
+    "tf-frente-puxa": { "statement": "In the linear motor, the coil ahead of the train attracts it while the one behind repels it.", "feedback": "True. This pull-and-push travels along the track, carrying the train." },
+    "tf-atrito-motor": { "statement": "The linear motor needs driving wheels on the track to accelerate the train.", "feedback": "False. The acceleration comes from the magnetic wave, with no contact with the track." },
+    "tf-alternada-motor": { "statement": "The alternating current in the track is used to switch the poles of the coils at the right pace.", "feedback": "True. Without this switching there would be no wave to carry the train." },
+    "tf-frio-super": { "statement": "The MagLev-Cobra's superconductor only works when it is very cold.", "feedback": "True. That is why liquid nitrogen is used, at about -196 °C." },
+    "tf-nitrogenio-combustivel": { "statement": "Liquid nitrogen is a fuel that is burned to move the train.", "feedback": "False. It only cools; the motion comes from the linear motor and the levitation from magnetism." },
+    "tf-estavel-super": { "statement": "Once cooled, the superconductor keeps stable levitation without a computer adjusting everything.", "feedback": "True. The field is partly trapped, holding the position (Meissner effect)." },
+    "tf-guiamento": { "statement": "The guidance system of a Maglev keeps the train aligned on the guideway, without shifting sideways.", "feedback": "True. It is one of the three systems of a Maglev, together with levitation and propulsion." },
+    "tf-tres-sistemas": { "statement": "A Maglev train only needs levitation; guidance and propulsion are unnecessary.", "feedback": "False. Without guidance the train would escape to the sides, and without propulsion it would not move." },
+    "tf-china-japao": { "statement": "Today, Maglev trains with passengers operate in China and Japan.", "feedback": "True. Other countries only have test lines or research projects." },
+    "tf-reino-unido": { "statement": "The United Kingdom and South Korea still run commercial Maglev lines.", "feedback": "False. Both had commercial lines, but they were shut down because of high costs, lack of parts and low demand." },
+    "tf-trilho-comum": { "statement": "A Maglev train can use the tracks of an existing regular railway.", "feedback": "False. The Maglev has its own guideway, so the whole line must be built from scratch." },
+    "tf-caro": { "statement": "Building a Maglev line costs much more than building a regular railway.", "feedback": "True. The high-precision magnetic control and its own structure make construction much more expensive." },
+    "tf-silencioso": { "statement": "Because it has no wheels rubbing on the track, the Maglev is quieter than traditional trains and airplanes.", "feedback": "True. With no contact with the guideway and with electric propulsion, little noise is left." },
+    "tf-desgaste": { "statement": "Because the Maglev does not touch the track, its parts wear out more than those of a regular train.", "feedback": "False. It is the opposite: with no contact, wear and maintenance drop a lot." },
+    "tf-aviao": { "statement": "On medium-distance trips, the Maglev can be an alternative to airplanes and help relieve highways and airports.", "feedback": "True. The future Tokyo–Nagoya line, for example, will cover 286 km in about 40 minutes." },
+    "tf-xangai-rodas": { "statement": "The Shanghai train uses wheels until it gains speed and only then starts to levitate.", "feedback": "False. The one that needs wheels at the start is the Japanese train (EDS). The Shanghai train floats from the start." },
+    "tf-helio": { "statement": "The superconducting magnets of the Japanese Maglev are cooled with liquid helium.", "feedback": "True. They are niobium-titanium superconductors, which need even lower temperatures than those of the MagLev-Cobra." },
+    "tf-600": { "statement": "In tests, the Japanese Maglev has gone past 600 km/h.", "feedback": "True. In 2015, a prototype reached 603 km/h." }
+  }
+}

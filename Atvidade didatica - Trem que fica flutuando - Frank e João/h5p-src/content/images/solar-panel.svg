@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Painel solar</title>
+  <desc id="desc">Ilustração vetorial de um painel solar azul sob o sol, representando energia fotovoltaica.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#ecfeff"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f3b66"/>
+      <stop offset="0.5" stop-color="#1464a5"/>
+      <stop offset="1" stop-color="#0b2b4c"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" rx="28" fill="url(#sky)"/>
+  <circle cx="500" cy="92" r="55" fill="#fde047" opacity=".95"/>
+  <g stroke="#facc15" stroke-width="10" stroke-linecap="round" opacity=".9">
+    <path d="M500 10v18M500 156v18M418 92h18M564 92h18M442 34l13 13M545 137l13 13M558 34l-13 13M455 137l-13 13"/>
+  </g>
+  <path d="M115 317L235 175h250L404 317z" fill="url(#panel)" stroke="#e2f5ff" stroke-width="10" stroke-linejoin="round"/>
+  <g stroke="#7dd3fc" stroke-width="5" opacity=".85">
+    <path d="M202 235h226M164 276h274M274 184l-39 133M347 184l-17 133M420 184l2 133"/>
+  </g>
+  <path d="M300 317v58M230 378h150" fill="none" stroke="#334155" stroke-width="16" stroke-linecap="round"/>
+  <path d="M64 386c70-48 132-32 187 0 53-42 112-45 171-4 62-30 115-26 158 4" fill="none" stroke="#16a34a" stroke-width="12" stroke-linecap="round"/>
+</svg>

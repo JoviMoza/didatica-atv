@@ -1,0 +1,42 @@
+CREDITOS DAS IMAGENS LOCAIS
+============================
+
+1) maglev-cobra.jpg
+Título: MaglevCobra
+Autoria: Cristina Indio do Brasil / Agência Brasil
+Licença original: CC BY 3.0 BR
+Fonte: https://commons.wikimedia.org/wiki/File:MaglevCobra.jpg
+Alteração local: miniatura em largura de 960 px.
+Uso: carta visual do protótipo do Memory Game.
+
+2) ybco.jpg
+Título: YBCO-modified
+Autoria: Puppy8800
+Licença: CC BY-SA 3.0
+Fonte: https://commons.wikimedia.org/wiki/File:YBCO-modified.jpg
+Uso: carta visual do material cerâmico supercondutor.
+
+3) magnet.jpg
+Título: Magnet 4
+Autoria: Peter Nussbaumer
+Licença: CC BY-SA 3.0
+Fonte: https://commons.wikimedia.org/wiki/File:Magnet_4.jpg
+Uso: carta visual do ímã retangular permanente.
+
+4) liquid-nitrogen.png
+Título: Cooling superconductor by liquid nitrogen
+Autoria: Ainur physicist
+Licença: CC BY 4.0
+Fonte: https://commons.wikimedia.org/wiki/File:Cooling_superconductor_by_liquid_nitrogen.png
+Alteração local: miniatura em largura de 960 px.
+Uso: carta visual do resfriamento de um supercondutor.
+
+5) solar-panel.svg
+Ilustração vetorial original criada para este projeto; incluída sob a licença MIT do código.
+
+6) sustainability.svg
+Ilustração vetorial original criada para este projeto; incluída sob a licença MIT do código.
+
+NOTA EDITORIAL
+--------------
+As cartas de energia fotovoltaica e emissão zero representam possibilidades de um sistema sustentável. Elas nãoitam que o protótipo do MagLev-Cobra já possua painel solar ou opere necessariamente sem emissões.

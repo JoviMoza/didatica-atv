@@ -1,0 +1,61 @@
+/* ------------------------------ buttons ------------------------------ */
+
+.mt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 650;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+}
+.mt-btn:active:not(:disabled) { transform: translateY(1px); }
+.mt-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+.mt-btn--primary { color: var(--primary-foreground); background: var(--primary); box-shadow: 0 1px 2px rgba(31, 63, 209, 0.3); }
+.mt-btn--primary:hover:not(:disabled) { background: var(--primary-hover); }
+.mt-btn--secondary { border-color: var(--input); color: var(--foreground); background: var(--card); }
+.mt-btn--secondary:hover:not(:disabled) { background: var(--muted); }
+.mt-btn--ghost { border-color: currentColor; background: transparent; }
+.mt-btn--sm { min-height: 32px; padding: 0.3rem 0.7rem; font-size: 0.85rem; }
+.mt-btn--block { width: 100%; }
+
+.mt-btn.is-ready { animation: mt-pulse 1.4s ease-out 2; }
+@keyframes mt-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+  100% { box-shadow: 0 0 0 14px rgba(6, 182, 212, 0); }
+}
+
+.mt-link {
+  padding: 0.25rem 0.1rem;
+  border: 0;
+  color: var(--primary);
+  background: none;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.mt-link--danger { color: var(--danger); }
+
+.mt-icon-btn {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.mt-icon-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
+
+/* Counter next to a locked "Pular" button (UI.skipButton): the button is
+   disabled until enough wrong tries, and this text says how many are left. */
+.mt-skip-hint { align-self: center; color: var(--muted-foreground); font-size: 0.82rem; font-weight: 600; }

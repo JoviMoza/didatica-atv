@@ -1,0 +1,51 @@
+{
+  "title": "Magnetismo e Transporte",
+  "description": "Oito páginas sobre magnetismo e trens Maglev em linguagem acessível, alinhadas aos livros de Física do PNLD, com laboratório de ímãs, questões sorteadas por aluno e revisão estendida.",
+  "language": "pt-br",
+  "mainLibrary": "H5P.MagnetismoTransporte",
+  "embedTypes": [
+    "iframe"
+  ],
+  "authors": [
+    {
+      "name": "Projeto Magnetismo e Transporte",
+      "role": "Autor"
+    }
+  ],
+  "license": "U",
+  "licenseExtras": "O código da biblioteca usa licença MIT. As imagens têm licenças identificadas em content/CREDITS.txt. Verificar os direitos do conteúdo autoral antes da publicação pública.",
+  "preloadedDependencies": [
+    {
+      "machineName": "H5P.MagnetismoTransporte",
+      "majorVersion": 2,
+      "minorVersion": 2
+    }
+  ],
+  "changes": [
+    {
+      "date": "24-09-26 00:00:00",
+      "author": "Projeto Missão MagLev",
+      "log": "Versão 1: páginas 1 a 8, persistência local, xAPI e resultados."
+    },
+    {
+      "date": "25-09-26 00:00:00",
+      "author": "Projeto Magnetismo e Transporte",
+      "log": "Versão 2: novo nome, laboratório com 4 ímãs giratórios e campo em tempo real, navegação sequencial com páginas bloqueadas e novo design."
+    },
+    {
+      "date": "25-09-26 12:00:00",
+      "author": "Projeto Magnetismo e Transporte",
+      "log": "Versão 2.1: conteúdo acessível alinhado ao PNLD, banco de questões sorteadas por aluno, página 6 sobre os sistemas Maglev e aba de revisão estendida."
+    },
+    {
+      "date": "25-09-26 18:00:00",
+      "author": "Projeto Magnetismo e Transporte",
+      "log": "Versão 2.2: código dividido em módulos (uma página por arquivo, CSS por componente); gabarito lacrado fora do código-fonte, progresso salvo com assinatura e fim do recebimento de notas externas por postMessage. Acessibilidade: botão Libras (VLibras), legenda em português nos vídeos e audiodescrição com leitura em voz alta; texto de apoio da página 6 corrigido conforme o vídeo."
+    },
+    {
+      "date": "25-09-26 21:00:00",
+      "author": "Projeto Magnetismo e Transporte",
+      "log": "Versão 2.2.1: novo vídeo na página 6 (Gerando Respostas, UFABC: \"MAGLEVS - Trens de Levitação Magnética\") com audiodescrição e texto de apoio; página 6 ganha o guiamento e um quadro de vantagens e desafios do Maglev; novo conceito \"Maglev no mundo\" na revisão; banco com 72 questões de escolha única e 62 de V ou F. Botão Aparência com os temas Padrão, Noturno, Caderno e Sinalização. Página 5: botão Pular par no jogo da memória (conta como erro e revela o par). Vocabulário e laboratório: Pular só depois de 3 tentativas erradas; quiz e V ou F sem Pular."
+    }
+  ]
+}

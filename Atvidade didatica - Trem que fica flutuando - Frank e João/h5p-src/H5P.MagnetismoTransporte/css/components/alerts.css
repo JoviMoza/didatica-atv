@@ -1,0 +1,24 @@
+/* Test-mode bar and storage warning shown under the header. */
+
+.mt-devbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 1080px;
+  margin: 0.75rem auto 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed #d4a72c;
+  border-radius: var(--radius-sm);
+  color: var(--warning);
+  background: var(--warning-soft);
+  font-size: 0.875rem;
+}
+
+.mt-alert {
+  max-width: 1080px;
+  margin: 1rem auto 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+}
+.mt-alert--warn { border: 1px solid #f1d38b; color: var(--warning); background: var(--warning-soft); }

@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Tema 1 — Noturno (modo escuro)
+   Laboratório à noite: fundo azul-marinho quase preto, cartões em azul
+   profundo, destaque em ciano elétrico e violeta. Descansa a vista em sala
+   escura ou projetor, e combina com o palco do laboratório, que já é escuro.
+   Carregue DEPOIS de todo o CSS de library.json (ver designs/README.md).
+   Contraste: texto principal 15:1, texto secundário 7:1 sobre --background.
+   ========================================================================== */
+
+.h5p-mt-host { background: #070b18; }
+
+.h5p-mt {
+  color-scheme: dark;
+  --background: #070b18;
+  --foreground: #e8edff;
+  --card: #0f1630;
+  --muted: #151e3d;
+  --muted-foreground: #a3aed0;
+  --border: #222d52;
+  --input: #34416f;
+  --primary: #7c9bff;
+  --primary-hover: #9db4ff;
+  --primary-foreground: #070b18;
+  --primary-soft: rgba(124, 155, 255, 0.16);
+  --deep: #040713;
+  --accent: #22d3ee;
+  --accent-soft: rgba(34, 211, 238, 0.12);
+  --success: #3ddc97;
+  --success-soft: rgba(61, 220, 151, 0.13);
+  --danger: #ff7b72;
+  --danger-soft: rgba(255, 123, 114, 0.13);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+  --ring: #fbbf24;
+  --pole-n: #ff5a4f;
+  --pole-s: #5b7fd6;
+  --probe: #ffd23f;
+  --radius: 16px;
+  --radius-sm: 11px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 12px 32px -14px rgba(0, 0, 0, 0.8);
+}
+
+/* ---------- header, stepper and footer ---------- */
+:where(.h5p-mt) .mt-top {
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(50rem 16rem at 90% -60%, rgba(124, 92, 255, 0.35), transparent 60%),
+    radial-gradient(40rem 14rem at 10% -60%, rgba(34, 211, 238, 0.25), transparent 60%),
+    #050915;
+}
+:where(.h5p-mt) .mt-brand__mark { border-color: rgba(34, 211, 238, 0.45); box-shadow: 0 0 18px -4px rgba(34, 211, 238, 0.6); }
+:where(.h5p-mt) .mt-step__dot { background: #0d1530; }
+:where(.h5p-mt) .mt-step.is-current .mt-step__dot { box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.35), 0 0 16px rgba(34, 211, 238, 0.7); }
+:where(.h5p-mt) .mt-tab.is-active,
+:where(.h5p-mt) .mt-lang__btn[aria-pressed="true"] { color: #040713; background: var(--accent); border-color: var(--accent); }
+:where(.h5p-mt) .mt-nav { background: rgba(7, 11, 24, 0.92); }
+
+/* ---------- surfaces ---------- */
+:where(.h5p-mt) .mt-hero { background: linear-gradient(135deg, #111a38 0%, #0b1127 100%); }
+:where(.h5p-mt) .mt-hero__art svg > rect:first-of-type { fill: #0a1330; }
+:where(.h5p-mt) .mt-card--tint { border-color: #2c3a70; background: linear-gradient(180deg, #131d40, var(--card)); }
+:where(.h5p-mt) .mt-badge { border-color: rgba(34, 211, 238, 0.4); color: var(--accent); }
+:where(.h5p-mt) .mt-chip--success { border-color: rgba(61, 220, 151, 0.4); }
+:where(.h5p-mt) .mt-callout { border-color: rgba(34, 211, 238, 0.3); }
+:where(.h5p-mt) .mt-page__kicker,
+:where(.h5p-mt) .mt-eyebrow,
+:where(.h5p-mt) .mt-hero__eyebrow { color: var(--accent); }
+:where(.h5p-mt) .mt-page__header h1,
+:where(.h5p-mt) .mt-hero h1 { text-shadow: 0 0 28px rgba(124, 155, 255, 0.35); }
+
+/* ---------- feedback and choices ---------- */
+:where(.h5p-mt) .mt-feedback.is-success { border-color: rgba(61, 220, 151, 0.45); color: #8ff0c4; }
+:where(.h5p-mt) .mt-feedback.is-error { border-color: rgba(255, 123, 114, 0.45); color: #ffb3ad; }
+:where(.h5p-mt) .mt-choice:hover { background: #152046; }
+:where(.h5p-mt) .mt-review .is-wrong { border-color: rgba(255, 123, 114, 0.4); background: rgba(255, 123, 114, 0.06); }
+:where(.h5p-mt) .mt-alert--warn,
+:where(.h5p-mt) .mt-video__notice { border-color: rgba(251, 191, 36, 0.4); }
+:where(.h5p-mt) .mt-devbar { border-color: rgba(251, 191, 36, 0.5); }
+
+/* ---------- page-specific ---------- */
+:where(.h5p-mt) .mt-token { border-color: #3a4a85; background: var(--card); }
+:where(.h5p-mt) .mt-token.is-selected { color: #070b18; background: var(--primary); }
+:where(.h5p-mt) .mt-slot.is-drag-over { background: rgba(124, 155, 255, 0.3); }
+:where(.h5p-mt) .mt-lab__stage { border-color: var(--border); background: #050a1c; }
+:where(.h5p-mt) .mt-lab__bg { fill: #050a1c; }
+:where(.h5p-mt) .mt-lab__lines path { stroke: #7c9bff; }
+:where(.h5p-mt) .mt-lab__panel { background: var(--card); }
+:where(.h5p-mt) .mt-challenge { border-color: rgba(251, 191, 36, 0.55); background: rgba(251, 191, 36, 0.07); }
+:where(.h5p-mt) .mt-science { background: linear-gradient(120deg, #111a3a, #1b1446); border: 1px solid var(--border); }
+:where(.h5p-mt) .mt-mcard__front { background: #f4f6ff; }
+:where(.h5p-mt) .mt-mcard__front .mt-mcard__label { color: #0b1530; }
+:where(.h5p-mt) .mt-mcard.is-matched .mt-mcard__front { background: #dff7ec; }
+:where(.h5p-mt) .mt-mcard__back { border-color: #2c3a70; background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 8px, transparent 8px 16px), linear-gradient(135deg, #0d1535, #2a1f6b); }
+:where(.h5p-mt) .mt-matching select { color: var(--foreground); background: var(--card); }
+:where(.h5p-mt) .mt-system:nth-child(3) .mt-system__tag { background: #0e9fb8; }
+:where(.h5p-mt) .mt-system__tag { color: #070b18; }
+:where(.h5p-mt) .mt-score-hero { border: 1px solid var(--border); background: radial-gradient(40rem 16rem at 100% 0%, rgba(124, 92, 255, 0.35), transparent 60%), #0b1127; }
+:where(.h5p-mt) .mt-concept.is-priority { border-color: rgba(251, 191, 36, 0.45); background: rgba(251, 191, 36, 0.07); }
+:where(.h5p-mt) .mt-video__poster { background: radial-gradient(30rem 14rem at 50% 120%, rgba(124, 92, 255, 0.5), transparent 70%), #060b1d; }

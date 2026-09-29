@@ -1,0 +1,43 @@
+/* ------------------------------ summaries ------------------------------ */
+
+.mt-summary { outline: none; }
+.mt-summary__score { display: flex; align-items: center; gap: 1.25rem; }
+
+.mt-ring {
+  --p: 0;
+  display: grid;
+  flex: 0 0 96px;
+  width: 96px;
+  height: 96px;
+  place-items: center;
+  border-radius: 999px;
+  background: conic-gradient(var(--primary) calc(var(--p) * 1%), var(--border) 0);
+}
+.mt-ring > span {
+  display: grid;
+  width: calc(100% - 18px);
+  height: calc(100% - 18px);
+  place-items: center;
+  align-content: center;
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  background: var(--card);
+  font-size: 0.85rem;
+  line-height: 1.1;
+}
+.mt-ring strong { color: var(--foreground); font-size: 1.6rem; }
+.mt-ring--lg { flex-basis: 132px; width: 132px; height: 132px; background: conic-gradient(var(--accent) calc(var(--p) * 1%), rgba(255, 255, 255, 0.2) 0); }
+.mt-ring--lg > span { background: var(--deep); color: #b9c8ff; }
+.mt-ring--lg strong { color: #fff; font-size: 2.2rem; }
+
+.mt-review { display: flex; flex-direction: column; gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+.mt-review li { display: flex; gap: 0.75rem; padding: 0.8rem 0.9rem; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.mt-review li span:not(.mt-review__mark) { display: block; margin-top: 0.25rem; color: var(--muted-foreground); font-size: 0.9rem; }
+.mt-review__mark { display: grid; flex: 0 0 1.6rem; height: 1.6rem; place-items: center; border-radius: 999px; font-weight: 900; }
+.mt-review .is-correct .mt-review__mark { color: var(--success); background: var(--success-soft); }
+.mt-review .is-wrong { border-color: #f5c2bb; background: #fffafa; }
+.mt-review .is-wrong .mt-review__mark { color: var(--danger); background: var(--danger-soft); }
+
+@media (max-width: 720px) {
+  .mt-summary__score { flex-direction: column; text-align: center; }
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Sustentabilidade</title>
+  <desc id="desc">Ilustração vetorial de uma folha, uma Terra azul e uma seta de renovação.</desc>
+  <defs>
+    <linearGradient id="earth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#86efac"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" rx="28" fill="#f0fdf4"/>
+  <circle cx="250" cy="224" r="126" fill="url(#earth)"/>
+  <path d="M166 150c38 8 52 30 44 55-20 4-42-10-44-55zm103 13c-8 33 9 57 38 61 11-28-4-55-38-61zm-84 90c28-17 53-9 61 17-18 23-48 20-61-17zm75 20c15-26 41-28 60-5-7 29-37 39-60 5z" fill="#86efac"/>
+  <path d="M350 272c-28-112 21-196 154-214 12 137-34 221-154 214z" fill="url(#leaf)" stroke="#166534" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M370 292c39-64 73-109 119-157" fill="none" stroke="#f0fdf4" stroke-width="10" stroke-linecap="round"/>
+  <g fill="none" stroke="#16a34a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 340c56-34 108-34 158 0"/>
+    <path d="M438 334c47-24 90-20 128 12"/>
+  </g>
+  <path d="M118 290l22 18-24 15M546 288l-22 19 25 13" fill="none" stroke="#16a34a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,176 @@
+/* ------------------------------ magnet lab ------------------------------ */
+
+.mt-lab { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 1rem; align-items: start; }
+
+.mt-lab__stage {
+  overflow: hidden;
+  border: 1px solid #1c2b5c;
+  border-radius: var(--radius);
+  background: #0a1433;
+  box-shadow: var(--shadow);
+}
+.mt-lab__svg { display: block; width: 100%; height: auto; touch-action: none; user-select: none; }
+.mt-lab__bg { fill: #0b1638; }
+.mt-lab__gridline { stroke: rgba(148, 170, 255, 0.08); stroke-width: 1; }
+.mt-lab__lines path { fill: none; stroke: #5b8cff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+.mt-lab__lines .mt-lab__arrow { fill: #9ec0ff; stroke: none; opacity: 1; }
+
+.mt-lab__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  padding: 0.6rem 0.9rem;
+  border-top: 1px solid #1c2b5c;
+  color: #b9c8ff;
+  font-size: 0.8rem;
+}
+.mt-lab__legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.mt-dot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+.mt-dot--n { background: var(--pole-n); }
+.mt-dot--s { background: var(--pole-s); }
+.mt-dot--line { height: 3px; border-radius: 2px; background: #5b8cff; }
+.mt-dot--probe { border-radius: 999px; background: var(--probe); }
+
+.mt-magnet { cursor: grab; outline: none; }
+.mt-magnet.is-dragging { cursor: grabbing; }
+.mt-magnet__ring { fill: rgba(255, 255, 255, 0.02); stroke: rgba(158, 192, 255, 0.28); stroke-width: 2; stroke-dasharray: 5 7; transition: stroke 0.15s; }
+.mt-magnet__cue { fill: none; stroke: rgba(158, 192, 255, 0.55); stroke-width: 3; stroke-linecap: round; }
+.mt-magnet:hover .mt-magnet__ring { stroke: rgba(6, 182, 212, 0.8); }
+.mt-magnet:focus-visible .mt-magnet__ring,
+.mt-magnet.is-dragging .mt-magnet__ring { stroke: var(--ring); stroke-width: 3; stroke-dasharray: none; fill: rgba(245, 158, 11, 0.06); }
+.mt-magnet__shadow { fill: rgba(0, 0, 0, 0.35); }
+.mt-magnet__n { fill: var(--pole-n); }
+.mt-magnet__s { fill: var(--pole-s); }
+.mt-magnet__seam { fill: var(--pole-n); }
+.mt-magnet__seam--s { fill: var(--pole-s); }
+.mt-magnet__label { fill: #fff; font: 800 20px var(--font); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+
+.mt-needle circle { fill: rgba(255, 255, 255, 0.05); stroke: rgba(158, 192, 255, 0.25); }
+.mt-needle__n { fill: var(--pole-n); }
+.mt-needle__s { fill: #cbd5e1; }
+
+.mt-probe circle { fill: var(--probe); }
+.mt-probe__arrow { stroke: var(--probe); stroke-width: 6; stroke-linecap: round; }
+.mt-probe__head { fill: var(--probe); }
+.mt-probe .mt-probe__zero { fill: rgba(245, 179, 1, 0.15); stroke: var(--probe); stroke-width: 2; stroke-dasharray: 4 4; }
+.mt-probe__text { fill: var(--probe); font: 800 15px var(--font); text-anchor: middle; }
+
+.mt-lab__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+.mt-meter { display: flex; flex-direction: column; gap: 0.35rem; }
+.mt-meter__row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.875rem; }
+.mt-meter__row strong { font-variant-numeric: tabular-nums; }
+.mt-meter__bar { height: 8px; overflow: hidden; border-radius: 999px; background: var(--muted); }
+.mt-meter__bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.2s; }
+.mt-meter__bar--probe span { background: linear-gradient(90deg, #f59e0b, var(--probe)); }
+
+.mt-toggles { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; padding: 0.75rem 0 0; border: 0; border-top: 1px solid var(--border); }
+.mt-toggles legend { padding: 0; color: var(--muted-foreground); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.mt-switch { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.9rem; cursor: pointer; }
+.mt-switch input {
+  position: relative;
+  order: 2;
+  width: 38px;
+  height: 22px;
+  margin: 0;
+  border-radius: 999px;
+  background: var(--input);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.mt-switch input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s;
+}
+.mt-switch input:checked { background: var(--primary); }
+.mt-switch input:checked::after { transform: translateX(16px); }
+
+.mt-lab__controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+.mt-rot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+}
+.mt-rot__name { color: var(--muted-foreground); font-size: 0.78rem; font-weight: 700; }
+.mt-rot__row { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
+.mt-rot__angle { font-size: 1.05rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.mt-mission-list { display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0; list-style: none; }
+.mt-mission { position: relative; display: flex; gap: 0.9rem; padding-bottom: 1.1rem; }
+.mt-mission:not(:last-child)::before { content: ""; position: absolute; top: 2.1rem; bottom: 0.2rem; left: 0.95rem; width: 2px; background: var(--border); }
+.mt-mission.is-done:not(:last-child)::before { background: var(--success); }
+.mt-mission__marker {
+  z-index: 1;
+  display: grid;
+  flex: 0 0 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  background: var(--card);
+  font-weight: 800;
+}
+.mt-mission.is-active .mt-mission__marker { border-color: var(--primary); color: #fff; background: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
+.mt-mission.is-done .mt-mission__marker { border-color: var(--success); color: #fff; background: var(--success); }
+.mt-mission.is-waiting { opacity: 0.6; }
+.mt-mission__body { display: flex; flex: 1; flex-direction: column; gap: 0.6rem; min-width: 0; padding-top: 0.2rem; }
+.mt-question { font-weight: 600; }
+
+.mt-challenge {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border: 1px dashed #e0b84a;
+  border-radius: var(--radius-sm);
+  background: #fffbeb;
+}
+.mt-challenge.is-done { border-style: solid; border-color: #b7e4cc; background: var(--success-soft); }
+.mt-challenge__icon { font-size: 1.4rem; line-height: 1.2; color: #d69e00; }
+.mt-challenge p { color: var(--muted-foreground); font-size: 0.925rem; }
+
+.mt-science {
+  display: flex;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius);
+  color: #dbe4ff;
+  background: linear-gradient(120deg, var(--deep), #16307f);
+}
+.mt-science h2 { color: #fff; font-size: 1.05rem; }
+.mt-science p { margin-top: 0.35rem; }
+.mt-science__icon { font-size: 1.8rem; }
+
+@media (max-width: 860px) {
+  .mt-lab { grid-template-columns: 1fr; }
+  .mt-lab__panel { display: grid; grid-template-columns: 1fr 1fr; }
+  .mt-lab__panel .mt-toggles,
+  .mt-lab__panel .mt-btn { grid-column: span 1; }
+  .mt-lab__controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .mt-lab__panel { grid-template-columns: 1fr; }
+}

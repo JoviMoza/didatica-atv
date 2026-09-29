@@ -1,0 +1,174 @@
+{
+  "title": "Magnetismo e Transporte",
+  "description": "Objeto de aprendizagem interativo e acessível sobre ímãs, campo magnético, eletroímãs e trens Maglev, com laboratório de ímãs, questões sorteadas por aluno e revisão estendida.",
+  "majorVersion": 2,
+  "minorVersion": 2,
+  "patchVersion": 1,
+  "runnable": 1,
+  "fullscreen": 1,
+  "machineName": "H5P.MagnetismoTransporte",
+  "author": "Projeto Magnetismo e Transporte",
+  "license": "MIT",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 24
+  },
+  "embedTypes": [
+    "iframe"
+  ],
+  "preloadedJs": [
+    {
+      "path": "js/core/util.js"
+    },
+    {
+      "path": "js/core/i18n.js"
+    },
+    {
+      "path": "js/core/storage.js"
+    },
+    {
+      "path": "js/core/activities.js"
+    },
+    {
+      "path": "js/core/xapi.js"
+    },
+    {
+      "path": "js/core/answer-key.js"
+    },
+    {
+      "path": "js/core/quiz.js"
+    },
+    {
+      "path": "js/data/content.js"
+    },
+    {
+      "path": "js/data/params-en.js"
+    },
+    {
+      "path": "js/data/bank.js"
+    },
+    {
+      "path": "js/lab/physics.js"
+    },
+    {
+      "path": "js/ui/components.js"
+    },
+    {
+      "path": "js/ui/accessibility.js"
+    },
+    {
+      "path": "js/ui/themes.js"
+    },
+    {
+      "path": "js/views/review.js"
+    },
+    {
+      "path": "js/pages/01-intro.js"
+    },
+    {
+      "path": "js/pages/02-vocabulary.js"
+    },
+    {
+      "path": "js/pages/03-magnet-lab.js"
+    },
+    {
+      "path": "js/pages/04-single-choice.js"
+    },
+    {
+      "path": "js/pages/05-memory.js"
+    },
+    {
+      "path": "js/pages/06-maglev.js"
+    },
+    {
+      "path": "js/pages/07-true-false.js"
+    },
+    {
+      "path": "js/pages/08-results.js"
+    },
+    {
+      "path": "js/app.js"
+    }
+  ],
+  "preloadedCss": [
+    {
+      "path": "css/base.css"
+    },
+    {
+      "path": "css/components/header.css"
+    },
+    {
+      "path": "css/components/stepper.css"
+    },
+    {
+      "path": "css/components/alerts.css"
+    },
+    {
+      "path": "css/layout.css"
+    },
+    {
+      "path": "css/components/buttons.css"
+    },
+    {
+      "path": "css/components/nav.css"
+    },
+    {
+      "path": "css/pages/intro.css"
+    },
+    {
+      "path": "css/components/callout.css"
+    },
+    {
+      "path": "css/components/video.css"
+    },
+    {
+      "path": "css/components/accessibility.css"
+    },
+    {
+      "path": "css/components/language.css"
+    },
+    {
+      "path": "css/components/theme.css"
+    },
+    {
+      "path": "css/pages/vocabulary.css"
+    },
+    {
+      "path": "css/components/feedback.css"
+    },
+    {
+      "path": "css/components/choices.css"
+    },
+    {
+      "path": "css/components/summary.css"
+    },
+    {
+      "path": "css/pages/magnet-lab.css"
+    },
+    {
+      "path": "css/pages/memory.css"
+    },
+    {
+      "path": "css/pages/maglev.css"
+    },
+    {
+      "path": "css/pages/results.css"
+    },
+    {
+      "path": "css/components/tabs.css"
+    },
+    {
+      "path": "css/views/review.css"
+    },
+    {
+      "path": "css/themes/noturno.css"
+    },
+    {
+      "path": "css/themes/caderno.css"
+    },
+    {
+      "path": "css/themes/sinalizacao.css"
+    }
+  ],
+  "semantics": "semantics.json"
+}

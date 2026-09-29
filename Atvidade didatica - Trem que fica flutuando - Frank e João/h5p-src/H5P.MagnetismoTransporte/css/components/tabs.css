@@ -1,0 +1,23 @@
+/* ------------------------------ tabs (v2.1) ------------------------------ */
+
+.mt-tabs {
+  display: flex;
+  gap: 0.25rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.25rem clamp(1rem, 3vw, 2rem) 0;
+}
+.mt-tab {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #d6e0ff;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+.mt-tab:hover { background: rgba(255, 255, 255, 0.08); }
+.mt-tab.is-active { border-color: #fff; color: var(--deep); background: #fff; }
+.mt-tab.is-locked { opacity: 0.65; cursor: not-allowed; }
+.mt-top:has(.mt-stepper[hidden]) { padding-bottom: 0.9rem; }

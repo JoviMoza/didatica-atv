@@ -54,7 +54,10 @@
         activityId: 'trueFalse',
         score: result ? result.pontuacaoObtida : items.filter((item) => item.correct).length,
         items,
-        nextLabel: L('Ver meus resultados', 'See my results', 'Ver mis resultados')
+        // Just "next page", like page 4's "Continuar". The old label pointed at
+        // the results panel, which the essay page (8) now sits in between, so it
+        // named the wrong destination.
+        nextLabel: L('Próxima página', 'Next page', 'Página siguiente')
       });
       return;
     }
@@ -143,14 +146,16 @@
     app.completeActivity('trueFalse', score, { score, max: COUNT, items });
     app.saveState();
     app.render({ focusSelector: '.mt-summary' });
-    app.announce(L(`Verdadeiro ou falso concluído com ${score} de ${COUNT} pontos. Seus resultados foram liberados.`, `True or false complete with ${score} of ${COUNT} points. Your results are unlocked.`, `Verdadero o falso completado con ${score} de ${COUNT} puntos. Tus resultados están desbloqueados.`));
+    // Page 7 only says the next page is open, never "your results": the results
+    // panel is page 9 and there is an essay in between (page 8).
+    app.announce(L(`Verdadeiro ou falso concluído com ${score} de ${COUNT} pontos. A próxima página foi liberada.`, `True or false complete with ${score} of ${COUNT} points. The next page is unlocked.`, `Verdadero o falso completado con ${score} de ${COUNT} puntos. La página siguiente está desbloqueada.`));
   }
 
   const page = {
     id: 7,
     get short() { return L('V ou F', 'T or F', 'V o F'); },
     get title() { return L('Verdadeiro ou falso', 'True or false', 'Verdadero o falso'); },
-    get unlockHint() { return L('Responda às cinco afirmações para ver seus resultados.', 'Answer the five statements to see your results.', 'Responde a las cinco afirmaciones para ver tus resultados.'); },
+    get unlockHint() { return L('Responda às cinco afirmações para avançar.', 'Answer the five statements to move on.', 'Responde a las cinco afirmaciones para avanzar.'); },
     task: 'trueFalse',
     init(app) {
       Quiz.ensureSelection(task(app), BANK, COUNT);

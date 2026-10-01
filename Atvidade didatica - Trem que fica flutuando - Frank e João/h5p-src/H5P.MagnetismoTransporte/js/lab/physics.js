@@ -46,16 +46,46 @@
     return names[Math.round(normalizeAngle(angle) / 45) % 8];
   }
 
-  // Positions of `count` magnets, equidistant by angle on the ellipse.
-  // Index 0 starts at the top and goes clockwise, so the picture never
-  // depends on the order the magnets were added.
+  /* Positions of `count` magnets, always equidistant.
+   *
+   * Two layouts, because 4 is the default and 4 is also the count that wants
+   * to look like the old picture:
+   *   - 4 magnets: one in each corner of the stage, which is the arrangement
+   *     the activity shipped with until the lab became variable-size. The
+   *     corners of a rectangle centred on the stage are equidistant from its
+   *     centre, so the "equidistant" promise still holds.
+   *   - any other count: equidistant by angle on the ellipse, so nothing
+   *     collides with the centre probe at 2..10.
+   *
+   * Index 0 is always the top-left / top position and then clockwise, so the
+   * picture never depends on the order the magnets were added.
+   *
+   * CORNER_INSET is the half-diagonal of a magnet plus a margin: a magnet is
+   * 116x44, so a corner inset of half its length (58) would let it stick out
+   * once rotated; the diagonal covers every rotation. */
+  const CORNER_INSET = Math.round(
+    Math.sqrt(Math.pow(LAB.magnetLength / 2, 2) + Math.pow(LAB.magnetWidth / 2, 2)
+  ) + 8
+  );
+  const CORNER = 4;
+
   function positions(count) {
     const total = Math.max(MAGNET_MIN, Math.min(MAGNET_MAX, Math.round(Number(count) || MAGNET_MIN)));
+    if (total === CORNER) {
+      const left = CORNER_INSET;
+      const right = LAB.width - CORNER_INSET;
+      const top = CORNER_INSET;
+      const bottom = LAB.height - CORNER_INSET;
+      return [
+        { x: left, y: top },
+        { x: right, y: top },
+        { x: right, y: bottom },
+        { x: left, y: bottom }
+      ].map((point, index) => ({ x: point.x, y: point.y, index }));
+    }
     return Array.from({ length: total }, (_, index) => {
       const degrees = (360 / total) * index - 90;
       const radians = degrees * Math.PI / 180;
-      // Numbering is positional, so it stays correct as magnets are added.
-      // The page module builds the visible name in the interface language.
       return {
         x: LAB.center.x + Math.cos(radians) * LAB.radiusX,
         y: LAB.center.y + Math.sin(radians) * LAB.radiusY,

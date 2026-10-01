@@ -117,7 +117,7 @@ stateDiagram-v2
 
 ## Laboratório de ímãs (física)
 
-- A quantidade de ímãs é ajustável de 2 a 10 (padrão 2), em pontos equidistantes do círculo; o aluno os acrescenta, retira e gira. Cada ímã é um par de "cargas" magnéticas (N = +1, S = −1), a 40 px do centro, com decaimento 1/r² e um termo de suavização ε = 6 px.
+- A quantidade de ímãs é ajustável de 2 a 10 (padrão 4), sempre em pontos equidistantes do centro; o aluno os acrescenta, retira e gira. Com exatamente 4, `Physics.positions()` os põe nos quatro cantos do palco, que é o arranjo original da atividade; nas outras quantidades, ficam equidistentes por ângulo na elipse. Cada ímã é um par de "cargas" magnéticas (N = +1, S = −1), a 40 px do centro, com decaimento 1/r² e um termo de suavização ε = 6 px.
 - As linhas de campo são integradas por RK2, com passo de 5 px, a partir de um leque de sementes no polo N.
 - A escala é arbitrária: a interface mostra o campo no centro só como Nulo, Fraco, Médio ou Forte. As perguntas tratam de simetria e superposição, que o modelo representa corretamente.
 - Ângulos em graus, no sentido horário, com 0° = N para cima. Encaixam de 15 em 15° ao soltar. O alinhamento é detectado com tolerância de 8°, e o campo nulo quando fica abaixo de 8% da referência (`Physics.NULL_PERCENT`).

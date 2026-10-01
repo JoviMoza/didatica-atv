@@ -4,7 +4,7 @@
   // v3: each student gets questions drawn at random from the banks
   // (seed + questionIds per quiz).
   // v4: opaque option ids (sealed answer key) and signed records.
-  // v5: variable magnet count in the lab (2..10, default 2), Spanish, and the
+  // v5: variable magnet count in the lab (2..10, default 4), Spanish, and the
   // essay page. The essay key is additive — hydrate() reads a missing one as an
   // empty draft — so v5 stays v5 on purpose: bumping it would throw away the
   // progress of a class that is halfway through v5. Bump it only when an
@@ -15,10 +15,13 @@
   const SIGNATURE_SEED = 0x4d542d34;
   const Util = H5P.MagnetismoTransporte && H5P.MagnetismoTransporte.Util;
   const PAGE_COUNT = 9;
-  // Magnets in the lab: the student adds them one at a time, up to MAX.
+  // Magnets in the lab: the student adds or removes them one at a time.
+  // The default is 4, the arrangement the activity shipped with before the lab
+  // became variable-size (one magnet per corner). Positions are derived by
+  // js/lab/physics.js — see positions(), which lays 4 out in the corners.
   const MAGNET_MIN = 2;
   const MAGNET_MAX = 10;
-  const MAGNET_DEFAULT = 2;
+  const MAGNET_DEFAULT = 4;
   const SAFE_KEYS = new Set(['__proto__', 'prototype', 'constructor']);
   // Interface languages; '' = not chosen yet. Duplicated from core/i18n.js
   // on purpose: both lists have to agree, and keeping them literal here makes

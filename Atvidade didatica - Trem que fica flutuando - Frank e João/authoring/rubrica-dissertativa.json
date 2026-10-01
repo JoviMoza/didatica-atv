@@ -54,7 +54,15 @@
           "abaixa a temperatura",
           "baixa a temperatura",
           "reduz a temperatura",
-          "reduce la temperatura"
+          "reduce la temperatura",
+          "nitrogênio líquido reduz",
+          "nitrogenio liquido reduz",
+          "resfria o supercondutor",
+          "enfria o supercondutor",
+          "resfriamento do supercondutor",
+          "enfriamiento del superconductor",
+          "o resfriamento",
+          "el enfriamiento"
         ],
         "feedback": "O papel do nitrogênio líquido é justamente baixar a temperatura do material. Cite esse resfriamento.",
         "label": "Resfriamento pelo nitrogênio líquido",
@@ -77,7 +85,15 @@
           "low temperature",
           "very low temperature",
           "temperaturas baixas",
-          "temperaturas bajas"
+          "temperaturas bajas",
+          "ponto crítico",
+          "ponto critico",
+          "ponto crítico de temperatura",
+          "critical point",
+          "temperatura abaixo",
+          "abaixo do ponto",
+          "temperatura reduzida",
+          "resfria bastante"
         ],
         "phrases": [
           "temperatura muito baixa",
@@ -86,7 +102,14 @@
           "below a temperatura crítica",
           "abaixo da temperatura crítica",
           "below the critical temperature",
-          "por debajo de la temperatura crítica"
+          "por debajo de la temperatura crítica",
+          "abaixo do ponto crítico",
+          "abaixo do ponto critico",
+          "abaixo do ponto",
+          "temperatura abaixo do ponto",
+          "reduz sua temperatura",
+          "reduz a temperatura abaixo",
+          "leva a temperatura abaixo"
         ],
         "feedback": "A levitação depende de o material estar em temperatura baixa, não apenas resfriado.",
         "label": "Temperatura baixa",
@@ -120,7 +143,22 @@
           "se vuelve superconductor",
           "pode ficar supercondutor",
           "supercondutividade",
-          "superconductividad"
+          "superconductividad",
+          "fica supercondutor nessa",
+          "supercondutor nessa temperatura",
+          "nessa temperatura ele",
+          "nessa temperatura fica",
+          "em baixa temperatura",
+          "a baixa temperatura permite",
+          "o supercondutor",
+          "do supercondutor",
+          "o material fica supercondutor",
+          "supercondutor com nitrogênio líquido",
+          "supercondutor com nitrogenio liquido",
+          "el superconductor",
+          "del superconductor",
+          "superconductor con",
+          "se comporta como superconductor"
         ],
         "feedback": "O nome do fenômeno é supercondutividade: o material ganha essa propriedade quando está frio o bastante.",
         "label": "Supercondutividade e temperatura crítica",
@@ -144,7 +182,16 @@
           "expulsar o campo",
           "repelir o campo",
           "expel el campo",
-          "expulsa o campo magnetico de dentro"
+          "expulsa o campo magnetico de dentro",
+          "expelindo",
+          "expelir",
+          "aprisiona",
+          "aprisionando",
+          "aprisiona o campo",
+          "aprisionando o campo",
+          "prende o campo",
+          "confina o campo",
+          "expels and traps"
         ],
         "phrases": [
           "expulsa o campo magnetico",
@@ -157,7 +204,14 @@
           "não deixa o campo entrar",
           "nao deixa o campo entrar",
           "impede o campo de entrar",
-          "impede que o campo entre"
+          "impede que o campo entre",
+          "expelindo o campo",
+          "expelindo o campo magnético",
+          "aprisiona o campo magnético",
+          "aprisionando o campo magnético",
+          "expelindo e aprisionando",
+          "expels the field",
+          "expels and traps the magnetic field"
         ],
         "feedback": "Falta o efeito Meissner: num supercondutor o campo magnético é expulso do material, e é isso que sustenta o trem.",
         "label": "Efeito Meissner",
@@ -192,7 +246,16 @@
           "mantém o trem no ar",
           "mantiene el tren en el aire",
           "permite a levitacao",
-          "permite a levitação"
+          "permite a levitação",
+          "levitação estável",
+          "levitacao estavel",
+          "garantir a levitação",
+          "garantir a levitacao",
+          "garantir levitação",
+          "garantir levitacao",
+          "para garantir a levitação",
+          "para garantir a levitacao",
+          "levitacion estable"
         ],
         "feedback": "Vale ligar a propriedade ao efeito prático: é ela que permite o trem flutuar.",
         "label": "Levitação",
@@ -274,7 +337,14 @@
           "reduz a temperatura",
           "reduce la temperatura",
           "leva a temperatura a",
-          "leva a temperatura para"
+          "leva a temperatura para",
+          "reduz sua temperatura",
+          "reduz la temperatura",
+          "leva a temperatura abaixo",
+          "resfria e reduz",
+          "abaixo do ponto critico",
+          "abaixo do ponto crítico",
+          "reduces the temperature"
         ]
       },
       {
@@ -297,7 +367,14 @@
           "low temperature allows",
           "temperatura muy baja",
           "por debajo de la temperatura crítica",
-          "por debajo de la temperatura critica"
+          "por debajo de la temperatura critica",
+          "ponto critico",
+          "ponto crítico",
+          "abaixo do ponto critico",
+          "abaixo do ponto crítico",
+          "critical point",
+          "nessa temperatura",
+          "em baixa temperatura"
         ]
       },
       {
@@ -320,7 +397,13 @@
           "nao deixa o campo entrar",
           "nao deixa o campo entrar",
           "impede o campo de entrar",
-          "impede que o campo entre"
+          "impede que o campo entre",
+          "ativa o efeito meissner",
+          "ativa o efeito de meissner",
+          "ativa o efeito",
+          "activates the meissner",
+          "activa el efecto meissner",
+          "supercondutividade ativa"
         ]
       },
       {
@@ -346,7 +429,15 @@
           "sustenta o veículo",
           "sustiene el tren",
           "gera a levitacao",
-          "gera a levitação"
+          "gera a levitação",
+          "garantir a levitacao",
+          "garantir a levitação",
+          "garantir levitacao",
+          "garantir levitação",
+          "levitacao estavel",
+          "levitação estável",
+          "para garantir a levitacao",
+          "levitacion estable"
         ]
       },
       {

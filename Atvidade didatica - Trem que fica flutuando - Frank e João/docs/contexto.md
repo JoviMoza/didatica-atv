@@ -7,7 +7,7 @@
 - **Linguagem acessível, alinhada ao PNLD.** Desde a v2.1, o conteúdo segue os temas de Magnetismo e Eletromagnetismo dos livros de Física do PNLD (FNDE), sem o enfoque acadêmico da v1: domínios, campo, equilíbrio de forças, Earnshaw, eletroímã, indução, EMS/EDS, motor linear e supercondutores. Os livros digitais exigem login gov.br, então a revisão indica temas do sumário, não capítulos específicos.
 - **Navegação sequencial.** O aluno não escolhe páginas. Ele pode voltar a qualquer página e avançar só até a última liberada.
 - **Vídeo da página 6 não obrigatório, sem avisar.** Estar na página 6 libera a 7, e nenhum texto pode dizer que o vídeo pode ser pulado.
-- **Laboratório com 2 a 10 ímãs** (acrescentar e retirar), que o aluno gira com o mouse, o toque ou o teclado. O roteiro é observar → alinhar → explicar, com um desafio extra opcional: zerar o campo no centro.
+- **Laboratório com 2 a 10 ímãs** (padrão 4, um em cada canto; acrescentar e retirar), que o aluno gira com o mouse, o toque ou o teclado. O roteiro é observar → alinhar → explicar, com um desafio extra opcional: zerar o campo no centro.
 - **Questões sorteadas por aluno**, para cada estudante receber um conjunto diferente.
 - **Aba "Revisão estendida"** com explicações, exemplos do dia a dia, indicação do livro e simulações. Por padrão, abre ao terminar a página 7; o professor pode deixá-la aberta desde o início no editor.
 - **Nota da primeira tentativa.** Praticar de novo é permitido, mas não altera a nota.

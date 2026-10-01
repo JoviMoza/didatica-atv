@@ -253,9 +253,12 @@
 
   const page = {
     id: 8,
-    get short() { return L('Dissertativa', 'Dissertativa', 'Dissertativa'); },
+// Stepper label (page.short). "Pegou?" is the student's own check-for-
+    // understanding, which is what this page asks of them; the technical name
+    // for the format still lives in `title` and in the docs.
+    get short() { return L('Pegou?', 'Got it?', '¿Entendiste?'); },
     get title() { return L('Dissertativa: por que o nitrogênio líquido?', 'Open-ended: why liquid nitrogen?', 'Dissertativa: ¿por qué el nitrógeno líquido?'); },
-    get unlockHint() { return L('Escreva e avalie sua resposta para ver o resultado.', 'Write and evaluate your answer to see the results.', 'Escribe y evalúa tu respuesta para ver los resultados.'); },
+    get unlockHint() { return L('Escreva e avalie sua resposta para seguir.', 'Write and evaluate your answer to move on.', 'Escribe y evalúa tu respuesta para continuar.'); },
     task: 'essay',
     render,
     reset(app) {

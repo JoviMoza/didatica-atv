@@ -92,7 +92,9 @@
         <span class="mt-magnets-count__hint">${escapeHtml(
           fewest
             ? L(`Mínimo de ${MAGNET_MIN} ímãs`, `Minimum of ${MAGNET_MIN} magnets`, `Mínimo de ${MAGNET_MIN} imanes`)
-            : L('Cada ímã entra em ponto equidistante no círculo.', 'Each magnet is placed equidistantly on the circle.', 'Cada imán se coloca equidistante en el círculo.')
+            // Not "on the circle": with 4 magnets they sit in the four corners
+            // of the stage, which is the arrangement the activity used to have.
+            : L('Cada ímã entra em ponto equidistante ao redor do centro.', 'Each magnet is placed equidistantly around the centre.', 'Cada imán se coloca equidistante alrededor del centro.')
         )}</span>
       </div>
     `;
@@ -140,9 +142,12 @@
   }
 
   function render(app, target) {
+    // "Start with two" was true when the default was MAGNET_DEFAULT 2. The lab
+    // ships with 4 (one per corner) and the student can add or remove from 2 to
+    // 10, so the copy now says the range instead of a single number.
     const magnets = app.state.tasks.magnets;
     target.innerHTML = `
-      ${app.heading(page.id, L('Gire os ímãs e veja, ao vivo, como o campo magnético muda. Comece com dois e use o botão para acrescentar mais. Arraste um ímã em círculo, use os botões ↺ ↻ ou selecione-o e use as setas do teclado.', 'Rotate the magnets and watch, live, how the magnetic field changes. Start with two and use the button to add more. Drag a magnet in a circle, use the ↺ ↻ buttons, or select it and use the arrow keys.', 'Gira los imanes y observa, en vivo, cómo cambia el campo magnético. Empieza con dos y usa el botón para añadir más. Arrastra un imán en círculo, usa los botones ↺ ↻ o selecciónalo y usa las flechas del teclado.'), L('Exploração', 'Exploration', 'Exploración'))}
+      ${app.heading(page.id, L('Gire os ímãs e veja, ao vivo, como o campo magnético muda. São 4 ímãs, um em cada canto; use os botões para acrescentar ou retirar, de 2 a 10. Arraste um ímã em círculo, use os botões ↺ ↻ ou selecione-o e use as setas do teclado.', 'Rotate the magnets and watch, live, how the magnetic field changes. There are 4 magnets, one in each corner; use the buttons to add or remove them, from 2 to 10. Drag a magnet in a circle, use the ↺ ↻ buttons, or select it and use the arrow keys.', 'Gira los imanes y observa, en vivo, cómo cambia el campo magnético. Hay 4 imanes, uno en cada esquina; usa los botones para añadir o quitarlos, de 2 a 10. Arrastra un imán en círculo, usa los botones ↺ ↻ o selecciónalo y usa las flechas del teclado.'), L('Exploração', 'Exploration', 'Exploración'))}
       <div class="mt-lab">
         <div class="mt-lab__stage">
           ${labSvg(magnets.count)}

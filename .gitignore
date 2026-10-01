@@ -12,3 +12,16 @@ Melhorias futuras/
 .get_*.py
 .list_*.py
 .find_*.py
+
+# Agent tooling and skills: local only. The repository is meant to hold the
+# code; the instructions written for AI agents and the vendored security skills
+# stay on this machine. `.opencode/` is the same thing for opencode's own
+# agent definitions.
+.claude/
+.opencode/
+**/.claude/
+**/.opencode/
+AGENTS.md
+CLAUDE.md
+**/AGENTS.md
+**/CLAUDE.md

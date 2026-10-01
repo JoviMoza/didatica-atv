@@ -23,7 +23,7 @@ Objeto de aprendizagem H5P (biblioteca própria `H5P.MagnetismoTransporte 2.3.0`
 ## Novidades da v2
 
 - **Novo nome:** "Missão MagLev" passou a se chamar **Magnetismo e Transporte**. "Missão MagLev · o trem que flutua" virou o subtítulo.
-- **Laboratório de ímãs (página 3):** quatro ímãs, um em cada canto (a v2.3 passou a 2 a 10), que o aluno **gira** de três formas: arrastando em círculo (mouse ou toque), com os botões ↺ ↻ ou pelo teclado (setas giram 15°, PageUp/PageDown giram 90°). As linhas de campo, as bússolas opcionais e a seta do campo resultante no centro são recalculadas em tempo real por superposição. Roteiro em três etapas: observar → alinhar → explicar. Há também um desafio extra opcional: zerar o campo no centro.
+- **Laboratório de ímãs (página 3):** quatro ímãs, um em cada canto (a v2.3 perm 2 a 10, mas o padrão continuam sendo 4 nos cantos), que o aluno **gira** de três formas: arrastando em círculo (mouse ou toque), com os botões ↺ ↻ ou pelo teclado (setas giram 15°, PageUp/PageDown giram 90°). As linhas de campo, as bússolas opcionais e a seta do campo resultante no centro são recalculadas em tempo real por superposição. Roteiro em três etapas: observar → alinhar → explicar. Há também um desafio extra opcional: zerar o campo no centro.
 - **Navegação sequencial:** o aluno não escolhe mais a página livremente. O indicador de progresso só informa. Os botões **Anterior** e **Próxima** permitem voltar a qualquer página e avançar apenas até a última página liberada. Páginas com atividade liberam a próxima quando são concluídas. O botão "Voltar para onde parei" aparece quando o aluno volta para revisar.
 - **Novo design:** tokens semânticos no estilo shadcn/ui (`--background`, `--primary`, `--muted`, `--ring`…), com fundo claro, azul profundo, ciano elétrico e branco. É CSS puro, sem build nem dependências.
 - **Correções:** no jogo da memória, as duas cartas de um par às vezes eram ambas imagens; agora cada par tem sempre uma imagem e uma descrição. A pontuação e a data da primeira conclusão não são mais sobrescritas quando o aluno pratica de novo.
@@ -32,7 +32,7 @@ Objeto de aprendizagem H5P (biblioteca própria `H5P.MagnetismoTransporte 2.3.0`
 |---|---|---|---:|
 | 1. Início | Texto, vídeo e instruções da missão | abrir a página | — |
 | 2. Vocabulário | Drag the Words (5 termos + 2 distratores) | completar as 5 lacunas | 5 pts |
-| 3. Laboratório de ímãs | Simulação com 2 a 10 ímãs giratórios (acrescentar e retirar) | concluir as 3 etapas do roteiro | — |
+| 3. Laboratório de ímãs | Simulação com 2 a 10 ímãs giratórios (padrão 4, um em cada canto; acrescentar e retirar) | concluir as 3 etapas do roteiro | — |
 | 4. Quiz | 4 questões de escolha única (sem pular) | responder às 4 | 4 pts |
 | 5. Memória | Vídeo UFRJ + 6 pares (ou associação por listas) | achar ou pular os 6 pares | 1 pt |
 | 6. Maglev | Vídeo, texto de apoio, sistemas EMS/EDS/supercondutor, motor linear, vantagens e desafios | abrir a página | — |

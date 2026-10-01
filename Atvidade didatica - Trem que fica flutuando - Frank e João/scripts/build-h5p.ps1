@@ -161,7 +161,10 @@ finally {
 
 $hash = (Get-FileHash -LiteralPath $Output -Algorithm SHA256).Hash.ToLowerInvariant()
 $hashPath = "$Output.sha256"
-"$hash  $([System.IO.Path]::GetFileName($Output))" | Set-Content -LiteralPath $hashPath -Encoding ascii
+# Set-Content would end the line with CRLF, and this file is committed next to
+# the package it describes: write the LF form the repo stores.
+$hashLine = "$hash  $([System.IO.Path]::GetFileName($Output))`n"
+[System.IO.File]::WriteAllText($hashPath, $hashLine, [System.Text.Encoding]::ASCII)
 
 $sizeMiB = [math]::Round((Get-Item -LiteralPath $Output).Length / 1MB, 2)
 Write-Host "Pacote H5P criado: $Output"

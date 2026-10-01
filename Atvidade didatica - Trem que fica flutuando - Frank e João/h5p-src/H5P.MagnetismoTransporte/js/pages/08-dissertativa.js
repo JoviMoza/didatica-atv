@@ -205,21 +205,7 @@
           </div>
         ` : ''}
       </section>
-      ${done ? feedbackHtml(app) : `<aside class="mt-callout mt-callout--soft">
-        ${L('<strong>O que conta como boa resposta:</strong> ligar o resfriamento à temperatura baixa, a temperatura baixa à supercondutividade, e a supercondutividade ao efeito Meissner. Faltando qualquer elo obrigatório, a nota máxima fica bloqueada.',
-          '<strong>What makes a good answer:</strong> link the cooling to the low temperature, the low temperature to superconductivity, and superconductivity to the Meissner effect. Missing any required link blocks the maximum score.',
-          '<strong>Qué hace buena respuesta:</strong> enlazar el enfriamiento con la temperatura baja, la temperatura baja con la superconductividad, y la superconductividad con el efecto Meissner. Si falta un eslabón obligatorio, la nota máxima queda bloqueada.')}
-      </aside>`}
-      <section class="mt-card">
-        <div class="mt-card__head">
-          <h2>${L('Como esta nota é calculada', 'How this score is calculated', 'Cómo se calcula esta nota')}</h2>
-        </div>
-        <p class="mt-muted">${L(
-          'A nota vai de 0 a 5 e sai de três sinais: quais conceitos da resposta aparecem, se as relações entre eles se sustentam e se há alguma afirmação que contradiz a física. Ela não é uma similaridade de texto, e não é uma correção automática declarada infalível: o professor continua sendo a referência.',
-          'The score runs from 0 to 5 and comes from three signals: which concepts appear, whether the relations between them hold, and whether anything contradicts the physics. It is not a text similarity, and it is not a self-declared infallible grader: the teacher remains the reference.',
-          'La nota va de 0 a 5 y sale de tres señales: qué conceptos aparecen, si las relaciones entre ellos se sostienen y si hay alguna afirmación que contradice la física. No es una similitud de texto, ni un corrector automático declarado infalible: el profesor sigue siendo la referencia.'
-        )}</p>
-      </section>
+      ${done ? feedbackHtml(app) : ''}
     `;
   }
 

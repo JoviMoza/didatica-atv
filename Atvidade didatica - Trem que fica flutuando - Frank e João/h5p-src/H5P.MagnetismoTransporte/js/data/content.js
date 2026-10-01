@@ -8,9 +8,10 @@
    * reach the package sealed, through js/data/bank.js (generated).
    * Accessible language, aligned with the Magnetism / Electromagnetism
    * topics of the Physics textbooks distributed by PNLD (FNDE).
-   * The English (en-US) texts are at the end of the file: each translated
-   * field becomes a getter that follows the interface language, so the
-   * pages read CONCEPTS[id].label, section.title… as before.
+   * The English (en-US) and Spanish (es-ES) texts are at the end of the
+   * file: each translated field becomes a getter that follows the interface
+   * language, so the pages read CONCEPTS[id].label, section.title… as
+   * before, and a missing translation shows the Portuguese original.
    * ------------------------------------------------------------------ */
 
   const I18n = H5P.MagnetismoTransporte.I18n;
@@ -356,23 +357,185 @@
     leaf: { alt: 'Illustration of a leaf and the Earth with a renewal sign', label: 'No smoke: cleaner electric transportation', shortLabel: 'Leaf and sustainability icon' }
   };
 
-  // Turns each field present in `english` into a getter that returns the
-  // English text when the interface is in en-US, and the original otherwise.
-  function localize(target, english) {
-    Object.keys(english || {}).forEach((field) => {
+  /* ------------------------------- Spanish ------------------------------- */
+
+  const ES_CONCEPTS = {
+    polos: 'Imanes y polos',
+    dominios: 'Dominios magnéticos',
+    campo: 'Campo magnético y líneas de campo',
+    equilibrio: 'Equilibrio de fuerzas',
+    earnshaw: 'Por qué los imanes solos no levitan',
+    eletroima: 'Electroimán',
+    inducao: 'Inducción y el Maglev japonés',
+    ems: 'Levitación por atracción (Shanghái)',
+    'motor-linear': 'Motor lineal',
+    supercondutor: 'Superconductores y el MagLev-Cobra',
+    'maglev-mundo': 'Maglev en el mundo: ventajas y desafíos'
+  };
+
+  const ES_LINKS = {
+    phetMagnets: { label: 'PhET: Imanes y electroimanes', url: 'https://phet.colorado.edu/es/simulations/magnets-and-electromagnets' },
+    phetCompass: { label: 'PhET: Imán y brújula', url: 'https://phet.colorado.edu/es/simulations/magnet-and-compass' },
+    phetFaraday: { label: 'PhET: Ley de Faraday', url: 'https://phet.colorado.edu/es/simulations/faradays-law' },
+    phetFaradayLab: { label: 'PhET: Laboratorio electromagnético de Faraday', url: 'https://phet.colorado.edu/es/simulations/faradays-electromagnetic-lab' },
+    phetForces: { label: 'PhET: Fuerzas y movimiento', url: 'https://phet.colorado.edu/es/simulations/forces-and-motion-basics' },
+    cobra: { label: 'Sitio web del MagLev-Cobra (COPPE/UFRJ, en portugués)' }
+  };
+
+  const ES_REVIEW = {
+    polos: {
+      title: 'Imanes y polos',
+      summary: 'Todo imán tiene un polo norte y un polo sur. Los iguales se repelen y los opuestos se atraen.',
+      body: [
+        'Los polos son las regiones donde el efecto del imán es más fuerte. Si cuelgas un imán de barra de un hilo, gira hasta que uno de sus polos apunta al norte geográfico: ese es el polo norte del imán.',
+        'Los polos nunca aparecen solos. Si partes un imán por la mitad, cada trozo se convierte en un imán nuevo y completo, con norte y sur.'
+      ],
+      example: 'Los imanes de nevera, los auriculares y los motores de juguetes usan esa atracción y esa repulsión.',
+      book: 'Capítulo de Magnetismo: «imanes», «polos magnéticos», «atracción y repulsión».'
+    },
+    dominios: {
+      title: 'Dominios magnéticos: de dónde viene el magnetismo',
+      summary: 'Un imán está formado por miles de millones de diminutos imanes atómicos alineados.',
+      body: [
+        'En materiales como el hierro, el níquel y el cobalto, cada átomo funciona como un imán diminuto. Esos átomos se organizan en bloques llamados dominios magnéticos.',
+        'En el hierro común, los dominios apuntan en todas las direcciones y se cancelan entre sí. En el imán de neodimio, los dominios se han forzado a alinearse: sus efectos se suman y aparecen los polos norte y sur.'
+      ],
+      example: 'Frotar un clavo contra un imán, siempre en el mismo sentido, alinea parte de los dominios y el clavo se convierte en un imán débil.',
+      book: 'Capítulo de Magnetismo: «materiales ferromagnéticos» y «dominios magnéticos».'
+    },
+    campo: {
+      title: 'Campo magnético y líneas de campo',
+      summary: 'El imán actúa a distancia mediante su campo magnético, que se representa con líneas que salen del polo norte y entran en el polo sur.',
+      body: [
+        'La fuerza magnética no actúa «de la nada»: el imán modifica el espacio a su alrededor y crea un campo magnético. Se representa mediante el vector B.',
+        'Las líneas de campo salen del polo norte y entran en el polo sur. Donde las líneas están más juntas, cerca del imán, el campo es más fuerte. Por eso la repulsión aumenta tanto cuando dos imanes se acercan mucho.',
+        'Cuando hay varios imanes, el campo en cada punto es la suma de los campos de todos ellos, como viste al girar los imanes en el laboratorio.'
+      ],
+      example: 'La aguja de una brújula es un pequeño imán que se alinea con el campo magnético de la Tierra.',
+      book: 'Capítulo de Magnetismo: «campo magnético», «líneas de campo» y «brújula».'
+    },
+    equilibrio: {
+      title: 'Flotar es equilibrar fuerzas',
+      summary: 'Para flotar quieto, la fuerza magnética ascendente debe cancelar el peso.',
+      body: [
+        'Según la Primera Ley de Newton, un objeto se queda quieto cuando la fuerza resultante sobre él es cero.',
+        'Lo que tira del objeto hacia abajo es su peso, P = m · g. Para que flote, la fuerza magnética debe apuntar hacia arriba con el mismo valor que el peso.'
+      ],
+      example: 'Una balanza en reposo, con el mismo peso en los dos platos, también está en equilibrio.',
+      book: 'Capítulo de las Leyes de Newton: «fuerza resultante», «peso» y «equilibrio».'
+    },
+    earnshaw: {
+      title: 'Por qué los imanes solos no hacen flotar nada quieto',
+      summary: 'Con imanes permanentes, el objeto siempre se escapa hacia un lado (teorema de Earnshaw).',
+      body: [
+        'Coloca un imán sobre otro, con los polos iguales enfrentados: se desliza hacia un lado y da la vuelta. En 1842, Samuel Earnshaw demostró que es imposible crear un equilibrio estable solo con imanes permanentes.',
+        'Por eso, en los juguetes que levitan, el objeto queda sujeto a un eje o gira como una peoneta. Los trenes resuelven el problema de otra manera: con electroimanes controlados por ordenador o con superconductores.'
+      ],
+      example: 'El «Levitron» es una peoneta magnética que solo flota mientras está girando.',
+      book: 'Capítulo de Magnetismo o capítulo sobre aplicaciones del electromagnetismo (cuadros sobre levitación y trenes Maglev).'
+    },
+    eletroima: {
+      title: 'Electroimán: electricidad que se convierte en magnetismo',
+      summary: 'La corriente eléctrica en una bobina crea un campo magnético que se puede encender, apagar y ajustar.',
+      body: [
+        'En 1820, Oersted observó que la corriente eléctrica en un hilo desviaba la aguja de una brújula. La corriente eléctrica produce un campo magnético.',
+        'Al enrollar el hilo en una bobina, el campo se parece al de un imán de barra: eso es un electroimán. La diferencia es que su fuerza cambia al instante, según la corriente.'
+      ],
+      example: 'Las grúas de los desguaces usan electroimanes para levantar y soltar chatarra.',
+      book: 'Capítulo de Electromagnetismo: «experimento de Oersted», «bobina», «solenoide» y «electroimán».'
+    },
+    inducao: {
+      title: 'Inducción y el Maglev japonés (EDS)',
+      summary: 'Los imanes en movimiento inducen corrientes en la guía, y esas corrientes empujan el tren hacia arriba.',
+      body: [
+        'El SCMaglev japonés usa la Suspensión Electrodinámica (EDS). El tren lleva imanes superconductores muy potentes, y la guía tiene bobinas metálicas.',
+        'Cuando el tren pasa, su campo magnético induce corriente eléctrica en las bobinas (ley de Faraday). Esa corriente crea un campo con la misma polaridad que el imán del tren, y los polos iguales se repelen: el tren es empujado hacia arriba y flota unos 10 cm por encima de la guía.',
+        'Como la corriente depende del movimiento, el tren usa ruedas de goma hasta alcanzar velocidad, alrededor de 100 a 150 km/h. Los imanes superconductores del tren japonés se enfrían con helio líquido. En 2015, un prototipo llegó a 603 km/h.'
+      ],
+      example: 'La misma inducción ocurre en la dinamo de una bicicleta, que enciende la luz frontal mientras gira la rueda.',
+      book: 'Capítulo de Electromagnetismo: «inducción electromagnética» y «ley de Faraday».'
+    },
+    ems: {
+      title: 'Levitación por atracción: el tren de Shanghái (EMS)',
+      summary: 'El tren «abraza» el raíl por debajo y es atraído hacia arriba por electroimanes controlados por ordenador.',
+      body: [
+        'El Transrapid, usado en Shanghái, usa la Suspensión Electromagnética (EMS). Brazos en forma de C abrazan el raíl, con electroimanes debajo de él. Al encenderse, los electroimanes son atraídos hacia arriba, hacia el raíl de acero.',
+        '¿Por qué el tren no se queda pegado al raíl? Los sensores miden la distancia miles de veces por segundo. Si el tren se acerca demasiado, el ordenador reduce la corriente; si empieza a caer, la aumenta. Así, el hueco se mantiene entre 1 y 1,5 centímetros, y el tren levita desde la salida, sin usar ruedas.'
+      ],
+      example: 'Es como equilibrar una escoba sobre la palma de la mano: pequeñas correcciones todo el tiempo.',
+      book: 'Capítulo de Electromagnetismo (aplicaciones del electroimán).'
+    },
+    'motor-linear': {
+      title: 'Motor lineal: cómo se mueve el tren sin ruedas',
+      summary: 'Las bobinas de la guía no paran de cambiar de polo: la de delante tira y la de detrás empuja.',
+      body: [
+        'Un motor eléctrico normal gira porque sus imanes cambian de polaridad alrededor de un eje. En un Maglev, ese motor se ha «desenrollado» a lo largo de la guía: es el motor lineal.',
+        'Con corriente alterna, la bobina situada delante del tren se convierte en un polo opuesto al del tren y lo atrae, mientras que la bobina justo detrás se convierte en un polo igual y lo empuja. Esta onda magnética recorre la guía, y el tren, sin rozamiento con la vía, la acompaña.'
+      ],
+      example: 'Imagina una fila de personas: la de delante tira de tu mano y la de detrás empuja tu espalda, una y otra vez y muy rápido.',
+      book: 'Capítulo de Electromagnetismo: «motor eléctrico» y «corriente alterna».'
+    },
+    supercondutor: {
+      title: 'Superconductores y el MagLev-Cobra',
+      summary: 'Enfriado con nitrógeno líquido, el superconductor «fija» el imán en su sitio y flota de forma estable.',
+      body: [
+        'Algunos materiales cerámicos, como el YBCO, se vuelven superconductores cuando están muy fríos. El nitrógeno líquido, a unos −196 °C, produce ese enfriamiento; no reacciona con el material, solo lo enfría.',
+        'Una vez enfriado, el superconductor expulsa parte del campo magnético (efecto Meissner) y fija el resto en su sitio. Por eso flota de manera estable sobre un raíl de imanes, sin necesidad de ordenador.',
+        'El MagLev-Cobra, tren brasileño desarrollado en el LASUP de la COPPE/UFRJ, aplica este principio sobre un raíl de imanes de neodimio.'
+      ],
+      example: 'Es el fenómeno que se ve en los vídeos en los que una pastilla humeante flota sobre un raíl de imanes.',
+      book: 'Cuadros de lectura sobre superconductividad y tecnología, en el capítulo de Magnetismo o de Electromagnetismo.'
+    },
+    'maglev-mundo': {
+      title: 'Maglev en el mundo: ventajas y desafíos',
+      summary: 'Un Maglev levita, es guiado y es empujado por imanes. Es rápido y silencioso, pero caro de construir.',
+      body: [
+        'Todo tren Maglev combina tres sistemas: la levitación, que lo deja suspendido sin rozamiento; el guiamiento, que lo mantiene alineado sin escaparse hacia los lados; y la propulsión, que aporta el motor lineal.',
+        'Hoy, solo China y Japón tienen Maglev transportando pasajeros. Shanghái tiene la única línea de alta velocidad en servicio, y Japón construye el Chuo Shinkansen, entre Tokio y Nagoya. Las líneas del Reino Unido y de Corea del Sur cerraron por el coste alto, la falta de repuestos y la poca demanda.',
+        'Puntos fuertes: más velocidad, menor consumo de energía, poco desgaste y poco ruido, todo porque el tren no toca la guía. Puntos débiles: la guía es muy cara y no puede aprovechar las vías de los ferrocarriles convencionales.'
+      ],
+      example: 'En un viaje de distancia media, como Tokio–Nagoya, el Maglev compite con el avión y ayuda a descongestionar carreteras y aeropuertos.',
+      book: 'Cuadros de ciencia, tecnología y sociedad en los capítulos de Electromagnetismo (aplicaciones e impactos de la tecnología en el transporte).'
+    }
+  };
+
+  const ES_MEMORY = {
+    ybco: { alt: 'Muestra cerámica de YBCO apoyada sobre una superficie', label: 'Superconductor: una vez enfriado, «fija» el imán en su sitio', shortLabel: 'Bloque cerámico de YBCO' },
+    magnet: { alt: 'Imán rectangular plateado', label: 'Imán de neodimio: dominios magnéticos alineados', shortLabel: 'Imán rectangular plateado' },
+    nitrogen: { alt: 'Superconductor enfriándose en un experimento con nitrógeno líquido', label: 'El nitrógeno líquido enfría el superconductor (−196 °C)', shortLabel: 'Recipiente con una nube de vapor blanco' },
+    cobra: { alt: 'Fotografía del prototipo del MagLev-Cobra sobre una vía de pruebas', label: 'MagLev-Cobra: tren brasileño de la UFRJ', shortLabel: 'Prototipo del MagLev-Cobra' },
+    solar: { alt: 'Ilustración de un panel solar bajo el sol', label: 'La energía solar puede alimentar los electroimanes', shortLabel: 'Panel solar' },
+    leaf: { alt: 'Ilustración de una hoja y de la Tierra con un símbolo de renovación', label: 'Sin humo: transporte eléctrico más limpio', shortLabel: 'Icono de hoja y sostenibilidad' }
+  };
+
+  // Turns each translated field into a getter that follows the interface
+  // language: the Spanish text when it is es-ES, the English one when it is
+  // en-US and the original otherwise. A language without translation falls
+  // back to Portuguese, never to the other translation.
+  function localize(target, english, spanish) {
+    const translations = { en: english || {}, es: spanish || {} };
+    const fields = Object.keys(translations.en);
+    Object.keys(translations.es).forEach((field) => {
+      if (fields.indexOf(field) === -1) {
+        fields.push(field);
+      }
+    });
+    fields.forEach((field) => {
       const original = target[field];
-      const translated = english[field];
       Object.defineProperty(target, field, {
         enumerable: true,
-        get: () => (I18n.isEnglish() ? translated : original)
+        get: () => {
+          const translated = I18n.isSpanish() ? translations.es[field] : I18n.isEnglish() ? translations.en[field] : original;
+          return translated === undefined || translated === null || translated === '' ? original : translated;
+        }
       });
     });
   }
 
-  Object.keys(CONCEPTS).forEach((id) => localize(CONCEPTS[id], { label: EN_CONCEPTS[id] }));
-  Object.keys(LINKS).forEach((key) => localize(LINKS[key], EN_LINKS[key]));
-  REVIEW_SECTIONS.forEach((section) => localize(section, EN_REVIEW[section.id]));
-  MEMORY_PAIRS.forEach((pair) => localize(pair, EN_MEMORY[pair.id]));
+  Object.keys(CONCEPTS).forEach((id) => localize(CONCEPTS[id], { label: EN_CONCEPTS[id] }, { label: ES_CONCEPTS[id] }));
+  Object.keys(LINKS).forEach((key) => localize(LINKS[key], EN_LINKS[key], ES_LINKS[key]));
+  REVIEW_SECTIONS.forEach((section) => localize(section, EN_REVIEW[section.id], ES_REVIEW[section.id]));
+  MEMORY_PAIRS.forEach((pair) => localize(pair, EN_MEMORY[pair.id], ES_MEMORY[pair.id]));
 
   H5P.MagnetismoTransporte = H5P.MagnetismoTransporte || {};
   H5P.MagnetismoTransporte.Content = {

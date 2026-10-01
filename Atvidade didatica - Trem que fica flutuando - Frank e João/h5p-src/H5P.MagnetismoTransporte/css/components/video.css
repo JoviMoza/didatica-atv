@@ -42,3 +42,18 @@
   background: var(--warning-soft);
   font-size: 0.85rem;
 }
+
+/* Escape hatch when the publisher blocks embedding and the player only
+ * shows YouTube's "video unavailable" screen. Sits directly under the
+ * frame so the student finds it without hunting through the caption. */
+.mt-video__fallback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.5rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+.mt-video__fallback a { color: var(--primary); font-weight: 700; }

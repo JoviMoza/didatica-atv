@@ -1,9 +1,9 @@
 {
   "title": "Magnetismo e Transporte",
   "description": "Objeto de aprendizagem interativo e acessível sobre ímãs, campo magnético, eletroímãs e trens Maglev, com laboratório de ímãs, questões sorteadas por aluno e revisão estendida.",
-  "majorVersion": 2,
-  "minorVersion": 2,
-  "patchVersion": 1,
+"majorVersion": 2,
+ "minorVersion": 3,
+ "patchVersion": 0,
   "runnable": 1,
   "fullscreen": 1,
   "machineName": "H5P.MagnetismoTransporte",
@@ -36,14 +36,20 @@
       "path": "js/core/answer-key.js"
     },
     {
+      "path": "js/core/essay.js"
+    },
+    {
       "path": "js/core/quiz.js"
     },
     {
       "path": "js/data/content.js"
     },
-    {
-      "path": "js/data/params-en.js"
-    },
+{
+          "path": "js/data/params-en.js"
+        },
+        {
+          "path": "js/data/params-es.js"
+        },
     {
       "path": "js/data/bank.js"
     },
@@ -84,7 +90,10 @@
       "path": "js/pages/07-true-false.js"
     },
     {
-      "path": "js/pages/08-results.js"
+      "path": "js/pages/08-dissertativa.js"
+    },
+    {
+      "path": "js/pages/09-results.js"
     },
     {
       "path": "js/app.js"
@@ -150,6 +159,9 @@
     },
     {
       "path": "css/pages/maglev.css"
+    },
+    {
+      "path": "css/pages/essay.css"
     },
     {
       "path": "css/pages/results.css"

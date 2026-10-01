@@ -110,27 +110,77 @@
         </div>
       </section>`;
 
+  const ES_BODY = `
+      <section class="mt-card" aria-labelledby="mt-systems">
+        <h2 id="mt-systems">Tres formas de hacer que un tren flote</h2>
+        <p class="mt-muted">Todo Maglev necesita levitar (quedar suspendido), ser guiado (no desviarse hacia los lados de la vía) y ser empujado hacia delante. Para flotar quieto, la fuerza magnética ascendente tiene que cancelar el peso. Cada sistema resuelve de un modo el problema de que los imanes por sí solos no son estables.</p>
+        <div class="mt-systems">
+          <article class="mt-system">
+            <span class="mt-system__tag">Repulsión</span>
+            <h3>Japón · SCMaglev (EDS)</h3>
+            <p>Imanes superconductores en el tren, enfriados con helio líquido, inducen corrientes en las bobinas del raíl (ley de Faraday). Esas corrientes crean polos iguales a los del tren, que es empujado hacia arriba y flota unos 10 cm.</p>
+            <p class="mt-system__note">Solo levita en movimiento: usa ruedas hasta unos 100 a 150 km/h. En las pruebas superó los 600 km/h.</p>
+          </article>
+          <article class="mt-system">
+            <span class="mt-system__tag">Atracción</span>
+            <h3>Shanghái · Transrapid (EMS)</h3>
+            <p>Brazos en forma de C abrazan el raíl por debajo. Los electroimanes son atraídos hacia arriba y los sensores ajustan la corriente miles de veces por segundo para que el tren ni se pegue ni caiga.</p>
+            <p class="mt-system__note">Levita desde el arranque, sin ruedas, con una holgura de 1 a 1,5 cm controlada por ordenador.</p>
+          </article>
+          <article class="mt-system">
+            <span class="mt-system__tag">Superconductor</span>
+            <h3>Brasil · MagLev-Cobra</h3>
+            <p>Bloques superconductores, enfriados con nitrógeno líquido, flotan sobre un raíl de imanes de neodimio. El superconductor "fija" el campo y se mantiene estable por sí solo.</p>
+            <p class="mt-system__note">Desarrollado en el LASUP de la COPPE/UFRJ.</p>
+          </article>
+        </div>
+      </section>
+      <section class="mt-card mt-card--tint" aria-labelledby="mt-linear">
+        <h2 id="mt-linear">¿Y cómo se mueve el tren? El motor lineal</h2>
+        <p>Imagine el motor de un ventilador "desenrollado" a lo largo de todo el raíl. Las bobinas del raíl cambian de polo sin parar: la bobina por delante del tren lo atrae y la de detrás lo repele. Esta onda magnética recorre la vía y el tren, sin rozamiento con el raíl, la acompaña.</p>
+        <p><strong>Piense en una fila:</strong> la persona de delante tira de tu mano y la de detrás te empuja la espalda, una y otra vez y muy rápido.</p>
+      </section>
+      <section class="mt-card" aria-labelledby="mt-world">
+        <h2 id="mt-world">Dónde están los Maglev y qué pesa en la balanza</h2>
+        <p class="mt-muted">Hoy, los trenes Maglev transportan pasajeros solo en China y Japón. En Shanghái está la única línea de alta velocidad en servicio, del aeropuerto de Pudong hasta el metro. Japón construye la Chuo Shinkansen, que unirá Tokio con Nagoya (286 km) en unos 40 minutos. El Reino Unido y Corea del Sur tuvieron líneas comerciales, pero fueron cerradas.</p>
+        <div class="mt-systems mt-systems--two">
+          <article class="mt-system">
+            <span class="mt-system__tag">Ventajas</span>
+            <h3>Rápido, económico y silencioso</h3>
+            <p>Sin tocar el raíl, el tren solo se enfrenta a la resistencia del aire: es más rápido y consume menos energía a alta velocidad.</p>
+            <p>Sin contacto, las piezas casi no se desgastan, el mantenimiento es menor y el ruido es mucho menor que el de los trenes y aviones habituales.</p>
+          </article>
+          <article class="mt-system">
+            <span class="mt-system__tag">Desafíos</span>
+            <h3>Caro y con vía propia</h3>
+            <p>La vía cuesta mucho más que un ferrocarril convencional, debido al control magnético de alta precisión.</p>
+            <p>No se pueden aprovechar las vías existentes: toda la línea tiene que construirse desde cero.</p>
+            <p class="mt-system__note">Puede sustituir al avión en trayectos medios y descongestionar autopistas y aeropuertos.</p>
+          </article>
+        </div>
+      </section>`;
+
   function render(app, section) {
     const media = app.media();
     section.innerHTML = `
-      ${app.heading(page.id, L('Assista ao vídeo e leia o texto de apoio. As afirmações da próxima página usam este conteúdo.', 'Watch the video and read the support text. The statements on the next page use this content.'))}
-      ${app.video('meissner', media.meissnerVideoUrl, media.meissnerVideoTitle || L('Trens de levitação magnética', 'Magnetic levitation trains'), 2, L('O conteúdo abaixo continua disponível caso o player seja bloqueado.', 'The content below is still available if the player is blocked.'))}
+      ${app.heading(page.id, L('Assista ao vídeo e leia o texto de apoio. As afirmações da próxima página usam este conteúdo.', 'Watch the video and read the support text. The statements on the next page use this content.', 'Mira el vídeo y lee el texto de apoyo. Las afirmaciones de la página siguiente usan este contenido.'))}
+      ${app.video('meissner', media.meissnerVideoUrl, media.meissnerVideoTitle || L('Trens de levitação magnética', 'Magnetic levitation trains', 'Trenes de levitación magnética'), 2, L('O conteúdo abaixo continua disponível caso o player seja bloqueado.', 'The content below is still available if the player is blocked.', 'El contenido siguiente sigue disponible si se bloquea el reproductor.'))}
       <section class="mt-card mt-transcript" aria-labelledby="transcript-title">
         <span class="mt-transcript__icon" aria-hidden="true">🧲</span>
         <div>
-          <span class="mt-eyebrow">${L('Texto de apoio', 'Support text')}</span>
-          <h2 id="transcript-title">${L('O que o vídeo mostra', 'What the video shows')}</h2>
+          <span class="mt-eyebrow">${L('Texto de apoio', 'Support text', 'Texto de apoyo')}</span>
+          <h2 id="transcript-title">${L('O que o vídeo mostra', 'What the video shows', 'Lo que muestra el vídeo')}</h2>
           <div class="mt-prose">${plainMarkup(app.text('page6Transcript'))}</div>
         </div>
       </section>
-      ${L(PT_BODY, EN_BODY)}
+      ${L(PT_BODY, EN_BODY, ES_BODY)}
     `;
   }
 
   const page = {
     id: 6,
     short: 'Maglev',
-    get title() { return L('Como o Maglev flutua e anda', 'How the Maglev floats and moves'); },
+    get title() { return L('Como o Maglev flutua e anda', 'How the Maglev floats and moves', 'Cómo flota y se mueve el Maglev'); },
     unlockHint: '',
     render
   };

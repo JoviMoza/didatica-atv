@@ -63,10 +63,16 @@ $temporary = Join-Path $outputDirectory (".magnetismo-transporte-{0}.tmp" -f [gu
 if (Test-Path -LiteralPath $temporary) {
     Remove-Item -LiteralPath $temporary -Force
 }
+# Leftovers from a build that was interrupted (Ctrl+C, or a throw below):
+# dist/ is tracked, so a stray 1 MiB .tmp shows up as untracked noise and can be
+# mistaken for a deliverable. Sweep them before starting.
+Get-ChildItem -LiteralPath $outputDirectory -Filter ".magnetismo-transporte-*.tmp" -File -ErrorAction SilentlyContinue |
+    Remove-Item -Force
 if (Test-Path -LiteralPath $Output) {
     Remove-Item -LiteralPath $Output -Force
 }
 
+try {
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $sourcePath = (Resolve-Path -LiteralPath $source).Path.TrimEnd("\")
@@ -148,3 +154,11 @@ $sizeMiB = [math]::Round((Get-Item -LiteralPath $Output).Length / 1MB, 2)
 Write-Host "Pacote H5P criado: $Output"
 Write-Host "Tamanho: $sizeMiB MiB"
 Write-Host "SHA-256: $hash"
+}
+finally {
+    # No-op after a successful Move-Item; removes the partial archive when any
+    # check above threw.
+    if (Test-Path -LiteralPath $temporary) {
+        Remove-Item -LiteralPath $temporary -Force
+    }
+}

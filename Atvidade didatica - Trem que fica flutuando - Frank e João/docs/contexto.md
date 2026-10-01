@@ -7,7 +7,7 @@
 - **Linguagem acessível, alinhada ao PNLD.** Desde a v2.1, o conteúdo segue os temas de Magnetismo e Eletromagnetismo dos livros de Física do PNLD (FNDE), sem o enfoque acadêmico da v1: domínios, campo, equilíbrio de forças, Earnshaw, eletroímã, indução, EMS/EDS, motor linear e supercondutores. Os livros digitais exigem login gov.br, então a revisão indica temas do sumário, não capítulos específicos.
 - **Navegação sequencial.** O aluno não escolhe páginas. Ele pode voltar a qualquer página e avançar só até a última liberada.
 - **Vídeo da página 6 não obrigatório, sem avisar.** Estar na página 6 libera a 7, e nenhum texto pode dizer que o vídeo pode ser pulado.
-- **Laboratório com 4 ímãs nos cantos**, que o aluno gira com o mouse, o toque ou o teclado. O roteiro é observar → alinhar → explicar, com um desafio extra opcional: zerar o campo no centro.
+- **Laboratório com 2 a 10 ímãs** (acrescentar e retirar), que o aluno gira com o mouse, o toque ou o teclado. O roteiro é observar → alinhar → explicar, com um desafio extra opcional: zerar o campo no centro.
 - **Questões sorteadas por aluno**, para cada estudante receber um conjunto diferente.
 - **Aba "Revisão estendida"** com explicações, exemplos do dia a dia, indicação do livro e simulações. Por padrão, abre ao terminar a página 7; o professor pode deixá-la aberta desde o início no editor.
 - **Nota da primeira tentativa.** Praticar de novo é permitido, mas não altera a nota.
@@ -40,6 +40,7 @@ Na v2.2.1, a página 6 deixou de repetir o vídeo da página 1 e passou a usar o
 | 2.0 (`H5P.MagnetismoTransporte`) | 25/09/2026 | Novo nome, laboratório com 4 ímãs giratórios, navegação sequencial, novo design |
 | 2.1 | 25/09/2026 | Conteúdo acessível alinhado ao PNLD, 35 questões sorteadas, página 6 sobre os sistemas Maglev, aba de revisão estendida |
 | 2.2 | 25/09/2026 | Código em módulos (JS por página, CSS por componente); gabarito lacrado, progresso assinado, fim das notas externas por `postMessage`; memória pontua acertos ÷ tentativas; vídeos param ao trocar de página; botão Libras (VLibras), legenda em português nos vídeos e audiodescrição com leitura em voz alta |
+| 2.3 | 01/10/2026 | Espanhol (es-ES) como terceira língua, com o banco inteiro traduzido; botão de língua único (globo + bandeira); sinalização de scroll; explicação "Como jogar" antes das cartas do jogo da memória; laboratório com 2 a 10 ímãs; nova página 8 dissertativa (5 pts) corrigida offline e resultados na página 9, total 20 pts. |
 | 2.2.1 | 25/09/2026 | Novo vídeo na página 6 (Gerando Respostas, UFABC), com audiodescrição e texto de apoio; guiamento e quadro de vantagens e desafios na página 6; conceito "Maglev no mundo" na revisão; +12 questões de escolha única (72) e +12 de V ou F (62); botão Aparência com os temas de `designs/` (Padrão continua o inicial); "Pular par" no jogo da memória; Pular do vocabulário e do laboratório só após 3 tentativas erradas; quiz e V ou F sem pulo |
 
 ## Pendências conhecidas

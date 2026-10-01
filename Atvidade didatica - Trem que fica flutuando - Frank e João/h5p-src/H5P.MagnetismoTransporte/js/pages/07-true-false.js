@@ -37,7 +37,7 @@
       return '';
     }
     const correction = I18n.payload(reveal(question).payload);
-    return answer.choice ? correction : `${L('Questão pulada.', 'Question skipped.')} ${correction}`.trim();
+    return answer.choice ? correction : `${L('Questão pulada.', 'Question skipped.', 'Pregunta omitida.')} ${correction}`.trim();
   }
 
   function render(app, section) {
@@ -50,11 +50,11 @@
         return { text: I18n.field(question, 'statement'), correct: Boolean(answer && answer.correct === 'true'), feedback: feedbackText(question, answer) };
       });
       section.innerHTML = UI.quizSummary({
-        heading: app.heading(page.id, L('A nota abaixo corresponde à primeira tentativa. Você pode praticar de novo sem alterá-la.', 'The score below is from your first attempt. You can practice again without changing it.'), '', L('Verdadeiro ou falso concluído', 'True or false complete')),
+        heading: app.heading(page.id, L('A nota abaixo corresponde à primeira tentativa. Você pode praticar de novo sem alterá-la.', 'The score below is from your first attempt. You can practice again without changing it.', 'La nota siguiente corresponde a tu primer intento. Puedes practicar de nuevo sin modificarla.'), '', L('Verdadeiro ou falso concluído', 'True or false complete', 'Verdadero o falso completado')),
         activityId: 'trueFalse',
         score: result ? result.pontuacaoObtida : items.filter((item) => item.correct).length,
         items,
-        nextLabel: L('Ver meus resultados', 'See my results')
+        nextLabel: L('Ver meus resultados', 'See my results', 'Ver mis resultados')
       });
       return;
     }
@@ -75,26 +75,26 @@
     };
 
     section.innerHTML = `
-      ${app.heading(page.id, L('Leia cada afirmação com atenção. Cada uma vale 1 ponto.', 'Read each statement carefully. Each one is worth 1 point.'), L('Vale 5 pontos', 'Worth 5 points'))}
+      ${app.heading(page.id, L('Leia cada afirmação com atenção. Cada uma vale 1 ponto.', 'Read each statement carefully. Each one is worth 1 point.', 'Lee cada afirmación con atención. Cada una vale 1 punto.'), L('Vale 5 pontos', 'Worth 5 points', 'Vale 5 puntos'))}
       <section class="mt-card mt-quiz">
         ${UI.quizProgress(current.index, list.length, checked)}
         <blockquote class="mt-statement">${escapeHtml(I18n.field(question, 'statement'))}</blockquote>
         <fieldset class="mt-choices mt-choices--tf" ${checked ? 'disabled' : ''}>
-          <legend class="mt-sr-only">${L('Escolha verdadeiro ou falso', 'Choose true or false')}</legend>
+          <legend class="mt-sr-only">${L('Escolha verdadeiro ou falso', 'Choose true or false', 'Elige verdadero o falso')}</legend>
           <label class="mt-choice mt-choice--tf ${optionClass('true')}">
             <input type="radio" name="tf-${question.id}" value="true" ${answer.choice === 'true' ? 'checked' : ''} ${checked ? 'disabled' : ''}>
-            <span class="mt-choice__tf" aria-hidden="true">${L('V', 'T')}</span><span>${L('Verdadeiro', 'True')}</span>
+            <span class="mt-choice__tf" aria-hidden="true">${L('V', 'T', 'V')}</span><span>${L('Verdadeiro', 'True', 'Verdadero')}</span>
           </label>
           <label class="mt-choice mt-choice--tf ${optionClass('false')}">
             <input type="radio" name="tf-${question.id}" value="false" ${answer.choice === 'false' ? 'checked' : ''} ${checked ? 'disabled' : ''}>
-            <span class="mt-choice__tf" aria-hidden="true">F</span><span>${L('Falso', 'False')}</span>
+            <span class="mt-choice__tf" aria-hidden="true">F</span><span>${L('Falso', 'False', 'Falso')}</span>
           </label>
         </fieldset>
         <div class="mt-card__foot">
           ${UI.answerFeedback('tf-feedback', checked, correct, feedbackText(question, answer))}
           ${!checked
-            ? `<button type="button" class="mt-btn mt-btn--primary" data-action="check-tf">${L('Verificar', 'Check')}</button>`
-            : `<button type="button" class="mt-btn mt-btn--primary" data-action="next-tf">${current.index === list.length - 1 ? L('Concluir', 'Finish') : L('Próxima afirmação →', 'Next statement →')}</button>`}
+            ? `<button type="button" class="mt-btn mt-btn--primary" data-action="check-tf">${L('Verificar', 'Check', 'Comprobar')}</button>`
+            : `<button type="button" class="mt-btn mt-btn--primary" data-action="next-tf">${current.index === list.length - 1 ? L('Concluir', 'Finish', 'Finalizar') : L('Próxima afirmação →', 'Next statement →', 'Siguiente afirmación →')}</button>`}
         </div>
       </section>
     `;
@@ -105,7 +105,7 @@
     const question = questions(app)[current.index];
     const selected = app.section(page.id).querySelector('input[name^="tf-"]:checked');
     if (!selected || !CHOICES.includes(selected.value)) {
-      app.announce(L('Escolha Verdadeiro ou Falso antes de verificar.', 'Choose True or False before checking.'));
+      app.announce(L('Escolha Verdadeiro ou Falso antes de verificar.', 'Choose True or False before checking.', 'Elige Verdadero o Falso antes de comprobar.'));
       return;
     }
     const opened = key.open(question.seal, ['tf', question.id, selected.value]);
@@ -120,7 +120,7 @@
     }
     app.saveState();
     app.render({ focusSelector: '#tf-feedback' });
-    app.announce(correct ? L('Resposta correta.', 'Correct answer.') : L('Resposta incorreta. Leia a correção.', 'Wrong answer. Read the correction.'));
+    app.announce(correct ? L('Resposta correta.', 'Correct answer.', 'Respuesta correcta.') : L('Resposta incorreta. Leia a correção.', 'Wrong answer. Read the correction.', 'Respuesta incorrecta. Lee la corrección.'));
   }
 
   function next(app) {
@@ -130,7 +130,7 @@
       current.index += 1;
       app.saveState();
       app.render({ focusSelector: 'input[type="radio"]' });
-      app.announce(L(`Afirmação ${current.index + 1} de ${list.length}.`, `Statement ${current.index + 1} of ${list.length}.`));
+      app.announce(L(`Afirmação ${current.index + 1} de ${list.length}.`, `Statement ${current.index + 1} of ${list.length}.`, `Afirmación ${current.index + 1} de ${list.length}.`));
       return;
     }
     const items = list.map((question) => {
@@ -143,14 +143,14 @@
     app.completeActivity('trueFalse', score, { score, max: COUNT, items });
     app.saveState();
     app.render({ focusSelector: '.mt-summary' });
-    app.announce(L(`Verdadeiro ou falso concluído com ${score} de ${COUNT} pontos. Seus resultados foram liberados.`, `True or false complete with ${score} of ${COUNT} points. Your results are unlocked.`));
+    app.announce(L(`Verdadeiro ou falso concluído com ${score} de ${COUNT} pontos. Seus resultados foram liberados.`, `True or false complete with ${score} of ${COUNT} points. Your results are unlocked.`, `Verdadero o falso completado con ${score} de ${COUNT} puntos. Tus resultados están desbloqueados.`));
   }
 
   const page = {
     id: 7,
-    get short() { return L('V ou F', 'T or F'); },
-    get title() { return L('Verdadeiro ou falso', 'True or false'); },
-    get unlockHint() { return L('Responda às cinco afirmações para ver seus resultados.', 'Answer the five statements to see your results.'); },
+    get short() { return L('V ou F', 'T or F', 'V o F'); },
+    get title() { return L('Verdadeiro ou falso', 'True or false', 'Verdadero o falso'); },
+    get unlockHint() { return L('Responda às cinco afirmações para ver seus resultados.', 'Answer the five statements to see your results.', 'Responde a las cinco afirmaciones para ver tus resultados.'); },
     task: 'trueFalse',
     init(app) {
       Quiz.ensureSelection(task(app), BANK, COUNT);

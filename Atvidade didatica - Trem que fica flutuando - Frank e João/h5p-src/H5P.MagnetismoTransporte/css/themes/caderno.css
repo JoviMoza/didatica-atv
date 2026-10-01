@@ -91,7 +91,7 @@
 :where(.h5p-mt[data-mt-theme="caderno"]) .mt-tab,
 :where(.h5p-mt[data-mt-theme="caderno"]) .mt-a11y-btn,
 :where(.h5p-mt[data-mt-theme="caderno"]) .mt-lang,
-:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lang__btn { border-radius: var(--radius-sm); }
+:where(.h5p-mt[data-mt-theme="caderno"]) .mt-lang__toggle { border-radius: var(--radius-sm); }
 :where(.h5p-mt[data-mt-theme="caderno"]) .mt-nav { border-top: 2px solid var(--border); background: rgba(255, 253, 247, 0.95); }
 
 /* ---------- surfaces: paper cards with a red margin ---------- */

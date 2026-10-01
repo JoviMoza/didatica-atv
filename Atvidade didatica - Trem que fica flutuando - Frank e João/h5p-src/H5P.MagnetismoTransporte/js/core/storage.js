@@ -4,17 +4,26 @@
   // v3: each student gets questions drawn at random from the banks
   // (seed + questionIds per quiz).
   // v4: opaque option ids (sealed answer key) and signed records.
-  // The storage key includes the schema version, so older records are
+  // v5: variable magnet count in the lab (2..10, default 2), Spanish, and the
+  // essay page. The essay key is additive — hydrate() reads a missing one as an
+  // empty draft — so v5 stays v5 on purpose: bumping it would throw away the
+  // progress of a class that is halfway through v5. Bump it only when an
+  // existing field changes meaning.
+  // The storage key includes the schema version, so records from v3/v4 are
   // ignored instead of being migrated.
-  const SCHEMA_VERSION = 4;
+  const SCHEMA_VERSION = 5;
   const SIGNATURE_SEED = 0x4d542d34;
   const Util = H5P.MagnetismoTransporte && H5P.MagnetismoTransporte.Util;
-  const PAGE_COUNT = 8;
-  const MAGNET_COUNT = 4;
-  const INITIAL_MAGNET_ANGLES = [0, 0, 0, 90];
+  const PAGE_COUNT = 9;
+  // Magnets in the lab: the student adds them one at a time, up to MAX.
+  const MAGNET_MIN = 2;
+  const MAGNET_MAX = 10;
+  const MAGNET_DEFAULT = 2;
   const SAFE_KEYS = new Set(['__proto__', 'prototype', 'constructor']);
-  // Interface languages (js/core/i18n.js); '' = not chosen yet.
-  const LANGUAGES = ['pt-BR', 'en-US'];
+  // Interface languages; '' = not chosen yet. Duplicated from core/i18n.js
+  // on purpose: both lists have to agree, and keeping them literal here makes
+  // the whitelist check a plain includes() instead of a namespace lookup.
+  const LANGUAGES = ['pt-BR', 'en-US', 'es-ES'];
   // Visual theme id (js/ui/themes.js); '' = default design. The list is
   // checked again by Themes.isSupported() before it is applied.
   const THEME_ID = /^[a-z][a-z0-9-]{0,30}$/;
@@ -42,7 +51,9 @@
           attempts: 0
         },
         magnets: {
-          angles: INITIAL_MAGNET_ANGLES.slice(),
+          count: MAGNET_DEFAULT,
+          // defaultAngles() owns the starting orientation; do not duplicate it.
+          angles: defaultAngles(MAGNET_DEFAULT),
           answers: {},
           checked: {},
           skipped: {},
@@ -84,6 +95,14 @@
           answers: {},
           complete: false,
           attempts: 0
+        },
+        // Open-ended answer. `text` is the student's own words, so it gets a
+        // real length cap (sanitizeAnswerMap's 120 chars is for options).
+        essay: {
+          text: '',
+          submitted: false,
+          evaluated: null,
+          attempts: 0
         }
       },
       graded: {}
@@ -106,12 +125,33 @@
     return Math.min(max, Math.max(min, number));
   }
 
+  // Starting orientation for N magnets: all pointing up (N north) except the
+  // last one lying on its side, which is the situation the first lab
+  // question asks about. Deterministic, so a reload redraws the same picture.
+  function defaultAngles(count) {
+    const total = Math.max(MAGNET_MIN, Math.min(MAGNET_MAX, Math.round(Number(count) || MAGNET_DEFAULT)));
+    return Array.from({ length: total }, (_, index) => (index === total - 1 ? 90 : 0));
+  }
+
   function normalizeAngle(value) {
     const number = Number(value);
     if (!Number.isFinite(number)) {
       return 0;
     }
     return ((number % 360) + 360) % 360;
+  }
+
+  function sanitizeText(value, limit) {
+    return String(value === undefined || value === null ? '' : value).slice(0, limit);
+  }
+
+  // Free text from the student: collapsed to a single line so a stored record
+  // can never inject markup, and capped well below the localStorage quota.
+  function sanitizeAnswer(value) {
+    return String(value === undefined || value === null ? '' : value)
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 2000);
   }
 
   function sanitizeAnswerMap(value) {
@@ -188,12 +228,16 @@
     };
 
     const magnets = isPlainObject(sourceTasks.magnets) ? sourceTasks.magnets : {};
+    // The student chooses how many magnets the lab has (2..10), so the saved
+    // angle array must match the saved count or it is rebuilt from scratch.
+    const count = Math.round(numberInRange(magnets.count, MAGNET_DEFAULT, MAGNET_MIN, MAGNET_MAX));
     const angles = copyArray(magnets.angles);
     const missions = isPlainObject(magnets.missions) ? magnets.missions : {};
     state.tasks.magnets = {
-      angles: angles.length === MAGNET_COUNT
+      count,
+      angles: angles.length === count
         ? angles.map(normalizeAngle)
-        : INITIAL_MAGNET_ANGLES.slice(),
+        : defaultAngles(count),
       answers: sanitizeStringMap(magnets.answers),
       checked: sanitizeStringMap(magnets.checked),
       skipped: sanitizeStringMap(magnets.skipped),
@@ -243,7 +287,22 @@
       attempts: numberInRange(trueFalse.attempts, 0, 0, 999)
     };
 
-    const allowed = new Set(['dragWords', 'singleChoice', 'memory', 'trueFalse']);
+    const essay = isPlainObject(sourceTasks.essay) ? sourceTasks.essay : {};
+    // Old records (v5 and earlier) have no `essay` key: they load as empty so
+    // a student mid-course is not asked to retype anything.
+    state.tasks.essay = {
+      text: sanitizeAnswer(essay.text),
+      submitted: Boolean(essay.submitted),
+      evaluated: sanitizeEvaluation(essay.evaluated),
+      attempts: numberInRange(essay.attempts, 0, 0, 99)
+    };
+
+// Mirror of the graded ids in core/activities.js. It cannot be derived from
+  // ACTIVITIES: this module is evaluated before activities.js (library.json
+  // order), so ACTIVITIES is still undefined here. An id missing from this set
+  // is silently dropped from `graded` on every reload — which is how the essay
+  // score used to disappear (docs/questoes-dissertativas-viabilidade.md).
+  const allowed = new Set(['dragWords', 'singleChoice', 'memory', 'trueFalse', 'essay']);
     const graded = isPlainObject(source.graded) ? source.graded : {};
     state.graded = Object.keys(graded).reduce((result, key) => {
       const value = graded[key];
@@ -277,6 +336,53 @@
     return state;
   }
 
+  // The grader's verdict is rebuilt from a whitelist too, so a tampered record
+  // cannot inject a fake score or a fake "all concepts correct" list. Note what
+  // is deliberately NOT kept: the seals and the reference answer. The page
+  // re-reads those from the live rubric through answer-key.js, so they must
+  // never reach localStorage.
+  function sanitizeEvaluation(value) {
+    if (!isPlainObject(value)) {
+      return null;
+    }
+    const statuses = ['correct', 'partial', 'missing'];
+    const conceptList = (list) => (Array.isArray(list) ? list : []).slice(0, 20).reduce((result, item) => {
+      if (!isPlainObject(item) || typeof item.id !== 'string' || !/^[a-z0-9-]{1,40}$/.test(item.id)) {
+        return result;
+      }
+      result.push({
+        id: item.id,
+        label: sanitizeText(item.label, 160),
+        status: statuses.indexOf(item.status) === -1 ? 'missing' : item.status,
+        hits: numberInRange(item.hits, 0, 0, 99),
+        required: Boolean(item.required)
+      });
+      return result;
+    }, []);
+    return {
+      // numberInRange falls back to `fallback` on a non-number, so a corrupted
+      // or hand-edited score cannot become NaN and render as "NaN / 5".
+      score: numberInRange(value.score, 0, 0, 1),
+      confidence: numberInRange(value.confidence, 0, 0, 1),
+      needsReview: Boolean(value.needsReview),
+      concepts: conceptList(value.concepts),
+      relations: (Array.isArray(value.relations) ? value.relations : []).slice(0, 20).reduce((result, item) => {
+        if (isPlainObject(item) && typeof item.from === 'string' && typeof item.to === 'string') {
+          result.push({
+            from: sanitizeText(item.from, 40),
+            to: sanitizeText(item.to, 40),
+            ok: Boolean(item.ok)
+          });
+        }
+        return result;
+      }, []),
+      contradictions: (Array.isArray(value.contradictions) ? value.contradictions : []).slice(0, 10)
+        .map((item) => sanitizeText(item && item.id, 40)).filter(Boolean)
+    };
+  }
+
+  // Session id for a content that has none (the authoring preview). A real
+  // Lumi/LMS content always passes its own id.
   function createSessionToken() {
     try {
       if (window.crypto && typeof window.crypto.randomUUID === 'function') {
@@ -365,7 +471,10 @@
   H5P.MagnetismoTransporte = H5P.MagnetismoTransporte || {};
   H5P.MagnetismoTransporte.Storage = {
     SCHEMA_VERSION,
-    INITIAL_MAGNET_ANGLES,
+    MAGNET_MIN,
+    MAGNET_MAX,
+    MAGNET_DEFAULT,
+    defaultAngles,
     createDefaultState,
     hydrate,
     normalizeAngle,

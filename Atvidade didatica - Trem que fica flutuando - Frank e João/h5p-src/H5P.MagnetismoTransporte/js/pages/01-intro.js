@@ -46,10 +46,10 @@
         </div>
         <div class="mt-hero__art" aria-hidden="true">${heroArt()}</div>
       </div>
-      ${app.video('intro', media.introVideoUrl, media.introVideoTitle, 0, L('O player só solicita dados ao YouTube depois que você escolhe carregá-lo.', 'The player only requests data from YouTube after you choose to load it.'))}
+      ${app.video('intro', media.introVideoUrl, media.introVideoTitle, 0, L('O player só solicita dados ao YouTube depois que você escolhe carregá-lo.', 'The player only requests data from YouTube after you choose to load it.', 'El reproductor solo solicita datos a YouTube después de que decidas cargarlo.'))}
       <div class="mt-grid mt-grid--2">
         <section class="mt-card" aria-labelledby="mt-goals">
-          <h2 id="mt-goals">${L('Ao final, você será capaz de…', 'By the end, you will be able to…')}</h2>
+          <h2 id="mt-goals">${L('Ao final, você será capaz de…', 'By the end, you will be able to…', 'Al final, serás capaz de…')}</h2>
           <ul class="mt-checklist">
             ${L(`
             <li>explicar por que ímãs se atraem e se repelem;</li>
@@ -61,11 +61,16 @@
             <li>read and interpret magnetic field lines;</li>
             <li>relate electric current and magnetism in the electromagnet;</li>
             <li>compare how different Maglev trains float and move;</li>
-            <li>recognize the MagLev-Cobra as a Brazilian development.</li>`)}
+            <li>recognize the MagLev-Cobra as a Brazilian development.</li>`, `
+            <li>explicar por qué los imanes se atraen y se repelen;</li>
+            <li>leer e interpretar las líneas de campo magnético;</li>
+            <li>relacionar la corriente eléctrica y el magnetismo en el electroimán;</li>
+            <li>comparar cómo flotan y se mueven distintos trenes Maglev;</li>
+            <li>reconocer el MagLev-Cobra como un desarrollo brasileiro.</li>`)}
           </ul>
         </section>
         <section class="mt-card mt-card--tint" aria-labelledby="mt-howto">
-          <h2 id="mt-howto">${L('Como funciona a missão', 'How the mission works')}</h2>
+          <h2 id="mt-howto">${L('Como funciona a missão', 'How the mission works', 'Cómo funciona la misión')}</h2>
           <ol class="mt-howto">
             ${L(`
             <li><strong>Siga em ordem.</strong> Use o botão <em>Próxima</em>, no fim de cada página.</li>
@@ -75,20 +80,24 @@
             <li><strong>Go in order.</strong> Use the <em>Next</em> button at the end of each page.</li>
             <li><strong>Pages with an activity</strong> unlock the next one when you finish them. <span aria-hidden="true">🔒</span></li>
             <li><strong>You can go back</strong> to review any page you have already unlocked.</li>
-            <li>At the end, the <strong>Extended review</strong> tab gathers explanations and simulations to study.</li>`)}
+            <li>At the end, the <strong>Extended review</strong> tab gathers explanations and simulations to study.</li>`, `
+            <li><strong>Sigue el orden.</strong> Usa el botón <em>Siguiente</em>, al final de cada página.</li>
+            <li><strong>Las páginas con actividad</strong> desbloquean la siguiente cuando la completas. <span aria-hidden="true">🔒</span></li>
+            <li><strong>Puedes volver</strong> para revisar cualquier página que ya hayas desbloqueado.</li>
+            <li>Al final, la pestaña <strong>Repaso ampliado</strong> reúne explicaciones y simulaciones para estudiar.</li>`)}
           </ol>
         </section>
       </div>
       <aside class="mt-callout">
-        ${L('<strong>Repare:</strong> o trem não usa nenhum sistema eletrônico visível para se manter no ar. A explicação aparece quando distinguimos repulsão, exclusão de campo e aprisionamento de fluxo.', '<strong>Notice:</strong> the train uses no visible electronic system to stay in the air. The explanation appears when we tell apart repulsion, field expulsion and flux pinning.')}
+        ${L('<strong>Repare:</strong> o trem não usa nenhum sistema eletrônico visível para se manter no ar. A explicação aparece quando distinguimos repulsão, exclusão de campo e aprisionamento de fluxo.', '<strong>Notice:</strong> the train uses no visible electronic system to stay in the air. The explanation appears when we tell apart repulsion, field expulsion and flux pinning.', '<strong>Fíjate:</strong> el tren no usa ningún sistema electrónico visible para mantenerse en el aire. La explicación aparece cuando distinguimos repulsión, expulsión de campo y anclaje de flujo.')}
       </aside>
     `;
   }
 
   const page = {
     id: 1,
-    get short() { return L('Início', 'Start'); },
-    get title() { return L('O trem que flutua', 'The floating train'); },
+    get short() { return L('Início', 'Start', 'Inicio'); },
+    get title() { return L('O trem que flutua', 'The floating train', 'El tren que flota'); },
     unlockHint: '',
     render
   };

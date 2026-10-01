@@ -1,6 +1,6 @@
 # Arquitetura
 
-O objeto é uma biblioteca H5P própria (`H5P.MagnetismoTransporte`) que monta toda a interface em JavaScript puro, dentro do iframe do H5P. Um único objeto de estado controla as 8 páginas e a aba de revisão. Esse estado é salvo no `localStorage`, e o HTML é gerado a partir dele.
+O objeto é uma biblioteca H5P própria (`H5P.MagnetismoTransporte`) que monta toda a interface em JavaScript puro, dentro do iframe do H5P. Um único objeto de estado controla as 9 páginas e a aba de revisão. Esse estado é salvo no `localStorage`, e o HTML é gerado a partir dele.
 
 Desde a v2.2, o código é dividido em módulos pequenos, com uma página por arquivo. Não há bundler: cada arquivo é um IIFE que pendura seu módulo no objeto `H5P.MagnetismoTransporte`, e a ordem de carregamento é a lista de `library.json`.
 
@@ -24,9 +24,9 @@ flowchart LR
 | Módulo | Responsabilidade |
 | --- | --- |
 | `core/util.js` | escape de HTML, formatação, sorteio com semente, hash `cyrb53` e gerador `mulberry32` |
-| `core/i18n.js` | idioma da interface (pt-BR / en-US): `L(pt, en)`, `field()` para os campos `…En` do banco e `payload()` para as explicações lacradas nas duas línguas |
+| `core/i18n.js` | idioma da interface (pt-BR / en-US / es-ES): `L(pt, en, es)`, `field()` para os campos `…En`/`…Es` do banco e `payload()` para as explicações lacradas nas três línguas |
 | `core/storage.js` | forma do estado, `hydrate()` com lista branca, registro assinado no `localStorage` |
-| `core/activities.js` | as 4 atividades avaliativas (rótulo, página, nota máxima, título xAPI) e `TOTAL_MAX` |
+| `core/activities.js` | as 4 atividades avaliativas (rótulo, página, nota máxima, título xAPI) e `TOTAL_MAX`. As chaves e os máximos são espelhados em `portal-perfis/app.py` (`ATIVIDADES`) e nunca se renomeiam |
 | `core/xapi.js` | monta o statement "completed" e o `H5P.XAPIEvent` |
 | `core/answer-key.js` | abre o gabarito lacrado (ver [seguranca.md](seguranca.md)) |
 | `core/quiz.js` | sorteio das questões por aluno e ordem das alternativas |
@@ -64,7 +64,7 @@ O `app` recebido pelas páginas é o controlador. Ele oferece `state`, `params`,
 
 ## Estado e persistência (`core/storage.js`)
 
-- Chave: `<storageKey>:v<SCHEMA_VERSION>:cid-<contentId>`. O `SCHEMA_VERSION` atual é 4.
+- Chave: `<storageKey>:v<SCHEMA_VERSION>:cid-<contentId>`. O `SCHEMA_VERSION` atual é 5.
 - O registro salvo é `{ d: "<JSON do estado>", s: "<assinatura>" }`. Se alguém editar o `d` à mão, a assinatura não confere e o registro é descartado (ver [seguranca.md](seguranca.md)).
 - `createDefaultState()` define a forma do estado. `hydrate()` reconstrói campo a campo a partir de uma lista branca, e registros corrompidos voltam ao padrão sem quebrar a atividade.
 - **Campo novo no estado exige mudança nos dois lugares.** Caso contrário, ele some ao recarregar.
@@ -72,7 +72,7 @@ O `app` recebido pelas páginas é o controlador. Ele oferece `state`, `params`,
 - Falhas de armazenamento (janela anônima, cota cheia) não interrompem a atividade: aparece um aviso no topo, e o estado continua em memória.
 - Na prévia local (`contentId = developer-preview`) o backend é o `sessionStorage`: cada aba/janela nova sorteia questões novas (um aluno novo), enquanto recarregar na mesma aba mantém o sorteio. No Lumi/LMS é `localStorage`, por dispositivo e navegador.
 
-Principais campos: `language` (`''`, `pt-BR` ou `en-US`; o botão PT-BR / EN-US do topo troca e re-renderiza tudo sem mexer no progresso), `theme` (`''` = design padrão, ou o id de um tema de `js/ui/themes.js`; aplicado sem re-render e mantido ao apagar o progresso), `currentPage`, `unlockedPage`, `visitedPages`, `videos`, `conceptErrors`, `graded` (primeira nota de cada atividade) e `tasks.*`. O laboratório guarda `angles`, `missions`, `done`, `skipped` (perguntas puladas) e `tries` (tentativas erradas por pergunta, que liberam o Pular); os quizzes guardam `seed`, `questionIds`, `index` e `answers` (pulo = resposta em branco); o vocabulário guarda `placements`, `mistakes` e `skipped`; a memória guarda o baralho como tokens opacos (use `deckIds()` em `05-memory.js`) e `skipped` (índices dos pares pulados).
+Principais campos: `language` (`''`, `pt-BR`, `en-US` ou `es-ES`; o botão único "Língua" + globo do topo abre a lista das três línguas, com a bandeira da que está em uso ao lado do rótulo, e re-renderiza tudo sem mexer no progresso), `theme` (`''` = design padrão, ou o id de um tema de `js/ui/themes.js`; aplicado sem re-render e mantido ao apagar o progresso), `currentPage`, `unlockedPage`, `visitedPages`, `videos`, `conceptErrors`, `graded` (primeira nota de cada atividade) e `tasks.*`. O laboratório guarda `count` (quantos ímãs, de 2 a 10, com 2 por padrão) e `angles`, `missions`, `done`, `skipped` (perguntas puladas) e `tries` (tentativas erradas por pergunta, que liberam o Pular); os quizzes guardam `seed`, `questionIds`, `index` e `answers` (pulo = resposta em branco); o vocabulário guarda `placements`, `mistakes` e `skipped`; a memória guarda o baralho como tokens opacos (use `deckIds()` em `05-memory.js`) e `skipped` (índices dos pares pulados); a dissertativa guarda `text`, `submitted`, `attempts` e `evaluated` (ver `js/core/essay.js` — a rubrica lacrada é relida do banco a cada correção, nunca do estado salvo).
 
 ## Navegação sequencial
 
@@ -107,7 +107,7 @@ stateDiagram-v2
 
 ## Pontuação, erros e revisão
 
-- 15 pontos no total: vocabulário 5, quiz 4, memória 1 (acertos ÷ tentativas, com decimais), V ou F 5. No vocabulário, a nota é o número de acertos (lacunas puladas valem 0).
+- 20 pontos no total: vocabulário 5, quiz 4, memória 1 (acertos ÷ tentativas, com decimais), V ou F 5, dissertativa 5. No vocabulário, a nota é o número de acertos (lacunas puladas valem 0).
 - Cada erro soma pontos em `conceptErrors[conceitoId]`. Os resultados e a aba de revisão mostram os 3 conceitos com mais erros, com links para a seção correspondente.
 
 ## xAPI
@@ -117,7 +117,7 @@ stateDiagram-v2
 
 ## Laboratório de ímãs (física)
 
-- Há 4 ímãs fixos nos cantos, e o aluno só os gira. Cada ímã é um par de "cargas" magnéticas (N = +1, S = −1), a 40 px do centro, com decaimento 1/r² e um termo de suavização ε = 6 px.
+- A quantidade de ímãs é ajustável de 2 a 10 (padrão 2), em pontos equidistantes do círculo; o aluno os acrescenta, retira e gira. Cada ímã é um par de "cargas" magnéticas (N = +1, S = −1), a 40 px do centro, com decaimento 1/r² e um termo de suavização ε = 6 px.
 - As linhas de campo são integradas por RK2, com passo de 5 px, a partir de um leque de sementes no polo N.
 - A escala é arbitrária: a interface mostra o campo no centro só como Nulo, Fraco, Médio ou Forte. As perguntas tratam de simetria e superposição, que o modelo representa corretamente.
 - Ângulos em graus, no sentido horário, com 0° = N para cima. Encaixam de 15 em 15° ao soltar. O alinhamento é detectado com tolerância de 8°, e o campo nulo quando fica abaixo de 8% da referência (`Physics.NULL_PERCENT`).

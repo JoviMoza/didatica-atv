@@ -26,17 +26,17 @@
   },
   "lab": {
     "q1": {
-      "prompt": "In the starting position, the magnet in the bottom right corner is lying on its side. What does this do to the field pattern?",
+      "prompt": "In the starting position, all the magnets point their N pole upwards except the last one, which is lying on its side. What does this do to the field pattern?",
       "options": [
         "The pattern becomes asymmetric: near that magnet the lines take another direction",
         "The field lines of all the magnets disappear",
         "Nothing changes: the orientation of a magnet does not affect the field"
       ],
-      "success": "That's right. The field at each point is the vector sum of the contributions of the four magnets. Rotating one of them changes its contribution, and the whole pattern loses its symmetry.",
-      "retry": "Not yet. Look at the blue lines near the bottom right corner and compare them with the other corners. Use “Starting position” if you have already rotated a magnet."
+      "success": "That's right. The field at each point is the vector sum of the contributions of all the magnets. Rotating one of them changes its contribution, and the whole pattern loses its symmetry.",
+      "retry": "Not yet. Look at the blue lines near the magnet that is lying on its side and compare them with the other magnets. Use “Starting position” if you have already rotated a magnet."
     },
     "q2": {
-      "prompt": "Now that the four magnets point their N pole the same way, what does the field look like?",
+      "prompt": "Now that all the magnets point their N pole the same way, what does the field look like?",
       "options": [
         "Symmetric and orderly: the contributions add up in a regular way",
         "The field lines disappeared",
@@ -414,7 +414,7 @@
     "tf-ferro": { "statement": "In a piece of ordinary iron, the magnetic domains point in every direction and their effects cancel out.", "feedback": "True. That is why ordinary iron does not act as a magnet, although it is attracted by one." },
     "tf-afastadas": { "statement": "The farther apart the field lines are, the stronger the magnetic field.", "feedback": "False. It is the opposite: lines closer together indicate a stronger field." },
     "tf-norte-sul": { "statement": "Outside the magnet, magnetic field lines leave the north pole and enter the south pole.", "feedback": "True. This is the convention used in textbooks and in the Magnet lab." },
-    "tf-soma": { "statement": "The magnetic field at a point is the sum of the fields of all the magnets nearby.", "feedback": "True. That is what you saw when you rotated the four magnets in the lab." },
+    "tf-soma": { "statement": "The magnetic field at a point is the sum of the fields of all the magnets nearby.", "feedback": "True. That is what you saw when you rotated the magnets in the lab." },
     "tf-resultante": { "statement": "For an object to float still, the net force on it must be zero.", "feedback": "True. The upward magnetic force exactly cancels the weight." },
     "tf-estavel": { "statement": "With permanent magnets alone, it is easy to make an object float still and stable, with no support.", "feedback": "False. Earnshaw's theorem shows this is not possible: the object escapes to the side." },
     "tf-bobina": { "statement": "An electric current flowing through a coil produces a magnetic field.", "feedback": "True. This is the principle of the electromagnet, discovered from Oersted's experiment." },

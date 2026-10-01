@@ -1,42 +1,130 @@
-/* Language switch in the header (PT-BR / EN-US), next to the Libras button.
-   A segmented control: the pressed button is the current language. */
+/* Language button in the header (action "toggle-lang-menu" /
+   "set-language"). One button: a globe, the word "Língua" and the flag of
+   the language in use. Clicking it opens the list of languages, each option
+   labelled in its own language with its own flag, so a student finds theirs
+   by picture. Flags are inline SVG: no remote images, no icon font. */
 
 .mt-lang {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.15rem;
+}
+
+.mt-lang__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   min-height: 40px;
-  padding: 0.2rem;
+  padding: 0.3rem 0.7rem;
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
-}
-
-.mt-lang__icon { flex: 0 0 auto; margin: 0 0.2rem 0 0.35rem; opacity: 0.85; }
-
-.mt-lang__btn {
-  min-width: 3.4rem;
-  min-height: 32px;
-  padding: 0.2rem 0.6rem;
-  border: 0;
-  border-radius: 999px;
-  color: inherit;
-  background: transparent;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   cursor: pointer;
 }
-.mt-lang__btn:hover { background: rgba(255, 255, 255, 0.16); }
-.mt-lang__btn[aria-pressed="true"] { color: var(--deep); background: #fff; cursor: default; }
-.mt-lang__btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.mt-lang__toggle:hover { background: rgba(255, 255, 255, 0.2); }
+.mt-lang__toggle:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.mt-lang__toggle[aria-expanded="true"] { background: rgba(255, 255, 255, 0.24); }
+
+.mt-lang__globe { flex: 0 0 auto; opacity: 0.9; }
+
+/* The flag of the language in use, shown next to the button label. */
+.mt-lang__flag {
+  flex: 0 0 auto;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.mt-lang__menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 20;
+  min-width: 15rem;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.7rem;
+  background: #fff;
+  color: var(--deep);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+.mt-lang__menu[hidden] { display: none; }
+
+.mt-lang__option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 42px;
+  padding: 0.4rem 0.6rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+.mt-lang__option:hover { background: rgba(18, 23, 58, 0.08); }
+.mt-lang__option:focus-visible { outline: 3px solid var(--ring); outline-offset: -2px; }
+.mt-lang__option[aria-checked="true"] { background: rgba(18, 23, 58, 0.1); font-weight: 800; }
+
+.mt-lang__option-name { flex: 1 1 auto; }
+
+.mt-lang__check { flex: 0 0 auto; font-weight: 900; }
+
+/* Reminder that the task is below the fold. It is decorative (aria-hidden),
+   so on small screens the arrow alone is enough. */
+.mt-scrollhint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.75rem;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.mt-scrollhint__arrow {
+  flex: 0 0 auto;
+  animation: mt-scrollhint 1.6s ease-in-out infinite;
+}
+
+@keyframes mt-scrollhint {
+  0%, 100% { transform: translateY(-2px); opacity: 0.7; }
+  50% { transform: translateY(3px); opacity: 1; }
+}
+
+/* The hint is a nudge, not a claim that the page always scrolls: on a tall
+   window there may be nothing below, so it is hidden when the task is
+   already in view (the controller toggles [data-role="scroll-hint"]). */
+.mt-scrollhint[hidden] { display: none; }
+
+@media (max-width: 720px) {
+  .mt-scrollhint__text { display: none; }
+  .mt-scrollhint { padding: 0.25rem 0.5rem; }
+}
 
 @media (max-width: 520px) {
-  .mt-lang__icon { display: none; }
-  .mt-lang__btn { min-width: 2.9rem; padding-inline: 0.45rem; }
+  .mt-lang__label { display: none; }
+  .mt-lang__menu { min-width: 13rem; }
+}
+
+/* A moving arrow is exactly what reduced-motion users are asking to avoid. */
+@media (prefers-reduced-motion: reduce) {
+  .mt-scrollhint__arrow { animation: none; }
 }
 
 @media (forced-colors: active) {
-  .mt-lang__btn[aria-pressed="true"] { outline: 2px solid CanvasText; }
+  .mt-lang__toggle { border: 1px solid CanvasText; }
+  .mt-lang__menu { border: 1px solid CanvasText; }
+  .mt-lang__option[aria-checked="true"] { outline: 2px solid CanvasText; }
+  .mt-lang__flag { box-shadow: 0 0 0 1px CanvasText; }
 }

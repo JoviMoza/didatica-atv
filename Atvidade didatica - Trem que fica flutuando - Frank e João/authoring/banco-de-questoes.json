@@ -60,28 +60,28 @@
     ]
   },
   "lab": {
-    "q1": {
-      "prompt": "Na posição inicial, o ímã do canto inferior direito está deitado. O que isso provoca no desenho do campo?",
-      "options": [
-        "O padrão fica assimétrico: perto desse ímã as linhas tomam outra direção",
-        "As linhas de campo de todos os ímãs desaparecem",
-        "Nada muda: a orientação de um ímã não afeta o campo"
-      ],
-      "correct": 0,
-      "success": "Isso mesmo. O campo em cada ponto é a soma vetorial das contribuições dos quatro ímãs. Girar um deles muda a sua contribuição e o padrão inteiro perde a simetria.",
-      "retry": "Ainda não. Observe as linhas azuis perto do canto inferior direito e compare com os outros cantos. Use “Posição inicial” se já tiver girado algum ímã."
-    },
-    "q2": {
-      "prompt": "Agora que os quatro ímãs apontam o polo N para o mesmo lado, como ficou o campo?",
-      "options": [
-        "Simétrico e organizado: as contribuições se somam de forma regular",
-        "As linhas de campo desapareceram",
-        "O campo ficou nulo em todos os pontos"
-      ],
-      "correct": 0,
-      "success": "Exato! Com os ímãs alinhados, o desenho fica espelhado e a seta no centro aponta no mesmo sentido dos ímãs. Em um trilho MagLev, ímãs organizados produzem um campo regular ao longo de toda a via.",
-      "retry": "Veja de novo: as linhas continuam lá. Repare na simetria entre a metade esquerda e a direita do desenho e na seta amarela do centro."
-    }
+"q1": {
+    "prompt": "Na posição inicial, todos os ímãs apontam o polo N para cima, menos o último, que está deitado de lado. O que isso provoca no desenho do campo?",
+    "options": [
+      "O padrão fica assimétrico: perto desse ímã as linhas tomam outra direção",
+      "As linhas de campo de todos os ímãs desaparecem",
+      "Nada muda: a orientação de um ímã não afeta o campo"
+    ],
+    "correct": 0,
+    "success": "Isso mesmo. O campo em cada ponto é a soma vetorial das contribuições de todos os ímãs. Girar um deles muda a sua contribuição e o padrão inteiro perde a simetria.",
+    "retry": "Ainda não. Observe as linhas azuis perto do ímã que está deitado de lado e compare com os outros ímãs. Use “Posição inicial” se já tiver girado algum ímã."
+  },
+  "q2": {
+    "prompt": "Agora que todos os ímãs apontam o polo N para o mesmo lado, como ficou o campo?",
+    "options": [
+      "Simétrico e organizado: as contribuições se somam de forma regular",
+      "As linhas de campo desapareceram",
+      "O campo ficou nulo em todos os pontos"
+    ],
+    "correct": 0,
+    "success": "Exato! Com os ímãs alinhados, o desenho fica espelhado e a seta no centro aponta no mesmo sentido dos ímãs. Em um trilho MagLev, ímãs organizados produzem um campo regular ao longo de toda a via.",
+    "retry": "Veja de novo: as linhas continuam lá. Repare na simetria entre a metade esquerda e a direita do desenho e na seta amarela do centro."
+  }
   },
   "singleChoice": [
     {
@@ -1062,7 +1062,7 @@
       "concept": "campo",
       "statement": "O campo magnético num ponto é a soma dos campos de todos os ímãs por perto.",
       "answer": true,
-      "feedback": "Verdadeiro. Foi o que você viu ao girar os quatro ímãs do laboratório."
+      "feedback": "Verdadeiro. Foi o que você viu ao girar os ímãs do laboratório."
     },
     {
       "id": "tf-resultante",

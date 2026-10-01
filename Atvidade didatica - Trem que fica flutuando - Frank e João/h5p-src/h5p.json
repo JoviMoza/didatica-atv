@@ -1,6 +1,6 @@
 {
   "title": "Magnetismo e Transporte",
-  "description": "Oito páginas sobre magnetismo e trens Maglev em linguagem acessível, alinhadas aos livros de Física do PNLD, com laboratório de ímãs, questões sorteadas por aluno e revisão estendida.",
+  "description": "Nove páginas sobre magnetismo e trens Maglev em linguagem acessível, alinhadas aos livros de Física do PNLD, com laboratório de ímãs, questões sorteadas por aluno, uma questão dissertativa corrigida no próprio navegador e revisão estendida.",
   "language": "pt-br",
   "mainLibrary": "H5P.MagnetismoTransporte",
   "embedTypes": [
@@ -18,7 +18,7 @@
     {
       "machineName": "H5P.MagnetismoTransporte",
       "majorVersion": 2,
-      "minorVersion": 2
+      "minorVersion": 3
     }
   ],
   "changes": [
@@ -46,6 +46,11 @@
       "date": "25-09-26 21:00:00",
       "author": "Projeto Magnetismo e Transporte",
       "log": "Versão 2.2.1: novo vídeo na página 6 (Gerando Respostas, UFABC: \"MAGLEVS - Trens de Levitação Magnética\") com audiodescrição e texto de apoio; página 6 ganha o guiamento e um quadro de vantagens e desafios do Maglev; novo conceito \"Maglev no mundo\" na revisão; banco com 72 questões de escolha única e 62 de V ou F. Botão Aparência com os temas Padrão, Noturno, Caderno e Sinalização. Página 5: botão Pular par no jogo da memória (conta como erro e revela o par). Vocabulário e laboratório: Pular só depois de 3 tentativas erradas; quiz e V ou F sem Pular."
+    },
+    {
+      "date": "01-10-26 10:00:00",
+      "author": "Projeto Magnetismo e Transporte",
+      "log": "Versão 2.3: espanhol (es-ES) como terceira língua, com o banco de 72 questões de escolha única e 62 de V ou F traduzido e textos de apoio próprios. Botão de língua único, com globo, a palavra Língua e a bandeira do idioma em uso ao lado. Sinalização de scroll no topo enquanto houver tarefa abaixo da dobra. Página 5: explicação \"Como jogar\" antes das cartas, com as regras e o cálculo da pontuação. Página 3: o número de ímãs passa a ser ajustável de 2 a 10 (padrão 2), em pontos equidistantes do círculo, com os botões \"Acrescentar ímã\" e \"Retirar ímã\"; as duas questões do laboratório foram reescritas para não dependerem da quantidade. As questões lacradas passam a carregar as três línguas. Nova página 8: questão dissertativa avaliada no próprio navegador por critérios, termos e relaçõesOffline (5 pontos), com referências e comentários lacrados; os resultados passam para a página 9 e o total vai de 15 para 20 pontos. Acessibilidade: indicação de scroll, textos do VLibras e da audiodescrição traduzidos nas três línguas."
     }
   ]
 }

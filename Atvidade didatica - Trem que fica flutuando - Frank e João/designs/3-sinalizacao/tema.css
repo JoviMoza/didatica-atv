@@ -67,10 +67,10 @@
 :where(.h5p-mt) .mt-tab,
 :where(.h5p-mt) .mt-a11y-btn,
 :where(.h5p-mt) .mt-lang,
-:where(.h5p-mt) .mt-lang__btn { border-radius: 0; }
+:where(.h5p-mt) .mt-lang__toggle { border-radius: 0; }
 :where(.h5p-mt) .mt-tab { border: 2px solid #ffffff; color: #ffffff; font-weight: 800; text-transform: uppercase; }
 :where(.h5p-mt) .mt-tab.is-active,
-:where(.h5p-mt) .mt-lang__btn[aria-pressed="true"] { border-color: #ffcc00; color: #111111; background: #ffcc00; }
+:where(.h5p-mt) .mt-lang__option[aria-checked="true"] { border-color: #ffcc00; color: #111111; background: #ffcc00; }
 :where(.h5p-mt) .mt-a11y-btn,
 :where(.h5p-mt) .mt-lang { border: 2px solid #ffffff; background: transparent; }
 

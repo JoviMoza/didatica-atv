@@ -103,7 +103,55 @@
 .mt-switch input:checked { background: var(--primary); }
 .mt-switch input:checked::after { transform: translateX(16px); }
 
-.mt-lab__controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+/* Magnet count: − [n / 10] + , sitting with the meters, the toggles and the
+   reset button inside the side panel. */
+.mt-magnets-count {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+.mt-magnets-count__label {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.mt-magnets-count__row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+
+/* Both steppers are the same size so the row stays balanced as the count
+   grows; 44px keeps them comfortable on a phone. */
+.mt-magnets-count__btn {
+  display: grid;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--deep);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.mt-magnets-count__btn:hover:not(:disabled) { background: var(--primary-soft); border-color: var(--primary); }
+.mt-magnets-count__btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.mt-magnets-count__btn--plus { border-color: var(--primary); color: var(--primary); }
+.mt-magnets-count__btn:disabled { color: var(--muted-foreground); background: var(--muted); cursor: default; opacity: 0.6; }
+
+.mt-magnets-count__value { display: inline-flex; align-items: baseline; gap: 0.25rem; font-weight: 800; }
+.mt-magnets-count__value strong { font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.mt-magnets-count__max { color: var(--muted-foreground); font-size: 0.9rem; font-weight: 600; }
+
+.mt-magnets-count__hint { color: var(--muted-foreground); font-size: 0.78rem; }
+
+/* One rotation row per magnet, from 2 to 10 of them: auto-fit keeps them
+   readable at any count and never leaves empty columns behind. */
+.mt-lab__controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.75rem; }
+
 .mt-rot {
   display: flex;
   flex-direction: column;
@@ -169,6 +217,9 @@
   .mt-lab__panel .mt-toggles,
   .mt-lab__panel .mt-btn { grid-column: span 1; }
   .mt-lab__controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* The panel becomes a 2-column grid here, so the count control spans it
+     rather than being squeezed into one column. */
+  .mt-magnets-count { grid-column: 1 / -1; }
 }
 
 @media (max-width: 520px) {

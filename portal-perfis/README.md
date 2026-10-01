@@ -44,7 +44,7 @@ com login (`/login`, `/atividade`, `/professor`) **não existem mais**.
 
 ## Notas: como chegam ao painel
 
-1. O aluno abre o QR, digita **nome e turma**, faz as 8 páginas.
+1. O aluno abre o QR, digita **nome e turma**, faz as 9 páginas.
 2. No fim clica em **Enviar meu progresso**: a página lê as notas já calculadas
    (`state.graded`) neste navegador e envia cada uma com nome/turma.
 3. O portal guarda a **primeira nota (a que vale)** + tentativas e marca a
@@ -68,7 +68,7 @@ CEP/TCLE-TALE com a orientação.
 
 ## Segurança e limites honestos
 
-- Links de 144 bits, checados no servidor em toda rota (nega por padrão);
+- Links de 192 bits (`secrets.token_urlsafe(24)`, 24 bytes), checados no servidor em toda rota (nega por padrão);
   cookie de acesso `HttpOnly` + `SameSite=Lax`; token duplo no envio
   (`X-Token`); static por allowlist; sem CDN/fontes externas.
 - **Limites**: quem tem o link tem o acesso (QR não é login); nomes e notas

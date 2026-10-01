@@ -56,7 +56,7 @@
 :where(.h5p-mt[data-mt-theme="noturno"]) .mt-step__dot { background: #0d1530; }
 :where(.h5p-mt[data-mt-theme="noturno"]) .mt-step.is-current .mt-step__dot { box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.35), 0 0 16px rgba(34, 211, 238, 0.7); }
 :where(.h5p-mt[data-mt-theme="noturno"]) .mt-tab.is-active,
-:where(.h5p-mt[data-mt-theme="noturno"]) .mt-lang__btn[aria-pressed="true"] { color: #040713; background: var(--accent); border-color: var(--accent); }
+:where(.h5p-mt[data-mt-theme="noturno"]) .mt-lang__option[aria-checked="true"] { color: #040713; background: var(--accent); border-color: var(--accent); }
 :where(.h5p-mt[data-mt-theme="noturno"]) .mt-nav { background: rgba(7, 11, 24, 0.92); }
 
 /* ---------- surfaces ---------- */

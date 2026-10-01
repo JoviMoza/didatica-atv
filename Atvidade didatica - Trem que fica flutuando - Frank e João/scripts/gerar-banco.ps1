@@ -1,6 +1,8 @@
 ﻿param(
     [string]$Source = "authoring/banco-de-questoes.json",
     [string]$English = "authoring/banco-de-questoes.en.json",
+    [string]$Spanish = "authoring/banco-de-questoes.es.json",
+    [string]$Rubric = "authoring/rubrica-dissertativa.json",
     [string]$Output = "h5p-src/H5P.MagnetismoTransporte/js/data/bank.js"
 )
 
@@ -9,9 +11,10 @@
 # uma chave derivada da resposta CERTA (ver js/core/answer-key.js).
 # O hash (cyrb53) e o gerador (mulberry32) abaixo precisam ser idênticos
 # aos de js/core/util.js.
-# Inglês (en-US): os textos de $English viram campos "...En" (questionEn,
-# textEn…) e as explicações lacradas levam as duas línguas, separadas por
-# $PayloadSeparator (igual a PAYLOAD_SEPARATOR em js/core/i18n.js).
+# Inglês (en-US) e espanhol (es-ES): os textos de $English e $Spanish viram
+# campos "...En"/"...Es" (questionEn, questionEs, textEn, textEs…) e as
+# explicações lacradas levam as três línguas na ordem pt, en, es, separadas
+# por $PayloadSeparator (igual a PAYLOAD_SEPARATOR em js/core/i18n.js).
 
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
@@ -19,6 +22,8 @@ Set-StrictMode -Version Latest
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if (-not [System.IO.Path]::IsPathRooted($Source)) { $Source = Join-Path $projectRoot $Source }
 if (-not [System.IO.Path]::IsPathRooted($English)) { $English = Join-Path $projectRoot $English }
+if (-not [System.IO.Path]::IsPathRooted($Spanish)) { $Spanish = Join-Path $projectRoot $Spanish }
+if (-not [System.IO.Path]::IsPathRooted($Rubric)) { $Rubric = Join-Path $projectRoot $Rubric }
 if (-not [System.IO.Path]::IsPathRooted($Output)) { $Output = Join-Path $projectRoot $Output }
 if (-not (Test-Path -LiteralPath $Source -PathType Leaf)) {
     throw "Gabarito não encontrado: $Source"
@@ -100,16 +105,23 @@ function Get-Prop($Object, [string]$Name) {
     return $null
 }
 
-# Portuguese text + English translation, sealed together.
-function Bilingual([string]$Pt, $En) {
-    if ($En) { return $Pt + $PayloadSeparator + [string]$En }
-    return $Pt
+# Portuguese text + English + Spanish, sealed together. The order must match
+# PAYLOAD_SEPARATOR parsing in js/core/i18n.js: pt, en, es. A missing
+# translation simply leaves the Portuguese in that slot, and I18n picks the
+# first non-empty part for the running language.
+function Trilingual([string]$Pt, $En, $Es) {
+    $text = $Pt
+    if ($En) { $text = $text + $PayloadSeparator + [string]$En }
+    if ($Es) { $text = $text + $PayloadSeparator + [string]$Es }
+    return $text
 }
 
-# ", fieldEn: "…"" when there is a translation, else nothing.
-function En-Field([string]$Name, $Value) {
-    if ($Value) { return ", ${Name}En: $(Js $Value)" }
-    return ""
+# ", fieldEn: "…", fieldEs: "…"" for each translation present.
+function Translations([string]$Name, $En, $Es) {
+    $out = ""
+    if ($En) { $out += ", ${Name}En: $(Js $En)" }
+    if ($Es) { $out += ", ${Name}Es: $(Js $Es)" }
+    return $out
 }
 
 function Assert-Id([string]$Id, [string]$Where) {
@@ -127,25 +139,31 @@ function Option-Id([string]$Salt, [string]$Scope, [string]$QuestionId, [int]$Ind
 
 # Options are written in the order of their opaque ids, so the position of
 # the correct option in the file carries no information.
-# $EnOptions: English options in the same order as the Portuguese ones.
-function Sealed-Options($Question, [string]$Salt, [string]$Scope, [string]$Payload, $EnOptions) {
+# $EnOptions / $EsOptions: translated options in the same order as the
+# Portuguese ones. A translation that is present must be complete.
+function Sealed-Options($Question, [string]$Salt, [string]$Scope, [string]$Payload, $EnOptions, $EsOptions) {
     $count = @($Question.options).Count
     if ($count -lt 2) { throw "$Scope '$($Question.id)': precisa de pelo menos 2 alternativas." }
     $correct = [int]$Question.correct
     if ($correct -lt 0 -or $correct -ge $count) { throw "$Scope '$($Question.id)': 'correct' fora do intervalo 0..$($count - 1)." }
-    $enList = @($EnOptions | Where-Object { $null -ne $_ })
-    if ($enList.Count -gt 0 -and $enList.Count -ne $count) {
-        throw "$Scope '$($Question.id)': a tradução em inglês tem $($enList.Count) alternativas; o original tem $count."
+    foreach ($language in @(@('inglês', $EnOptions), @('espanhol', $EsOptions))) {
+        $list = @($language[1] | Where-Object { $null -ne $_ })
+        if ($list.Count -gt 0 -and $list.Count -ne $count) {
+            throw "$Scope '$($Question.id)': a tradução em $($language[0]) tem $($list.Count) alternativas; o original tem $count."
+        }
     }
+    $enList = @($EnOptions | Where-Object { $null -ne $_ })
+    $esList = @($EsOptions | Where-Object { $null -ne $_ })
     $options = @()
     for ($i = 0; $i -lt $count; $i++) {
         $textEn = if ($enList.Count -gt 0) { [string]$enList[$i] } else { $null }
-        $options += [pscustomobject]@{ id = (Option-Id $Salt $Scope $Question.id $i); text = [string]@($Question.options)[$i]; textEn = $textEn }
+        $textEs = if ($esList.Count -gt 0) { [string]$esList[$i] } else { $null }
+        $options += [pscustomobject]@{ id = (Option-Id $Salt $Scope $Question.id $i); text = [string]@($Question.options)[$i]; textEn = $textEn; textEs = $textEs }
     }
     $correctId = $options[$correct].id
     Assert-Unique @($options | ForEach-Object { $_.id }) "$Scope '$($Question.id)'"
     $sorted = @($options | Sort-Object id)
-    $optionJs = ($sorted | ForEach-Object { "{ id: $(Js $_.id), text: $(Js $_.text)$(En-Field 'text' $_.textEn) }" }) -join ", "
+    $optionJs = ($sorted | ForEach-Object { "{ id: $(Js $_.id), text: $(Js $_.text)$(Translations 'text' $_.textEn $_.textEs) }" }) -join ", "
     return @{
         options = "[$optionJs]"
         seal = [MtSeal]::Seal($Salt, "$Scope|$($Question.id)|$correctId", $Payload)
@@ -159,6 +177,13 @@ if (Test-Path -LiteralPath $English -PathType Leaf) {
 }
 else {
     Write-Warning "Tradução em inglês não encontrada ($English): o modo English mostrará as questões em português."
+}
+$es = $null
+if (Test-Path -LiteralPath $Spanish -PathType Leaf) {
+    $es = Get-Content -LiteralPath $Spanish -Raw -Encoding UTF8 | ConvertFrom-Json
+}
+else {
+    Write-Warning "Tradução em espanhol não encontrada ($Spanish): o modo Español mostrará as questões em português."
 }
 $salt = [string]$bank.salt
 if ($salt.Length -lt 8) { throw "'salt' ausente ou curto demais em $Source." }
@@ -185,10 +210,16 @@ $allTerms = @($terms + $distractors)
 $allTerms | ForEach-Object { Assert-Id $_.id "dragWords" }
 Assert-Unique @($allTerms | ForEach-Object { $_.id }) "dragWords"
 $enDrag = Get-Prop $en "dragWords"
+$esDrag = Get-Prop $es "dragWords"
 $enSentence = @(Get-Prop $enDrag "sentence" | Where-Object { $null -ne $_ })
+$esSentence = @(Get-Prop $esDrag "sentence" | Where-Object { $null -ne $_ })
 $enTerms = Get-Prop $enDrag "terms"
+$esTerms = Get-Prop $esDrag "terms"
 if ($enSentence.Count -gt 0 -and $enSentence.Count -ne @($drag.sentence).Count) {
     throw "dragWords (inglês): 'sentence' precisa ter $(@($drag.sentence).Count) itens."
+}
+if ($esSentence.Count -gt 0 -and $esSentence.Count -ne @($drag.sentence).Count) {
+    throw "dragWords (espanhol): 'sentence' precisa ter $(@($drag.sentence).Count) itens."
 }
 $lines.Add("    dragWords: {")
 $lines.Add("      sentence: [")
@@ -199,8 +230,13 @@ if ($enSentence.Count -gt 0) {
     $lines.Add(($enSentence | ForEach-Object { "        $(Js $_)" }) -join ",`n")
     $lines.Add("      ],")
 }
+if ($esSentence.Count -gt 0) {
+    $lines.Add("      sentenceEs: [")
+    $lines.Add(($esSentence | ForEach-Object { "        $(Js $_)" }) -join ",`n")
+    $lines.Add("      ],")
+}
 $lines.Add("      terms: [")
-$lines.Add((@($allTerms | Sort-Object id) | ForEach-Object { "        { id: $(Js $_.id), text: $(Js $_.text)$(En-Field 'text' (Get-Prop $enTerms $_.id)), concept: $(Js $_.concept) }" }) -join ",`n")
+$lines.Add((@($allTerms | Sort-Object id) | ForEach-Object { "        { id: $(Js $_.id), text: $(Js $_.text)$(Translations 'text' (Get-Prop $enTerms $_.id) (Get-Prop $esTerms $_.id)), concept: $(Js $_.concept) }" }) -join ",`n")
 $lines.Add("      ],")
 $lines.Add("      slots: [")
 $slotLines = @()
@@ -220,8 +256,9 @@ foreach ($id in $labIds) {
     $question = $bank.lab.$id
     $question | Add-Member -NotePropertyName id -NotePropertyValue $id -Force
     $enQuestion = Get-Prop (Get-Prop $en "lab") $id
-    $sealed = Sealed-Options $question $salt "lab" (Bilingual ([string]$question.success) (Get-Prop $enQuestion "success")) (Get-Prop $enQuestion "options")
-    $labLines += "      ${id}: {`n        prompt: $(Js $question.prompt)$(En-Field 'prompt' (Get-Prop $enQuestion 'prompt')),`n        retry: $(Js $question.retry)$(En-Field 'retry' (Get-Prop $enQuestion 'retry')),`n        options: $($sealed.options),`n        seal: $(Js $sealed.seal)`n      }"
+    $esQuestion = Get-Prop (Get-Prop $es "lab") $id
+    $sealed = Sealed-Options $question $salt "lab" (Trilingual ([string]$question.success) (Get-Prop $enQuestion "success") (Get-Prop $esQuestion "success")) (Get-Prop $enQuestion "options") (Get-Prop $esQuestion "options")
+    $labLines += "      ${id}: {`n        prompt: $(Js $question.prompt)$(Translations 'prompt' (Get-Prop $enQuestion 'prompt') (Get-Prop $esQuestion 'prompt')),`n        retry: $(Js $question.retry)$(Translations 'retry' (Get-Prop $enQuestion 'retry') (Get-Prop $esQuestion 'retry')),`n        options: $($sealed.options),`n        seal: $(Js $sealed.seal)`n      }"
 }
 $lines.Add($labLines -join ",`n")
 $lines.Add("    },")
@@ -234,8 +271,9 @@ $lines.Add("    singleChoice: [")
 $singleLines = @()
 foreach ($question in $single) {
     $enQuestion = Get-Prop (Get-Prop $en "singleChoice") $question.id
-    $sealed = Sealed-Options $question $salt "single" (Bilingual ([string]$question.explanation) (Get-Prop $enQuestion "explanation")) (Get-Prop $enQuestion "options")
-    $singleLines += "      {`n        id: $(Js $question.id), concept: $(Js $question.concept),`n        question: $(Js $question.question)$(En-Field 'question' (Get-Prop $enQuestion 'question')),`n        options: $($sealed.options),`n        seal: $(Js $sealed.seal)`n      }"
+    $esQuestion = Get-Prop (Get-Prop $es "singleChoice") $question.id
+    $sealed = Sealed-Options $question $salt "single" (Trilingual ([string]$question.explanation) (Get-Prop $enQuestion "explanation") (Get-Prop $esQuestion "explanation")) (Get-Prop $enQuestion "options") (Get-Prop $esQuestion "options")
+    $singleLines += "      {`n        id: $(Js $question.id), concept: $(Js $question.concept),`n        question: $(Js $question.question)$(Translations 'question' (Get-Prop $enQuestion 'question') (Get-Prop $esQuestion 'question')),`n        options: $($sealed.options),`n        seal: $(Js $sealed.seal)`n      }"
 }
 $lines.Add($singleLines -join ",`n")
 $lines.Add("    ],")
@@ -250,11 +288,96 @@ foreach ($question in $trueFalse) {
     if ($question.answer -isnot [bool]) { throw "trueFalse '$($question.id)': 'answer' precisa ser true ou false." }
     $answer = if ($question.answer) { "true" } else { "false" }
     $enQuestion = Get-Prop (Get-Prop $en "trueFalse") $question.id
-    $seal = [MtSeal]::Seal($salt, "tf|$($question.id)|$answer", (Bilingual ([string]$question.feedback) (Get-Prop $enQuestion "feedback")))
-    $tfLines += "      {`n        id: $(Js $question.id), concept: $(Js $question.concept),`n        statement: $(Js $question.statement)$(En-Field 'statement' (Get-Prop $enQuestion 'statement')),`n        seal: $(Js $seal)`n      }"
+    $esQuestion = Get-Prop (Get-Prop $es "trueFalse") $question.id
+    $seal = [MtSeal]::Seal($salt, "tf|$($question.id)|$answer", (Trilingual ([string]$question.feedback) (Get-Prop $enQuestion "feedback") (Get-Prop $esQuestion "feedback")))
+    $tfLines += "      {`n        id: $(Js $question.id), concept: $(Js $question.concept),`n        statement: $(Js $question.statement)$(Translations 'statement' (Get-Prop $enQuestion 'statement') (Get-Prop $esQuestion 'statement')),`n        seal: $(Js $seal)`n      }"
 }
 $lines.Add($tfLines -join ",`n")
-$lines.Add("    ]")
+$lines.Add("    ],")
+
+# ------------------------------------------------------------ dissertativa
+# A rubrica sai de authoring/rubrica-dissertativa.json e entra LACRADA, pelo
+# mesmo caminho do resto do gabarito: cada item ganha um selo cuja chave deriva
+# do id do conceito. O navegador recebe as expressões aceitas (sem as respostas
+# de referência, que ficam seladas) e só consegue abri-las com o gabarito.
+if (Test-Path -LiteralPath $Rubric -PathType Leaf) {
+    $essay = (Get-Content -LiteralPath $Rubric -Raw -Encoding UTF8 | ConvertFrom-Json).essay
+    $essayId = [string]$essay.id
+    if ($essayId -notmatch '^[a-z0-9-]{1,60}$') { throw "essay: 'id' inválido: '$essayId'" }
+    $essayMax = [int]$essay.maxPoints
+    if ($essayMax -lt 1) { throw "essay: 'maxPoints' precisa ser >= 1." }
+
+    # Referências seladas: pt<sep>en<sep>es numa única string, iguais às
+    # explicações do resto do banco.
+    $references = Trilingual ([string]$essay.referenceAnswers[0]) `
+        @($essay.referenceAnswersEn)[0] @($essay.referenceAnswersEs)[0]
+
+    $conceptLines = @()
+    foreach ($concept in @($essay.concepts)) {
+        Assert-Id $concept.id "essay.concepts"
+        $texts = @($concept.keywords) + @($concept.phrases)
+        if ($texts.Count -eq 0) { throw "essay '$($concept.id)': sem 'keywords' nem 'phrases'." }
+        # minúsculas E sem acento: o avaliador normaliza os dois lados do
+        # mesmo jeito (NFD + faixa \u0300-\u036f), então o termo precisa chegar
+        # já dobrado, senão "nitrogênio líquido" nunca casa com a resposta.
+        function Fold-Term([string]$Value) {
+            $text = $Value.ToLowerInvariant().Normalize([Text.NormalizationForm]::FormD)
+            return [regex]::Replace($text, "[$([char]0x0300)-$([char]0x036F)]", "").Trim()
+        }
+        $lower = ($texts | ForEach-Object { Fold-Term ([string]$_) } | Where-Object { $_ } | Sort-Object -Unique)
+        # "ok|" é o marcador que answer-key.js usa para validar a chave: o
+        # open() só decodifica quando a marca sai correta, então ela PRECISA
+        # estar no texto lacrado (e é removida na leitura).
+        $sealText = "ok|" + ([string]$concept.feedback)
+        $termsJs = (($lower | ForEach-Object { Js $_ }) -join ", ")
+        $required = "false"
+        if ($concept.required) { $required = "true" }
+        # Numbers are emitted as raw JS numbers, not Js strings: a quoted "0.25"
+    # would still work with Number() but breaks arithmetic if a future field
+    # is used directly (as the grader does with concept.weight).
+    $conceptLines += "        { id: $(Js $concept.id), label: $(Js $concept.label)$(Translations 'label' $concept.labelEn $concept.labelEs), weight: $([double]$concept.weight), required: $required, terms: [$termsJs], seal: $(Js ([MtSeal]::Seal($salt, "essay|$essayId|$($concept.id)", $sealText))) }"
+    }
+
+    $relationLines = @()
+    foreach ($relation in @($essay.relations)) {
+        $patterns = @($relation.patterns | ForEach-Object { Fold-Term ([string]$_) } | Where-Object { $_ } | Sort-Object -Unique)
+        if ($patterns.Count -eq 0) { throw "essay relation $($relation.from)->$($relation.to): sem 'patterns'." }
+        $patternsJs = (($patterns | ForEach-Object { Js $_ }) -join ", ")
+        $relationLines += "        { from: $(Js $relation.from), to: $(Js $relation.to), weight: $([double]$relation.weight), patterns: [$patternsJs] }"
+    }
+
+    $contradictionLines = @()
+    foreach ($contradiction in @($essay.contradictions)) {
+        $patterns = @($contradiction.patterns | ForEach-Object { Fold-Term ([string]$_) } | Where-Object { $_ } | Sort-Object -Unique)
+        if ($patterns.Count -eq 0) { throw "essay contradiction '$($contradiction.id)': sem 'patterns'." }
+        $patternsJs = (($patterns | ForEach-Object { Js $_ }) -join ", ")
+        $contradictionLines += "        { id: $(Js $contradiction.id), weight: $([double]$contradiction.weight), patterns: [$patternsJs] }"
+    }
+
+    $cal = $essay.calibration
+    $lines.Add("    essay: {")
+    $lines.Add("      id: $(Js $essayId),")
+    $lines.Add("      maxPoints: $essayMax,")
+    $lines.Add("      prompt: $(Js $essay.prompt)$(Translations 'prompt' $essay.promptEn $essay.promptEs),")
+    $lines.Add("      concepts: [")
+    $lines.Add(($conceptLines -join ",`n"))
+    $lines.Add("      ],")
+    $lines.Add("      relations: [")
+    $lines.Add(($relationLines -join ",`n"))
+    $lines.Add("      ],")
+    $lines.Add("      contradictions: [")
+    $lines.Add(($contradictionLines -join ",`n"))
+    $lines.Add("      ],")
+    $lines.Add("      calibration: { requiredShortfallPenalty: $([double]$cal.requiredShortfallPenalty), contradictionMultiplier: $([double]$cal.contradictionMultiplier), minScore: $([double]$cal.minScore), maxScore: $([double]$cal.maxScore) },")
+    $lines.Add("      references: $(Js ([MtSeal]::Seal($salt, "essay|$essayId|referencias", $references)))")
+    $lines.Add("    }")
+    $essaySummary = "1 dissertativa ($essayMax pontos)"
+}
+else {
+    Write-Warning "Rubrica da dissertativa não encontrada ($Rubric): a página 8 cairá para o gabarito em branco."
+    $lines.Add("    essay: null")
+    $essaySummary = "0 dissertativas (rubrica ausente)"
+}
 
 $lines.Add("  };")
 $lines.Add("})(window.H5P = window.H5P || {});")
@@ -264,4 +387,4 @@ New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Output) | Out-Nul
 [System.IO.File]::WriteAllText($Output, $text, (New-Object System.Text.UTF8Encoding $false))
 
 Write-Host "Banco lacrado gerado: $Output"
-Write-Host ("  {0} lacunas, {1} perguntas do laboratório, {2} de escolha única, {3} de V ou F" -f $terms.Count, $labIds.Count, $single.Count, $trueFalse.Count)
+Write-Host ("  {0} lacunas, {1} perguntas do laboratório, {2} de escolha única, {3} de V ou F, {4}" -f $terms.Count, $labIds.Count, $single.Count, $trueFalse.Count, $essaySummary)

@@ -1,2 +1,14 @@
 ﻿node_modules/
 docs-apresentacao/
+
+# Future work / research notes: local only, never part of the delivery.
+Melhorias futuras/
+
+# Scratch scripts written by tooling agents while working on a task.
+.check_*.py
+.fix_*.py
+.probe_*.py
+.add_*.py
+.get_*.py
+.list_*.py
+.find_*.py

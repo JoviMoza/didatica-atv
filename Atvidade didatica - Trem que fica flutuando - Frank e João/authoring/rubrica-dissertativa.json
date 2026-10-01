@@ -1,0 +1,447 @@
+{
+  "_instrucoes": [
+    "Gabarito da questão dissertativa. FICA FORA DO PACOTE: o build lacra este arquivo em js/data/bank.js (escopo 'essay'), e nada aqui pode ser lido pelo navegador em texto puro.",
+    "Para acrescentar um item em 'concepts', use 'required' e 'weight' como parâmetros de autoria: os pesos não devem ser congelados antes do benchmark humano (docs/questoes-dissertativas-viabilidade.md).",
+    "Cada conceito traz 'keywords' (termos e expressões aceitos, com sinônimos de Portugal e Espanha), 'phrases' (expressões que valem mais que a palavra solta, porque provam a relação) e 'patterns' (contradições que limitam a nota).",
+    "'trilingual' marca um texto que precisa existir nos três idiomas: os suffixes de campo são en, es."
+  ],
+  "essay": {
+    "id": "q-dissertativa-maglev",
+    "maxPoints": 5,
+    "prompt": "Explique por que o MagLev-Cobra precisa de nitrogênio líquido para levitar de forma estável e o que acontece se a temperatura subir.",
+    "promptEn": "Explain why the MagLev-Cobra needs liquid nitrogen to levitate stably and what happens if the temperature rises.",
+    "promptEs": "Explica por qué el MagLev-Cobra necesita nitrógeno líquido para levitar de forma estable y qué ocurre si la temperatura sube.",
+    "referenceAnswers": [
+      "O nitrogênio líquido resfria o material até uma temperatura muito baixa. Nessa condição o material fica supercondutor: a resistência elétrica some e ele passa a expulsar o campo magnético do seu interior (efeito Meissner). É essa propriedade que produz a levitação. Se a temperatura subir acima da temperatura crítica, o material deixa de ser supercondutor, o campo magnético volta a entrar e a levitação estável é perdida.",
+      "O resfriamento com nitrogênio líquido mantém o material abaixo da temperatura crítica, condição em que ele se torna supercondutor e expulsa o campo magnético (efeito Meissner), e é isso que sustenta o trem no ar. Quando a temperatura sobe e ultrapassa a temperatura crítica, o material deixa de ser supercondutor, o efeito Meissner desaparece e o trem perde a levitação estável."
+    ],
+    "referenceAnswersEn": [
+      "Liquid nitrogen cools the material down to a very low temperature. At that condition the material becomes superconducting: electrical resistance disappears and it starts to push magnetic field out of its interior (Meissner effect). That property is what produces the levitation. If the temperature rises above the critical temperature, the material stops being superconducting, the magnetic field goes back in, and stable levitation is lost.",
+      "Cooling with liquid nitrogen keeps the material below the critical temperature, the condition in which it becomes superconducting and expels magnetic field (Meissner effect), and that is what holds the train up. When the temperature rises past the critical temperature the material stops being superconducting, the Meissner effect disappears and the train loses stable levitation."
+    ],
+    "referenceAnswersEs": [
+      "El nitrógeno líquido enfría el material hasta una temperatura muy baja. En esa condición el material se vuelve superconductor: desaparece la resistencia eléctrica y empieza a expulsar el campo magnético de su interior (efecto Meissner). Esa propiedad es la que produce la levitación. Si la temperatura sube por encima de la temperatura crítica, el material deja de ser superconductor, el campo magnético vuelve a entrar y se pierde la levitación estable.",
+      "El enfriamiento con nitrógeno líquido mantiene el material por debajo de la temperatura crítica, la condición en la que se vuelve superconductor y expulsa el campo magnético (efecto Meissner), y eso es lo que sostiene el tren en el aire. Cuando la temperatura sube y supera la temperatura crítica, el material deja de ser superconductor, desaparece el efecto Meissner y el tren pierde la levitación estable."
+    ],
+    "concepts": [
+      {
+        "id": "resfriamento",
+        "weight": 0.2,
+        "required": true,
+        "keywords": [
+          "nitrogênio líquido",
+          "nitrogeneo liquido",
+          "nitrógeno líquido",
+          "resfria",
+          "resfriar",
+          "resfriamento",
+          "enfria",
+          "enfriar",
+          "enfriamiento",
+          "enfriamiento",
+          "resfriar o material",
+          "esfriar",
+          "refrigeracao",
+          "refrigeración"
+        ],
+        "phrases": [
+          "nitrogênio líquido resfria",
+          "nitrógeno líquido enfría",
+          "resfria o material",
+          "enfria o material",
+          "enfría el material",
+          "esfriar o material",
+          "abaixa a temperatura",
+          "baixa a temperatura",
+          "reduz a temperatura",
+          "reduce la temperatura"
+        ],
+        "feedback": "O papel do nitrogênio líquido é justamente baixar a temperatura do material. Cite esse resfriamento.",
+        "label": "Resfriamento pelo nitrogênio líquido",
+        "labelEn": "Cooling with liquid nitrogen",
+        "labelEs": "Enfriamiento con nitrógeno líquido"
+      },
+      {
+        "id": "baixa-temperatura",
+        "weight": 0.15,
+        "required": true,
+        "keywords": [
+          "temperatura baixa",
+          "baixa temperatura",
+          "temperatura baixa",
+          "temperatura muito baixa",
+          "temperatura muy baja",
+          "frio",
+          "frio extremo",
+          "cold",
+          "low temperature",
+          "very low temperature",
+          "temperaturas baixas",
+          "temperaturas bajas"
+        ],
+        "phrases": [
+          "temperatura muito baixa",
+          "temperatura muito abaixo",
+          "temperatura muy baja",
+          "below a temperatura crítica",
+          "abaixo da temperatura crítica",
+          "below the critical temperature",
+          "por debajo de la temperatura crítica"
+        ],
+        "feedback": "A levitação depende de o material estar em temperatura baixa, não apenas resfriado.",
+        "label": "Temperatura baixa",
+        "labelEn": "Low temperature",
+        "labelEs": "Temperatura baja"
+      },
+      {
+        "id": "supercondutividade",
+        "weight": 0.25,
+        "required": true,
+        "keywords": [
+          "supercondutor",
+          "supercondutiva",
+          "supercondutores",
+          "superconductor",
+          "superconductora",
+          "superconductores",
+          "supercondutividade",
+          "superconductividad",
+          "temperatura critica",
+          "temperatura crítica",
+          "critical temperature",
+          "temperatura critica",
+          "temperatura crítica"
+        ],
+        "phrases": [
+          "fica supercondutor",
+          "se torna supercondutor",
+          "torna-se supercondutor",
+          "vira supercondutor",
+          "se vuelve superconductor",
+          "pode ficar supercondutor",
+          "supercondutividade",
+          "superconductividad"
+        ],
+        "feedback": "O nome do fenômeno é supercondutividade: o material ganha essa propriedade quando está frio o bastante.",
+        "label": "Supercondutividade e temperatura crítica",
+        "labelEn": "Superconductivity and critical temperature",
+        "labelEs": "Superconductividad y temperatura crítica"
+      },
+      {
+        "id": "meissner",
+        "weight": 0.2,
+        "required": false,
+        "keywords": [
+          "meissner",
+          "efeito meissner",
+          "efeito de meissner",
+          "meissner effect",
+          "efecto meissner",
+          "expulsa o campo",
+          "expulsa o campo magnetico",
+          "expulsa o campo magnético",
+          "expel",
+          "expulsar o campo",
+          "repelir o campo",
+          "expel el campo",
+          "expulsa o campo magnetico de dentro"
+        ],
+        "phrases": [
+          "expulsa o campo magnetico",
+          "expulsa o campo magnético",
+          "expulsa o campo magnetico do interior",
+          "expulsa o campo magnético de dentro",
+          "expels the magnetic field",
+          "expulsa o campo magnetico do seu interior",
+          "expulsa el campo magnético",
+          "não deixa o campo entrar",
+          "nao deixa o campo entrar",
+          "impede o campo de entrar",
+          "impede que o campo entre"
+        ],
+        "feedback": "Falta o efeito Meissner: num supercondutor o campo magnético é expulso do material, e é isso que sustenta o trem.",
+        "label": "Efeito Meissner",
+        "labelEn": "Meissner effect",
+        "labelEs": "Efecto Meissner"
+      },
+      {
+        "id": "levitacao",
+        "weight": 0.1,
+        "required": false,
+        "keywords": [
+          "levitacao",
+          "levitação",
+          "levitar",
+          "levitation",
+          "levita",
+          "flutua",
+          "flutuar",
+          "float",
+          "floating",
+          "flotar",
+          "sustenta o trem",
+          "sustenta",
+          "suspende"
+        ],
+        "phrases": [
+          "sustenta o trem",
+          "sustenta o veiculo",
+          "sustenta o veículo",
+          "sustiene el tren",
+          "mantem o trem no ar",
+          "mantém o trem no ar",
+          "mantiene el tren en el aire",
+          "permite a levitacao",
+          "permite a levitação"
+        ],
+        "feedback": "Vale ligar a propriedade ao efeito prático: é ela que permite o trem flutuar.",
+        "label": "Levitação",
+        "labelEn": "Levitation",
+        "labelEs": "Levitación"
+      },
+      {
+        "id": "perda-aquecimento",
+        "weight": 0.2,
+        "required": true,
+        "keywords": [
+          "perde",
+          "perder",
+          "deixa de ser supercondutor",
+          "deixa de funcionar",
+          "para de funcionar",
+          "cambia",
+          "mudar",
+          "vuelve",
+          "volver",
+          "deja de ser superconductor",
+          "ya no es superconductor",
+          "pierde",
+          "perde a levitacao",
+          "perde a levitação",
+          "deja de levitar",
+          "pode cair",
+          "cai",
+          "cair",
+          "cayendo",
+          "caer",
+          "deja de funcionar"
+        ],
+        "phrases": [
+          "deixa de ser supercondutor",
+          "deixa de ser superconductor",
+          "ya no es superconductor",
+          "deixa de ser supercondutiva",
+          "para de ser supercondutor",
+          "perde a supercondutividade",
+          "pierde la superconductividad",
+          "perde a levitacao",
+          "perde a levitação",
+          "perde la levitación",
+          "deixa de levitar",
+          "ya no levita",
+          "deja de levitar",
+          "o trem cai",
+          "o tren cae",
+          "el tren cae",
+          "acima da temperatura critica",
+          "acima da temperatura crítica",
+          "por encima da temperatura critica",
+          "passa a ser um material comum",
+          "volta a ser um material comum"
+        ],
+        "feedback": "A segunda parte é essencial: ao passar da temperatura crítica o material deixa de ser supercondutor e a levitação estável acaba.",
+        "label": "O que acontece se a temperatura subir",
+        "labelEn": "What happens if the temperature rises",
+        "labelEs": "Qué ocurre si la temperatura sube"
+      }
+    ],
+    "relations": [
+      {
+        "from": "resfriamento",
+        "to": "baixa-temperatura",
+        "weight": 0.25,
+        "patterns": [
+          "nitrogênio líquido resfria",
+          "nitrogênio liquido resfria",
+          "resfria e leva a",
+          "nitrógeno líquido enfría",
+          "resfria o material",
+          "enfria o material",
+          "enfría el material",
+          "esfriar o material",
+          "abaixa a temperatura",
+          "baixa a temperatura",
+          "reduz a temperatura",
+          "reduce la temperatura",
+          "leva a temperatura a",
+          "leva a temperatura para"
+        ]
+      },
+      {
+        "from": "baixa-temperatura",
+        "to": "supercondutividade",
+        "weight": 0.25,
+        "patterns": [
+          "temperatura baixa",
+          "baixa temperatura",
+          "temperatura baixa",
+          "temperatura baixa permite",
+          "temperatura crítica",
+          "temperatura critica",
+          "temperatura crítica permite",
+          "fica supercondutor",
+          "se torna supercondutor",
+          "torna-se supercondutor",
+          "vira supercondutor",
+          "se vuelve superconductor",
+          "low temperature allows",
+          "temperatura muy baja",
+          "por debajo de la temperatura crítica",
+          "por debajo de la temperatura critica"
+        ]
+      },
+      {
+        "from": "supercondutividade",
+        "to": "meissner",
+        "weight": 0.25,
+        "patterns": [
+          "efeito meissner",
+          "efeito de meissner",
+          "meissner effect",
+          "efecto meissner",
+          "supercondutor expulsa",
+          "superconductor expulsa",
+          "supercondutividade expulsa",
+          "superconductividad expulsa",
+          "expulsa o campo",
+          "expulsa o campo magnetico",
+          "expulsa o campo magnético",
+          "expulsa el campo magnético",
+          "nao deixa o campo entrar",
+          "nao deixa o campo entrar",
+          "impede o campo de entrar",
+          "impede que o campo entre"
+        ]
+      },
+      {
+        "from": "meissner",
+        "to": "levitacao",
+        "weight": 0.25,
+        "patterns": [
+          "efeito meissner",
+          "efeito de meissner",
+          "meissner effect",
+          "efecto meissner",
+          "permite a levitacao",
+          "permite a levitação",
+          "permite la levitación",
+          "proporciona a levitacao",
+          "proporciona a levitação",
+          "e por isso que o trem",
+          "e por isso o trem",
+          "e por isso que levita",
+          "e por isso levita",
+          "sustenta o trem",
+          "sustenta o veiculo",
+          "sustenta o veículo",
+          "sustiene el tren",
+          "gera a levitacao",
+          "gera a levitação"
+        ]
+      },
+      {
+        "from": "supercondutividade",
+        "to": "perda-aquecimento",
+        "weight": 0.25,
+        "patterns": [
+          "se a temperatura subir",
+          "se a temperatura aumenta",
+          "se a temperatura sobe",
+          "se subir a temperatura",
+          "com o aumento da temperatura",
+          "com o aquecimento",
+          "quando a temperatura subir",
+          "quando a temperatura aumenta",
+          "aquecendo",
+          "si la temperatura sube",
+          "si sube la temperatura",
+          "al calentar",
+          "al aumentar la temperatura",
+          "con el aumento de la temperatura",
+          "pierde a supercondutividade",
+          "perde a supercondutividade",
+          "pierde la superconductividad"
+        ]
+      }
+    ],
+    "contradictions": [
+      {
+        "id": "nitrogenio-aumenta",
+        "weight": 0.5,
+        "patterns": [
+          "nitrogênio líquido aumenta",
+          "nitrogênio liquido aumenta",
+          "nitrogênio líquido eleva",
+          "nitrogênio liquido eleva",
+          "nitrogênio líquido esquenta",
+          "nitrogênio liquido esquenta",
+          "nitrogênio líquido aquece",
+          "nitrogênio liquido aquece",
+          "nitrogênio líquido aumenta a temperatura",
+          "nitrogênio liquido aumenta a temperatura",
+          "nitrógeno líquido aumenta",
+          "nitrógeno líquido eleva",
+          "nitrógeno líquido calienta",
+          "nitrógeno líquido aumenta la temperatura",
+          "aumenta a temperatura",
+          "eleva a temperatura",
+          "el nitrógeno líquido aumenta",
+          "el nitrógeno líquido calienta",
+          "el nitrógeno líquido aumenta la temperatura"
+        ]
+      },
+      {
+        "id": "meissner-atrai",
+        "weight": 0.5,
+        "patterns": [
+          "efeito meissner atrai",
+          "efeito de meissner atrai",
+          "efeito meissner permite a entrada do campo",
+          "efeito meissner deixa o campo entrar",
+          "efeito meissner concentra o campo",
+          "efeito meissner aumenta o campo",
+          "efeito meissner prova o campo",
+          "efeito meissner dentro do campo",
+          "meissner effect attracts",
+          "efeito meissner atrai o campo",
+          "efeito meissner puxa o campo",
+          "efeito meissner traz o campo",
+          "el efecto meissner atrae",
+          "el efecto meissner deja entrar el campo"
+        ]
+      },
+      {
+        "id": "frio-aumenta",
+        "weight": 0.5,
+        "patterns": [
+          "frio aumenta a temperatura",
+          "resfriar aumenta a temperatura",
+          "esfriar aumenta a temperatura",
+          "baixa a temperatura aumenta",
+          "frio aumenta",
+          "cold increases the temperature",
+          "enfriar aumenta la temperatura",
+          "el frío aumenta",
+          "enfriar aumenta"
+        ]
+      }
+    ],
+    "calibration": {
+      "_nota": "Pesos iniciais de autoria, ainda sem benchmark humano. Não congelar: reavaliar depois de comparar com notas de professor (docs/questoes-dissertativas-viabilidade.md).",
+      "requiredShortfallPenalty": 0.34,
+      "contradictionMultiplier": 0.5,
+      "minScore": 0,
+      "maxScore": 1
+    }
+  }
+}

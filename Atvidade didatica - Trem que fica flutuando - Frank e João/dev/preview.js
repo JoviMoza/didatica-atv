@@ -36,7 +36,7 @@
     const instance = new H5P.MagnetismoTransporte(
       content,
       'developer-preview',
-      'H5P.MagnetismoTransporte 2.2.1',
+      'H5P.MagnetismoTransporte 2.3.0',
       { jsonContent: JSON.stringify(content) }
     );
     host.innerHTML = '';

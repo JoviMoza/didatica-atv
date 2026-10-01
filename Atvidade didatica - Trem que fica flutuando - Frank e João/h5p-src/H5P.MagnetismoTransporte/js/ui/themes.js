@@ -14,10 +14,10 @@
 
   // swatches: background, card/main colour, accent.
   const THEMES = [
-    { id: '', name: () => L('Padrão', 'Default'), hint: () => L('Azul e branco, o visual original', 'Blue and white, the original look'), swatches: ['#f5f7fb', '#1f3fd1', '#06b6d4'] },
-    { id: 'noturno', name: () => L('Noturno', 'Night'), hint: () => L('Tela escura, boa para sala escura e projetor', 'Dark screen, good for dark rooms and projectors'), swatches: ['#070b18', '#7c9bff', '#22d3ee'] },
-    { id: 'caderno', name: () => L('Caderno', 'Notebook'), hint: () => L('Papel quadriculado e tinta azul', 'Grid paper and blue ink'), swatches: ['#f6f0e1', '#1d3f9e', '#d6453d'] },
-    { id: 'sinalizacao', name: () => L('Sinalização', 'Signage'), hint: () => L('Preto, branco e amarelo: maior contraste', 'Black, white and yellow: highest contrast'), swatches: ['#ffffff', '#111111', '#ffcc00'] }
+    { id: '', name: () => L('Padrão', 'Default', 'Predeterminado'), hint: () => L('Azul e branco, o visual original', 'Blue and white, the original look', 'Azul y blanco, el aspecto original'), swatches: ['#f5f7fb', '#1f3fd1', '#06b6d4'] },
+    { id: 'noturno', name: () => L('Noturno', 'Night', 'Nocturno'), hint: () => L('Tela escura, boa para sala escura e projetor', 'Dark screen, good for dark rooms and projectors', 'Pantalla oscura, adecuada para salas oscuras y proyectores'), swatches: ['#070b18', '#7c9bff', '#22d3ee'] },
+    { id: 'caderno', name: () => L('Caderno', 'Notebook', 'Cuaderno'), hint: () => L('Papel quadriculado e tinta azul', 'Grid paper and blue ink', 'Papel cuadriculado y tinta azul'), swatches: ['#f6f0e1', '#1d3f9e', '#d6453d'] },
+    { id: 'sinalizacao', name: () => L('Sinalização', 'Signage', 'Señalización'), hint: () => L('Preto, branco e amarelo: maior contraste', 'Black, white and yellow: highest contrast', 'Negro, blanco y amarillo: el máximo contraste'), swatches: ['#ffffff', '#111111', '#ffcc00'] }
   ];
 
   function find(id) {
@@ -51,9 +51,9 @@
         <button type="button" class="mt-a11y-btn mt-theme__toggle" data-action="toggle-theme-menu"
           aria-expanded="false" aria-controls="h5p-mt-theme-menu">
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7.5" cy="11" r="1.3" fill="currentColor"/><circle cx="10.5" cy="7" r="1.3" fill="currentColor"/><circle cx="15" cy="7.5" r="1.3" fill="currentColor"/></svg>
-          <span>${L('Aparência', 'Appearance')}</span>
+          <span>${L('Aparência', 'Appearance', 'Apariencia')}</span>
         </button>
-        <div class="mt-theme__menu" id="h5p-mt-theme-menu" role="group" aria-label="${L('Aparência da atividade', 'Activity appearance')}" hidden>
+        <div class="mt-theme__menu" id="h5p-mt-theme-menu" role="group" aria-label="${L('Aparência da atividade', 'Activity appearance', 'Apariencia de la actividad')}" hidden>
           ${THEMES.map((theme) => `
             <button type="button" class="mt-theme__option" data-action="set-theme" data-theme="${escapeHtml(theme.id)}"
               aria-pressed="${theme.id === find(current).id ? 'true' : 'false'}">

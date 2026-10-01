@@ -5,7 +5,7 @@
    * Since v2.2 the activity no longer accepts results from outside
    * (postMessage / externalDispatcher): any page script could forge them. */
 
-  const LIBRARY = 'H5P.MagnetismoTransporte-2.2.1';
+  const LIBRARY = 'H5P.MagnetismoTransporte-2.3.0';
   const Activities = H5P.MagnetismoTransporte.Activities;
 
   function normalize(value, fallback) {

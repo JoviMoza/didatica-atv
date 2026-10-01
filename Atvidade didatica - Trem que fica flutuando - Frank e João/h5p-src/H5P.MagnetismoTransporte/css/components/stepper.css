@@ -1,7 +1,9 @@
 /* stepper: purely informative, never clickable */
+/* One column per page. Derived from the page count instead of written as "8",
+   so adding or removing a page cannot silently overflow the grid. */
 .mt-stepper {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--mt-pages, 9), minmax(0, 1fr));
   gap: 0.35rem;
   max-width: 1080px;
   margin: 0 auto;

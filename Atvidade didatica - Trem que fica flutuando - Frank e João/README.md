@@ -1,6 +1,15 @@
-# Magnetismo e Transporte — v2.2.1
+# Magnetismo e Transporte — v2.3.0
 
-Objeto de aprendizagem H5P (biblioteca própria `H5P.MagnetismoTransporte 2.2.1`) sobre magnetismo, eletroímãs, trens Maglev e o MagLev-Cobra. São **8 páginas** em sequência, quatro atividades avaliativas (15 pontos), persistência em `localStorage`, eventos xAPI e painel de resultados.
+Objeto de aprendizagem H5P (biblioteca própria `H5P.MagnetismoTransporte 2.3.0`) sobre magnetismo, eletroímãs, trens Maglev e o MagLev-Cobra. São **8 páginas** em sequência, quatro atividades avaliativas (15 pontos), persistência em `localStorage`, eventos xAPI e painel de resultados.
+
+## Novidades da v2.3.0
+
+- **Espanhol (es-ES) como terceira língua:** interface, banco de questões e textos de apoio traduzidos. São três idiomas: português (padrão), inglês e espanhol.
+- **Botão de língua único:** um só botão no topo, com um globo e a palavra **Língua**, e ao lado a bandeira do idioma em uso (Brasil, Estados Unidos ou Espanha). Clicar abre a lista das três opções, cada uma com a sua bandeira e o nome no próprio idioma.
+- **Sinalização de scroll:** no topo aparece um aviso "Role para baixo para fazer a tarefa", com uma seta pulsando, enquanto ainda houver tarefa abaixo da dobra. Ele some sozinho assim que o aluno rola, e nunca aparece quando a página inteira cabe na tela.
+- **Página 5, "Como jogar":** antes das cartas, o aluno lê como o jogo funciona (duas cartas por vez, par certo permanece virado, par errado volta) e como a pontuação é calculada (acertos ÷ tentativas). A explicação some quando o jogo termina.
+- **Página 3, número de ímãs ajustável:** o laboratório começa com **2 ímãs** e o aluno pode acrescentar até **10** e retirar de volta até 2, em pontos equidistantes do círculo, numerados como Ímã 1, Ímã 2… O contador e o limite ficam sempre à vista. O ímã novo nasce na mesma direção do vizinho, para não desfazer um alinhamento já feito. As duas questões do laboratório foram reescritas para valerem com qualquer quantidade.
+- **Página 8, questão dissertativa (5 pts):** o aluno escreve uma resposta aberta e ela é corrigida **no próprio navegador**, sem servidor e sem internet, por critérios obrigatórios, termos esperados, relações e contradições. A rubrica, as referências e os comentários ficam lacrados no pacote (não aparecem em texto puro no código nem no que é salvo no navegador); o resultado é uma nota de 0 a 5 com o que foi acertado, o que faltou e o que conflita. A correção é transparente e nunca definitiva: a resposta continua sendo do aluno, e a página de resultados mostra cada critério para ele conferir. O total da atividade passou de 15 para **20 pontos**.
 
 ## Novidades da v2.2.1
 
@@ -9,12 +18,12 @@ Objeto de aprendizagem H5P (biblioteca própria `H5P.MagnetismoTransporte 2.2.1`
 - **Botão Aparência:** no topo, o aluno escolhe o visual: **Padrão** (o original, que continua sendo o inicial), Noturno, Caderno ou Sinalização. A escolha fica salva. Os temas vêm de `designs/` (ver `designs/README.md`).
 - **Pular par na memória:** sempre disponível (página com vídeo). O par pulado é revelado, conta como uma tentativa sem acerto e marca o conceito para revisão.
 - **Pular só depois de tentar:** no vocabulário e no laboratório, o Pular libera depois de 3 tentativas erradas na questão, com um contador ao lado. O quiz e o V ou F não têm mais Pular.
-- **Versão em inglês:** botão PT-BR / EN-US no topo.
+- **Versão em inglês:** botão PT-BR / EN-US no topo (a v2.3 somou o espanhol e trocou o par de botões pelo botão único "Língua").
 
 ## Novidades da v2
 
 - **Novo nome:** "Missão MagLev" passou a se chamar **Magnetismo e Transporte**. "Missão MagLev · o trem que flutua" virou o subtítulo.
-- **Laboratório de ímãs (página 3):** quatro ímãs, um em cada canto, que o aluno **gira** de três formas: arrastando em círculo (mouse ou toque), com os botões ↺ ↻ ou pelo teclado (setas giram 15°, PageUp/PageDown giram 90°). As linhas de campo, as bússolas opcionais e a seta do campo resultante no centro são recalculadas em tempo real por superposição. Roteiro em três etapas: observar → alinhar → explicar. Há também um desafio extra opcional: zerar o campo no centro.
+- **Laboratório de ímãs (página 3):** quatro ímãs, um em cada canto (a v2.3 passou a 2 a 10), que o aluno **gira** de três formas: arrastando em círculo (mouse ou toque), com os botões ↺ ↻ ou pelo teclado (setas giram 15°, PageUp/PageDown giram 90°). As linhas de campo, as bússolas opcionais e a seta do campo resultante no centro são recalculadas em tempo real por superposição. Roteiro em três etapas: observar → alinhar → explicar. Há também um desafio extra opcional: zerar o campo no centro.
 - **Navegação sequencial:** o aluno não escolhe mais a página livremente. O indicador de progresso só informa. Os botões **Anterior** e **Próxima** permitem voltar a qualquer página e avançar apenas até a última página liberada. Páginas com atividade liberam a próxima quando são concluídas. O botão "Voltar para onde parei" aparece quando o aluno volta para revisar.
 - **Novo design:** tokens semânticos no estilo shadcn/ui (`--background`, `--primary`, `--muted`, `--ring`…), com fundo claro, azul profundo, ciano elétrico e branco. É CSS puro, sem build nem dependências.
 - **Correções:** no jogo da memória, as duas cartas de um par às vezes eram ambas imagens; agora cada par tem sempre uma imagem e uma descrição. A pontuação e a data da primeira conclusão não são mais sobrescritas quando o aluno pratica de novo.
@@ -23,12 +32,13 @@ Objeto de aprendizagem H5P (biblioteca própria `H5P.MagnetismoTransporte 2.2.1`
 |---|---|---|---:|
 | 1. Início | Texto, vídeo e instruções da missão | abrir a página | — |
 | 2. Vocabulário | Drag the Words (5 termos + 2 distratores) | completar as 5 lacunas | 5 pts |
-| 3. Laboratório de ímãs | Simulação com 4 ímãs giratórios | concluir as 3 etapas do roteiro | — |
+| 3. Laboratório de ímãs | Simulação com 2 a 10 ímãs giratórios (acrescentar e retirar) | concluir as 3 etapas do roteiro | — |
 | 4. Quiz | 4 questões de escolha única (sem pular) | responder às 4 | 4 pts |
 | 5. Memória | Vídeo UFRJ + 6 pares (ou associação por listas) | achar ou pular os 6 pares | 1 pt |
 | 6. Maglev | Vídeo, texto de apoio, sistemas EMS/EDS/supercondutor, motor linear, vantagens e desafios | abrir a página | — |
 | 7. V ou F | 5 afirmações (sem pular) | responder às 5 | 5 pts |
-| 8. Resultados | Nota total, barras e o que revisar | — | — |
+| 8. Dissertativa | Resposta aberta corrigida offline (critérios, termos, relações, contradições) | escrever e conferir a resposta | 5 pts |
+| 9. Resultados | Nota total (20 pts), barras e o que revisar | — | — |
 
 ## Prévia local
 
@@ -55,6 +65,8 @@ Saídas: `dist/magnetismo-transporte.h5p` e `dist/magnetismo-transporte.h5p.sha2
 ```text
 authoring/banco-de-questoes.json   questões e gabarito em texto puro (fora do pacote)
 authoring/banco-de-questoes.en.json  tradução das questões para o inglês
+authoring/banco-de-questoes.es.json  tradução das questões para o espanhol
+authoring/rubrica-dissertativa.json  critérios, referências e comentários da dissertativa
 designs/                           temas Noturno, Caderno e Sinalização (fonte do botão Aparência)
 h5p-src/
 ├── h5p.json
@@ -63,7 +75,7 @@ h5p-src/
     ├── library.json, semantics.json, icon.svg
     ├── js/core/       estado, xAPI, sorteio e gabarito lacrado
     ├── js/data/       conteúdo didático e bank.js (gerado, respostas lacradas)
-    ├── js/pages/      uma página por arquivo (01-intro … 08-results)
+    ├── js/pages/      uma página por arquivo (01-intro … 09-results)
     ├── js/ui/         componentes, acessibilidade e temas (themes.js)
     ├── js/app.js      navegação e montagem das páginas
     ├── css/           base + components/ + pages/ + views/ + themes/ (gerado)

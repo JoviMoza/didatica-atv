@@ -63,14 +63,18 @@ def base_url() -> str:
 
 
 # Atividades avaliativas (espelho de js/core/activities.js — só rótulos e máximos,
-# nunca gabarito). TOTAL_MAX = 15.
+# nunca gabarito). TOTAL_MAX = 20.
 ATIVIDADES = {
     "dragWords": {"rotulo": "Vocabulário", "pagina": 2, "max": 5},
     "singleChoice": {"rotulo": "Quiz (escolha única)", "pagina": 4, "max": 4},
     "memory": {"rotulo": "Memória", "pagina": 5, "max": 1},
     "trueFalse": {"rotulo": "V ou F", "pagina": 7, "max": 5},
+    "essay": {"rotulo": "Dissertativa", "pagina": 8, "max": 5},
 }
 TOTAL_MAX = sum(a["max"] for a in ATIVIDADES.values())
+# Quantas atividades o aluno precisa concluir (derivado, nunca literal: era
+# "/4" escrito à mão e não acompanha a ATIVIDADES acima).
+ATIVIDADE_COUNT = len(ATIVIDADES)
 
 # Eixos temáticos = campo `concept` do banco (só ids e agrupamento, sem respostas).
 EIXOS = {
@@ -341,7 +345,7 @@ def atividade(request: Request, tok: str):
         return Response("Não encontrado.", status_code=404)
     corpo = """
     <div class='card'><h1>Atividade: Magnetismo e Transporte</h1>
-    <p class='mut'>1) Escreva seu nome e turma. 2) Faça as 8 páginas em sequência.
+    <p class='mut'>1) Escreva seu nome e turma. 2) Faça as 9 páginas em sequência.
     3) No fim, clique em <strong>Enviar meu progresso</strong> para o professor ver
     suas notas. O envio lê <em>neste navegador</em> as notas já calculadas pela
     atividade — nada é corrigido fora dela.</p>
@@ -355,7 +359,7 @@ def atividade(request: Request, tok: str):
     src='/h5p/dev/preview.html'></iframe>
     <script>(function() {
       var CHAVE_PREFIXO = 'h5p.magnetismo-transporte';
-      var ATIVS = ['dragWords','singleChoice','memory','trueFalse'];
+      var ATIVS = ['dragWords','singleChoice','memory','trueFalse','essay'];
       var TOKEN = {token_json};
       try {
         document.getElementById('nome').value = localStorage.getItem('portal_nome') || '';
@@ -554,7 +558,7 @@ def painel(request: Request, tok: str, turma: str = "", busca: str = ""):
         linhas.append(
             f"<tr><td><a href='/p/{tok}/aluno?{_q(item['nome'], item['turma'])}'>"
             f"{esc(item['nome'])}</a></td><td>{esc(item['turma'])}</td>{cels}"
-            f"<td><strong>{item['total']:g}/{TOTAL_MAX}</strong></td><td>{feito}/4</td></tr>"
+            f"<td><strong>{item['total']:g}/{TOTAL_MAX}</strong></td><td>{feito}/{ATIVIDADE_COUNT}</td></tr>"
         )
     medias = ""
     if lista:
@@ -591,7 +595,7 @@ def painel(request: Request, tok: str, turma: str = "", busca: str = ""):
     <div class='card'><table><thead><tr><th>Aluno</th><th>Turma</th>
     {''.join(f"<th>{esc(m['rotulo'])} ({m['max']})</th>" for m in ATIVIDADES.values())}
     <th>Total ({TOTAL_MAX})</th><th>Concluiu</th></tr></thead>
-    <tbody>{''.join(linhas) if linhas else "<tr><td colspan='8' class='mut'>Sem envios ainda. Os alunos aparecem aqui depois de clicar em “Enviar meu progresso”.</td></tr>"}</tbody></table></div>
+    <tbody>{''.join(linhas) if linhas else f"<tr><td colspan='{ATIVIDADE_COUNT + 3}' class='mut'>Sem envios ainda. Os alunos aparecem aqui depois de clicar em “Enviar meu progresso”.</td></tr>"}</tbody></table></div>
     <div class='card'><h2>Médias da turma</h2><ul>{medias or '<li class=mut>Sem dados.</li>'}</ul></div>
     <div class='card'><h2>Eixos temáticos (conceitos do banco)</h2><ul>
     {''.join(f"<li><strong>{esc(e)}</strong>: {esc(', '.join(c))}</li>" for e, c in EIXOS.items())}

@@ -26,8 +26,12 @@
     return I18n.field(term, 'text');
   }
 
+  // sentence / sentenceEn / sentenceEs, in the running language. Going through
+  // I18n.field() instead of testing isEnglish() by hand is what makes the
+  // Spanish version show up: a bare `isEnglish()` check falls through to
+  // Portuguese, which is how sentenceEs was ignored when Spanish shipped.
   function sentenceParts() {
-    return I18n.isEnglish() && DRAG.sentenceEn ? DRAG.sentenceEn : DRAG.sentence;
+    return I18n.field(DRAG, 'sentence');
   }
 
   // Returns the concept sealed for this blank when tokenId is the right word.
@@ -61,16 +65,16 @@
     const isCorrect = isPlaced(task, index);
     if (!isCorrect && isSkipped(task, index)) {
       const answer = skippedTerm(index);
-      const label = answer ? termText(answer) : L(`lacuna ${index + 1}`, `blank ${index + 1}`);
+      const label = answer ? termText(answer) : L(`lacuna ${index + 1}`, `blank ${index + 1}`, `hueco ${index + 1}`);
       return `<button type="button" class="mt-slot is-skipped"
       data-slot-id="slot-${index}"
-      aria-label="${L(`Espaço ${index + 1}: pulado, resposta ${escapeHtml(label)}`, `Blank ${index + 1}: skipped, answer ${escapeHtml(label)}`)}"
+      aria-label="${L(`Espaço ${index + 1}: pulado, resposta ${escapeHtml(label)}`, `Blank ${index + 1}: skipped, answer ${escapeHtml(label)}`, `Hueco ${index + 1}: omitido, respuesta ${escapeHtml(label)}`)}"
       disabled>${escapeHtml(label)}</button>`;
     }
-    const label = isCorrect && token ? termText(token) : L(`lacuna ${index + 1}`, `blank ${index + 1}`);
+    const label = isCorrect && token ? termText(token) : L(`lacuna ${index + 1}`, `blank ${index + 1}`, `hueco ${index + 1}`);
     return `<button type="button" class="mt-slot ${isCorrect ? 'is-correct' : ''} ${app.ui.dragToken && !isCorrect ? 'is-target' : ''}"
       data-action="place-drag-token" data-slot-id="slot-${index}" data-role="drag-slot"
-      aria-label="${L('Espaço', 'Blank')} ${index + 1}: ${isCorrect ? escapeHtml(label) + L(', correto', ', correct') : L('vazio', 'empty')}"
+      aria-label="${L('Espaço', 'Blank', 'Hueco')} ${index + 1}: ${isCorrect ? escapeHtml(label) + L(', correto', ', correct', ', correcto') : L('vazio', 'empty', 'vacío')}"
       ${isCorrect ? 'disabled' : ''}>${escapeHtml(label)}</button>`;
   }
 
@@ -100,33 +104,35 @@
     )).join('');
 
     section.innerHTML = `
-      ${app.heading(page.id, L('Complete o texto com os cinco termos que explicam o experimento.', 'Complete the text with the five terms that explain the experiment.'), L('Vale 5 pontos', 'Worth 5 points'))}
+      ${app.heading(page.id, L('Complete o texto com os cinco termos que explicam o experimento.', 'Complete the text with the five terms that explain the experiment.', 'Completa el texto con los cinco términos que explican el experimento.'), L('Vale 5 pontos', 'Worth 5 points', 'Vale 5 puntos'))}
       <section class="mt-card mt-drag" aria-labelledby="drag-task-title">
         <div class="mt-card__head">
-          <h2 id="drag-task-title">${L('Banco de palavras', 'Word bank')}</h2>
+          <h2 id="drag-task-title">${L('Banco de palavras', 'Word bank', 'Banco de palabras')}</h2>
           <span class="mt-chip ${task.complete ? 'mt-chip--success' : ''}">${correctCount} / ${SLOT_COUNT}</span>
         </div>
-        <p class="mt-muted mt-small">${L('Arraste uma palavra até um espaço — ou toque na palavra e depois no espaço. Há duas palavras que não pertencem ao texto.', 'Drag a word to a blank — or tap the word and then the blank. Two words do not belong in the text.')}</p>
-        <div class="mt-token-bank" role="group" aria-label="${L('Palavras disponíveis', 'Available words')}">
+        <p class="mt-muted mt-small">${L('Arraste uma palavra até um espaço — ou toque na palavra e depois no espaço. Há duas palavras que não pertencem ao texto.', 'Drag a word to a blank — or tap the word and then the blank. Two words do not belong in the text.', 'Arrastra una palabra hasta un hueco — o toca la palabra y después el hueco. Hay dos palabras que no pertenecen al texto.')}</p>
+        <div class="mt-token-bank" role="group" aria-label="${L('Palavras disponíveis', 'Available words', 'Palabras disponibles')}">
           ${pool.length ? pool.map((term) => `
             <button type="button" class="mt-token ${selected === term.id ? 'is-selected' : ''}"
               data-action="select-drag-token" data-token-id="${escapeHtml(term.id)}" data-role="drag-token"
               draggable="true" aria-pressed="${selected === term.id ? 'true' : 'false'}"
               ${task.complete ? 'disabled' : ''}>${escapeHtml(termText(term))}</button>
-          `).join('') : `<span class="mt-muted">${L('Todas as palavras foram usadas.', 'All the words have been used.')}</span>`}
+          `).join('') : `<span class="mt-muted">${L('Todas as palavras foram usadas.', 'All the words have been used.', 'Todas las palabras se han usado.')}</span>`}
         </div>
         <p class="mt-reading">${sentence}</p>
         <div class="mt-card__foot">
           <p class="mt-feedback ${task.complete ? 'is-success' : ''}" id="drag-feedback" role="status" tabindex="-1">
             ${task.complete
               ? L(`✓ Atividade concluída: ${correctCount} de ${SLOT_COUNT} termos${skippedCount ? ` (${skippedCount} pulada${skippedCount === 1 ? '' : 's'})` : ''}. A próxima página foi liberada.`,
-                `✓ Activity complete: ${correctCount} of ${SLOT_COUNT} terms${skippedCount ? ` (${skippedCount} skipped)` : ''}. The next page is unlocked.`)
+                `✓ Activity complete: ${correctCount} of ${SLOT_COUNT} terms${skippedCount ? ` (${skippedCount} skipped)` : ''}. The next page is unlocked.`,
+                `✓ Actividad completada: ${correctCount} de ${SLOT_COUNT} términos${skippedCount ? ` (${skippedCount} omitido${skippedCount === 1 ? '' : 's'})` : ''}. La página siguiente ya está disponible.`)
               : L(`${remaining} espaço${remaining === 1 ? '' : 's'} ainda ${remaining === 1 ? 'resta' : 'restam'}.${selected ? ' Agora toque em um espaço.' : ''}`,
-                `${remaining} blank${remaining === 1 ? '' : 's'} left.${selected ? ' Now tap a blank.' : ''}`)}
+                `${remaining} blank${remaining === 1 ? '' : 's'} left.${selected ? ' Now tap a blank.' : ''}`,
+                `Todavía ${remaining === 1 ? 'queda' : 'quedan'} ${remaining} hueco${remaining === 1 ? '' : 's'}.${selected ? ' Ahora toca en un hueco.' : ''}`)}
           </p>
           ${!task.complete ? skipControl(task) : ''}
           ${task.complete && app.allowRetry()
-            ? `<button type="button" class="mt-link" data-action="reset-task" data-task="dragWords">${L('Praticar novamente', 'Practice again')}</button>`
+            ? `<button type="button" class="mt-link" data-action="reset-task" data-task="dragWords">${L('Praticar novamente', 'Practice again', 'Practicar de nuevo')}</button>`
             : ''}
         </div>
       </section>
@@ -141,8 +147,8 @@
     app.ui.dragToken = app.ui.dragToken === tokenId ? null : tokenId;
     app.render({ focusSelector: `[data-token-id="${CSS.escape(tokenId)}"]` });
     app.announce(app.ui.dragToken
-      ? L(`${termText(term)} selecionada. Escolha um espaço no texto.`, `${termText(term)} selected. Choose a blank in the text.`)
-      : L('Seleção cancelada.', 'Selection canceled.'));
+      ? L(`${termText(term)} selecionada. Escolha um espaço no texto.`, `${termText(term)} selected. Choose a blank in the text.`, `${termText(term)} seleccionada. Elige un hueco del texto.`)
+      : L('Seleção cancelada.', 'Selection canceled.', 'Selección cancelada.'));
   }
 
   function placeToken(app, slotId, tokenId) {
@@ -165,7 +171,7 @@
       if (slot) {
         slot.classList.add('is-wrong');
       }
-      app.announce(L(`${termText(chosen)} não pertence a este espaço. A palavra voltou ao banco.`, `${termText(chosen)} does not belong in this blank. The word went back to the bank.`));
+      app.announce(L(`${termText(chosen)} não pertence a este espaço. A palavra voltou ao banco.`, `${termText(chosen)} does not belong in this blank. The word went back to the bank.`, `${termText(chosen)} no pertenece a este hueco. La palabra volvió al banco.`));
       return;
     }
 
@@ -178,11 +184,11 @@
       app.completeActivity('dragWords', correctCount, { correct: correctCount, max: SLOT_COUNT, skipped: skippedCount });
       app.saveState();
       app.render({ focusSelector: '#drag-feedback' });
-      app.announce(L(`Atividade concluída: ${correctCount} de ${SLOT_COUNT}. A próxima página foi liberada.`, `Activity complete: ${correctCount} of ${SLOT_COUNT}. The next page is unlocked.`));
+      app.announce(L(`Atividade concluída: ${correctCount} de ${SLOT_COUNT}. A próxima página foi liberada.`, `Activity complete: ${correctCount} of ${SLOT_COUNT}. The next page is unlocked.`, `Actividad completada: ${correctCount} de ${SLOT_COUNT}. La página siguiente ya está disponible.`));
     } else {
       app.saveState();
       app.render({ focusSelector: '.mt-token' });
-      app.announce(L(`${termText(chosen)}: resposta correta.`, `${termText(chosen)}: correct answer.`));
+      app.announce(L(`${termText(chosen)}: resposta correta.`, `${termText(chosen)}: correct answer.`, `${termText(chosen)}: respuesta correcta.`));
     }
   }
 
@@ -208,9 +214,9 @@
     const tries = ready ? SKIP_AFTER_TRIES : Math.max(0, ...openIndexes(task).map((i) => wrongTries(task, i)));
     return UI.skipButton({
       action: 'skip-drag-gap', data: '', hintId: 'drag-skip-hint', ready, tries,
-      label: ready ? L(`Pular lacuna ${index + 1}`, `Skip blank ${index + 1}`) : L('Pular lacuna', 'Skip blank'),
-      aria: ready ? L(`Pular a lacuna ${index + 1} sem responder. Conta como erro.`, `Skip blank ${index + 1} without answering. It counts as a mistake.`) : L('Pular lacuna', 'Skip blank'),
-      scope: L('em uma lacuna', 'on one blank')
+      label: ready ? L(`Pular lacuna ${index + 1}`, `Skip blank ${index + 1}`, `Saltar hueco ${index + 1}`) : L('Pular lacuna', 'Skip blank', 'Saltar hueco'),
+      aria: ready ? L(`Pular a lacuna ${index + 1} sem responder. Conta como erro.`, `Skip blank ${index + 1} without answering. It counts as a mistake.`, `Saltar el hueco ${index + 1} sin responder. Cuenta como error.`) : L('Pular lacuna', 'Skip blank', 'Saltar hueco'),
+      scope: L('em uma lacuna', 'on one blank', 'en un hueco')
     });
   }
 
@@ -243,14 +249,15 @@
     app.render({ focusSelector: '#drag-feedback' });
     const answer = skippedTerm(index);
     app.announce(L(`Lacuna ${index + 1} pulada. Conta como erro.${answer ? ` A resposta era ${termText(answer)}.` : ''}`,
-      `Blank ${index + 1} skipped. It counts as a mistake.${answer ? ` The answer was ${termText(answer)}.` : ''}`));
+      `Blank ${index + 1} skipped. It counts as a mistake.${answer ? ` The answer was ${termText(answer)}.` : ''}`,
+      `Hueco ${index + 1} omitido. Cuenta como error.${answer ? ` La respuesta era ${termText(answer)}.` : ''}`));
   }
 
   const page = {
     id: 2,
-    get short() { return L('Vocabulário', 'Vocabulary'); },
-    get title() { return L('As palavras do magnetismo', 'The words of magnetism'); },
-    get unlockHint() { return L('Complete as cinco lacunas para liberar a próxima página.', 'Fill in the five blanks to unlock the next page.'); },
+    get short() { return L('Vocabulário', 'Vocabulary', 'Vocabulario'); },
+    get title() { return L('As palavras do magnetismo', 'The words of magnetism', 'Las palabras del magnetismo'); },
+    get unlockHint() { return L('Complete as cinco lacunas para liberar a próxima página.', 'Fill in the five blanks to unlock the next page.', 'Completa los cinco huecos para desbloquear la página siguiente.'); },
     task: 'dragWords',
     render,
     reset(app) {

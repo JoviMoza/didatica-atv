@@ -49,6 +49,25 @@
 .mt-details { padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--card); }
 .mt-details summary { font-weight: 700; cursor: pointer; }
 .mt-details[open] summary { margin-bottom: 0.75rem; }
+
+/* "Como jogar", placed right above the table. Starts open: a student who
+   meets this game for the first time should read it before playing, and
+   it can still be collapsed once the rules are clear. */
+.mt-howto { border-color: var(--primary); }
+.mt-howto__body { display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.95rem; }
+/* Steps use the same numbered badges as the intro checklist, which live in
+   css/pages/intro.css as .mt-howto. Here that class means "details block",
+   so the list markers are suppressed explicitly: leaving both on draws the
+   native number and the badge on top of each other. */
+/* Steps reuse the numbered-badge pattern from the intro checklist
+   (css/pages/intro.css, class .mt-howto). The counters live in the
+   ::before pseudo-element, so a plain <ol> must reset its own markers or
+   both numbers are drawn on top of each other. */
+.mt-howto__steps { display: flex; flex-direction: column; gap: 0.45rem; margin: 0; padding-left: 0; list-style: none; counter-reset: howto; }
+.mt-howto__steps li { position: relative; padding-left: 2rem; counter-increment: howto; }
+/* The score rule is the part students get wrong most (they expect one
+   point per pair), so it gets its own emphasis. */
+.mt-howto__score { padding: 0.6rem 0.75rem; border-radius: var(--radius-sm); background: var(--primary-soft); }
 .mt-details--flat { padding: 0.6rem 0 0; border: 0; border-top: 1px solid var(--border); border-radius: 0; }
 
 .mt-matching { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }

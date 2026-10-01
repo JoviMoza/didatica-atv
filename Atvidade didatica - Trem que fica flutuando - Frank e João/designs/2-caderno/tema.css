@@ -88,7 +88,7 @@
 :where(.h5p-mt) .mt-tab,
 :where(.h5p-mt) .mt-a11y-btn,
 :where(.h5p-mt) .mt-lang,
-:where(.h5p-mt) .mt-lang__btn { border-radius: var(--radius-sm); }
+:where(.h5p-mt) .mt-lang__toggle { border-radius: var(--radius-sm); }
 :where(.h5p-mt) .mt-nav { border-top: 2px solid var(--border); background: rgba(255, 253, 247, 0.95); }
 
 /* ---------- surfaces: paper cards with a red margin ---------- */

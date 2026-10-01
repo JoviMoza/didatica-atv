@@ -2,15 +2,20 @@
   'use strict';
 
   /* ------------------------------------------------------------------ *
-   * Magnet lab: four bar magnets, one in each corner of the stage.
-   * Angles are in degrees, clockwise, 0° = north pole pointing up.
-   * Each magnet is modelled as a pair of magnetic "charges" (N = +1,
-   * S = −1) with 1/r² falloff, which is enough to draw textbook field
-   * lines and to evaluate the superposition at the centre of the stage.
-   * Pure functions only: the page module (pages/03-magnet-lab.js) draws.
+   * Magnet lab: bar magnets laid out equidistantly on a circle around
+   * the stage, from MAGNET_MIN to MAGNET_MAX of them (the student adds
+   * one at a time). Angles are in degrees, clockwise, 0° = north pole
+   * pointing up. Each magnet is modelled as a pair of magnetic
+   * "charges" (N = +1, S = −1) with 1/r² falloff, which is enough to
+   * draw textbook field lines and to evaluate the superposition at the
+   * centre of the stage. Pure functions only: the page module
+   * (pages/03-magnet-lab.js) draws.
    * ------------------------------------------------------------------ */
 
-  const normalizeAngle = H5P.MagnetismoTransporte.Storage.normalizeAngle;
+  const Storage = H5P.MagnetismoTransporte.Storage;
+  const normalizeAngle = Storage.normalizeAngle;
+  const MAGNET_MIN = Storage.MAGNET_MIN;
+  const MAGNET_MAX = Storage.MAGNET_MAX;
   const I18n = H5P.MagnetismoTransporte.I18n;
   const L = I18n.L;
 
@@ -18,26 +23,22 @@
     width: 800,
     height: 520,
     center: { x: 400, y: 260 },
+    // The magnets sit on this ellipse: equidistant by angle, which keeps
+    // them clear of each other and of the centre probe at any count.
+    radiusX: 268,
+    radiusY: 172,
     poleOffset: 40,
     magnetLength: 116,
     magnetWidth: 44,
     step: 15,
-    // `name` follows the interface language ("Ímã superior esquerdo" /
-    // "top left magnet").
-    positions: [
-      { x: 140, y: 118, get name() { return L('superior esquerdo', 'top left'); } },
-      { x: 660, y: 118, get name() { return L('superior direito', 'top right'); } },
-      { x: 140, y: 402, get name() { return L('inferior esquerdo', 'bottom left'); } },
-      { x: 660, y: 402, get name() { return L('inferior direito', 'bottom right'); } }
-    ]
+    min: MAGNET_MIN,
+    max: MAGNET_MAX
   };
-
-  // Below this share of the reference field, the centre counts as "Nulo".
-  const NULL_PERCENT = 8;
 
   const DIRECTION_NAMES = {
     'pt-BR': ['para cima', 'para cima e à direita', 'para a direita', 'para baixo e à direita', 'para baixo', 'para baixo e à esquerda', 'para a esquerda', 'para cima e à esquerda'],
-    'en-US': ['up', 'up and to the right', 'to the right', 'down and to the right', 'down', 'down and to the left', 'to the left', 'up and to the left']
+    'en-US': ['up', 'up and to the right', 'to the right', 'down and to the right', 'down', 'down and to the left', 'to the left', 'up and to the left'],
+    'es-ES': ['hacia arriba', 'hacia arriba y a la derecha', 'hacia la derecha', 'hacia abajo y a la derecha', 'hacia abajo', 'hacia abajo y a la izquierda', 'hacia la izquierda', 'hacia arriba y a la izquierda']
   };
 
   function angleToDirection(angle) {
@@ -45,10 +46,32 @@
     return names[Math.round(normalizeAngle(angle) / 45) % 8];
   }
 
+  // Positions of `count` magnets, equidistant by angle on the ellipse.
+  // Index 0 starts at the top and goes clockwise, so the picture never
+  // depends on the order the magnets were added.
+  function positions(count) {
+    const total = Math.max(MAGNET_MIN, Math.min(MAGNET_MAX, Math.round(Number(count) || MAGNET_MIN)));
+    return Array.from({ length: total }, (_, index) => {
+      const degrees = (360 / total) * index - 90;
+      const radians = degrees * Math.PI / 180;
+      // Numbering is positional, so it stays correct as magnets are added.
+      // The page module builds the visible name in the interface language.
+      return {
+        x: LAB.center.x + Math.cos(radians) * LAB.radiusX,
+        y: LAB.center.y + Math.sin(radians) * LAB.radiusY,
+        index
+      };
+    });
+  }
+
   function magnetPoles(angles) {
+    const placed = positions((angles || []).length);
     const poles = [];
     angles.forEach((degrees, index) => {
-      const position = LAB.positions[index];
+      const position = placed[index];
+      if (!position) {
+        return;
+      }
       const radians = degrees * Math.PI / 180;
       const dx = Math.sin(radians);
       const dy = -Math.cos(radians);
@@ -83,6 +106,9 @@
     const margin = 24;
     angles.forEach((degrees, index) => {
       const north = poles[index * 2];
+      if (!north) {
+        return;
+      }
       const heading = (degrees - 90) * Math.PI / 180;
       for (let k = 0; k < seeds; k += 1) {
         const spread = -1.45 + (2.9 * k) / (seeds - 1);
@@ -122,10 +148,19 @@
     return fieldAt(magnetPoles(angles), LAB.center.x, LAB.center.y);
   }
 
-  const REFERENCE_FIELD = (function () {
-    const field = centerField([0, 0, 0, 0]);
-    return Math.hypot(field.x, field.y) || 1;
-  })();
+  // Reference field for the qualitative meter. With every N pole pointing
+  // the same way, the centre field grows with the number of magnets, so
+  // each count is measured against its own reference: the meter then means
+  // "strong for this many magnets" at any count.
+  const REFERENCE_FIELDS = {};
+  function referenceField(count) {
+    const total = Math.max(MAGNET_MIN, Math.min(MAGNET_MAX, Math.round(Number(count) || MAGNET_MIN)));
+    if (REFERENCE_FIELDS[total] === undefined) {
+      const field = centerField(new Array(total).fill(0));
+      REFERENCE_FIELDS[total] = Math.hypot(field.x, field.y) || 1;
+    }
+    return REFERENCE_FIELDS[total];
+  }
 
   function angularDistance(a, b) {
     const diff = Math.abs(normalizeAngle(a) - normalizeAngle(b));
@@ -133,10 +168,13 @@
   }
 
   function isAligned(angles) {
-    return angles.every((angle) => angularDistance(angle, angles[0]) <= 8);
+    return angles.length > 1 && angles.every((angle) => angularDistance(angle, angles[0]) <= 8);
   }
 
   function alignmentPercent(angles) {
+    if (!angles.length) {
+      return 0;
+    }
     let x = 0;
     let y = 0;
     angles.forEach((angle) => {
@@ -148,12 +186,16 @@
 
   function centerFieldPercent(angles) {
     const field = centerField(angles);
-    return Math.round((Math.hypot(field.x, field.y) / REFERENCE_FIELD) * 100);
+    return Math.round((Math.hypot(field.x, field.y) / referenceField(angles.length)) * 100);
   }
+
+  // Below this share of the reference field, the centre counts as "Nulo".
+  const NULL_PERCENT = 8;
 
   H5P.MagnetismoTransporte.Physics = {
     LAB,
     NULL_PERCENT,
+    positions,
     angleToDirection,
     magnetPoles,
     fieldAt,

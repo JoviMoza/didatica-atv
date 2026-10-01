@@ -132,7 +132,7 @@
         "name": "reviewAlwaysOpen",
         "type": "boolean",
         "label": "Revisão estendida disponível desde o início",
-        "description": "Desativado: a aba abre quando o aluno termina a página 7.",
+        "description": "Desativado: a aba abre quando o aluno termina a última página (9).",
         "default": false
       },
       {
@@ -153,10 +153,20 @@
         "name": "language",
         "type": "select",
         "label": "Idioma inicial da interface",
-        "description": "O aluno pode trocar a qualquer momento pelo botão PT-BR / EN-US no topo; a escolha fica salva. Os textos deste editor são em português; a versão em inglês fica em js/data/params-en.js.",
+        "description": "O aluno pode trocar a qualquer momento pelo botão único “Língua” no topo; a escolha fica salva. Os textos deste editor são em português; as traduções ficam em js/data/params-en.js e js/data/params-es.js.",
         "options": [
-          { "value": "pt-BR", "label": "Português (Brasil)" },
-          { "value": "en-US", "label": "English (US)" }
+          {
+            "value": "pt-BR",
+            "label": "Português (Brasil)"
+          },
+          {
+            "value": "en-US",
+            "label": "English (US)"
+          },
+          {
+            "value": "es-ES",
+            "label": "Español (España)"
+          }
         ],
         "default": "pt-BR"
       },

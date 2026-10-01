@@ -90,34 +90,77 @@
     const results = app.ui.matching || {};
     return `
       <details class="mt-details" ${results.checked ? 'open' : ''}>
-        <summary>${L('Prefere associar sem cartas? (alternativa acessível)', 'Prefer matching without cards? (accessible alternative)')}</summary>
-        <p class="mt-muted">${L('Mesmo gabarito e mesma pontuação do jogo da memória.', 'Same answers and same scoring as the memory game.')}</p>
+        <summary>${L('Prefere associar sem cartas? (alternativa acessível)', 'Prefer matching without cards? (accessible alternative)', '¿Prefieres asociar sin cartas? (alternativa accesible)')}</summary>
+        <p class="mt-muted">${L('Mesmo gabarito e mesma pontuação do jogo da memória.', 'Same answers and same scoring as the memory game.', 'Las mismas respuestas y la misma puntuación que el juego de memoria.')}</p>
         <form class="mt-matching" onsubmit="return false;">
           ${PAIRS.map((pair, pairIndex) => memory.skipped.includes(pairIndex) ? `
             <label>
               <span>${escapeHtml(pair.shortLabel)}</span>
               <select disabled><option selected>${escapeHtml(pair.label)}</option></select>
-              <span class="mt-small">${L('Pulado', 'Skipped')}</span>
+              <span class="mt-small">${L('Pulado', 'Skipped', 'Omitido')}</span>
             </label>
           ` : `
             <label>
               <span>${escapeHtml(pair.shortLabel)}</span>
               <select data-role="matching-select" data-pair-id="${escapeHtml(pair.id)}">
-                <option value="">${L('Escolher…', 'Choose…')}</option>
+                <option value="">${L('Escolher…', 'Choose…', 'Elegir…')}</option>
                 ${PAIRS.map((candidate) => {
                   // Each answer can be used only once across the rows.
                   const usedElsewhere = selected[pair.id] !== candidate.id && Object.values(selected).includes(candidate.id);
                   return `<option value="${escapeHtml(candidate.id)}" ${selected[pair.id] === candidate.id ? 'selected' : ''} ${usedElsewhere ? 'disabled' : ''}>${escapeHtml(candidate.label)}</option>`;
                 }).join('')}
               </select>
-              <span class="mt-small">${results.checked && selected[pair.id] ? (selected[pair.id] === pair.id ? L('✓ Correta', '✓ Correct') : L('✕ Revise', '✕ Review')) : ''}</span>
+              <span class="mt-small">${results.checked && selected[pair.id] ? (selected[pair.id] === pair.id ? L('✓ Correta', '✓ Correct', '✓ Correcta') : L('✕ Revise', '✕ Review', '✕ Revisa')) : ''}</span>
             </label>
           `).join('')}
           <div class="mt-card__foot">
             <p id="matching-status" class="mt-feedback" role="status" tabindex="-1">${escapeHtml(results.message || '')}</p>
-            <button type="button" class="mt-btn mt-btn--primary" data-action="check-matching">${L('Verificar associações', 'Check matches')}</button>
+            <button type="button" class="mt-btn mt-btn--primary" data-action="check-matching">${L('Verificar associações', 'Check matches', 'Verificar asociaciones')}</button>
           </div>
         </form>
+      </details>
+    `;
+  }
+
+  /* --------------------------- how to play --------------------------- */
+
+  /* Didactic explanation placed right above the table: what the game is,
+   * how a round works, why the score is hits ÷ tries and what the buttons
+   * do. Students meet this game without any prior instruction, so the
+   * rules are stated before the first card, not after a failed attempt. */
+  function howToPlay(app) {
+    const memory = app.state.tasks.memory;
+    // Once the game is over, the rules would only take space away from the
+    // result; the student has already played.
+    if (memory.complete) {
+      return '';
+    }
+    return `
+      <details class="mt-details mt-howto" open>
+        <summary>${L('Como jogar', 'How to play', 'Cómo jugar')}</summary>
+        <div class="mt-howto__body">
+          <p>${L(
+            'Cada par é uma imagem do MagLev-Cobra e a descrição do que ela mostra. O objetivo é ligar os dois lados de cada par.',
+            'Each pair is a picture of MagLev-Cobra and the description of what it shows. Your goal is to match the two sides of each pair.',
+            'Cada par es una imagen del MagLev-Cobra y la descripción de lo que muestra. Tu objetivo es unir los dos lados de cada par.'
+          )}</p>
+          <ol class="mt-howto__steps">
+            <li>${L('Escolha <strong>duas</strong> cartas viradas para baixo.', 'Choose <strong>two</strong> face-down cards.', 'Elige <strong>dos</strong> cartas boca abajo.')}</li>
+            <li>${L('Se forem o mesmo par, elas ficam viradas e você ganha o par.', 'If they are the same pair, they stay face up and you win the pair.', 'Si son el mismo par, se quedan descubiertas y ganas el par.')}</li>
+            <li>${L('Se não combinarem, elas voltam a ficar viradas para baixo.', 'If they do not match, they flip face down again.', 'Si no combinan, vuelven a quedar boca abajo.')}</li>
+            <li>${L('Repita até encontrar os seis pares.', 'Repeat until you find all six pairs.', 'Repite hasta encontrar los seis pares.')}</li>
+          </ol>
+          <p class="mt-howto__score">${L(
+            `<strong>Como a pontuação é calculada:</strong> pontos = acertos ÷ tentativas. Encontrar os pares de primeira vale mais do que encontrar depois de muitas tentativas, mesmo que você ache todos.`,
+            `<strong>How the score works:</strong> points = hits ÷ tries. Finding pairs on the first try is worth more than finding them after many tries, even if you find all of them.`,
+            `<strong>Cómo se calcula la puntuación:</strong> puntos = aciertos ÷ intentos. Encontrar los pares a la primera vale más que encontrarlos después de muchos intentos, aunque los encuentres todos.`
+          )}</p>
+          <p class="mt-small mt-muted">${L(
+            '<strong>Prefere sem cartas?</strong> Abaixo do jogo há uma lista para associar imagem e descrição com o teclado. Dá a mesma pontuação.',
+            '<strong>Prefer no cards?</strong> Below the game there is a list for matching image and description with the keyboard. It gives the same score.',
+            '<strong>¿Prefieres sin cartas?</strong> Debajo del juego hay una lista para asociar imagen y descripción con el teclado. Da la misma puntuación.'
+          )}</p>
+        </div>
       </details>
     `;
   }
@@ -137,12 +180,12 @@
         ? `<img src="${escapeHtml(app.assetPath(`images/${pair.image}`))}" alt="${escapeHtml(pair.alt)}">`
         : `<span class="mt-mcard__label">${escapeHtml(pair.label)}</span>`;
       const accessibleLabel = isSkipped
-        ? `${describe(cardId)}. ${L('Par pulado.', 'Pair skipped.')}`
+        ? `${describe(cardId)}. ${L('Par pulado.', 'Pair skipped.', 'Par omitido.')}`
         : isMatched
-          ? `${describe(cardId)}. ${L('Par encontrado.', 'Pair found.')}`
+          ? `${describe(cardId)}. ${L('Par encontrado.', 'Pair found.', 'Par encontrado.')}`
           : isOpen
-          ? `${describe(cardId)}. ${L('Carta aberta.', 'Card face up.')}`
-          : L(`Carta virada ${position + 1} de ${CARD_COUNT}.`, `Face-down card ${position + 1} of ${CARD_COUNT}.`);
+          ? `${describe(cardId)}. ${L('Carta aberta.', 'Card face up.', 'Carta descubierta.')}`
+          : L(`Carta virada ${position + 1} de ${CARD_COUNT}.`, `Face-down card ${position + 1} of ${CARD_COUNT}.`, `Carta boca abajo ${position + 1} de ${CARD_COUNT}.`);
       const wrongPair = memory.open.length === 2 && isOpen;
       return `
         <button type="button" class="mt-mcard ${visible ? 'is-open' : ''} ${isMatched ? 'is-matched' : ''} ${isSkipped ? 'is-skipped' : ''} ${wrongPair ? 'is-wrong' : ''}"
@@ -157,35 +200,36 @@
     }).join('');
 
     section.innerHTML = `
-      ${app.heading(page.id, L('Conheça o projeto brasileiro e associe cada imagem ao seu conceito.', 'Meet the Brazilian project and match each image to its concept.'), L('Pontos = acertos ÷ tentativas', 'Points = hits ÷ tries'))}
-      ${app.video('cobra', media.cobraVideoUrl, media.cobraVideoTitle || '01. Maglev Cobra', 63, L('O trecho começa em 1:03.', 'The clip starts at 1:03.'))}
+      ${app.heading(page.id, L('Conheça o projeto brasileiro e associe cada imagem ao seu conceito.', 'Meet the Brazilian project and match each image to its concept.', 'Conoce el proyecto brasileño y asocia cada imagen con su concepto.'), L('Pontos = acertos ÷ tentativas', 'Points = hits ÷ tries', 'Puntos = aciertos ÷ intentos'))}
+      ${app.video('cobra', media.cobraVideoUrl, media.cobraVideoTitle || '01. Maglev Cobra', 63, L('O trecho começa em 1:03.', 'The clip starts at 1:03.', 'El clip empieza en 1:03.'))}
       <section class="mt-card mt-memory" aria-labelledby="memory-title">
         <div class="mt-card__head">
-          <h2 id="memory-title">${L('Encontre os seis pares', 'Find the six pairs')}</h2>
-          <span class="mt-chip ${memory.complete ? 'mt-chip--success' : ''}">${L(`${memory.matched.length} / 6 pares · ${memory.moves} tentativas`, `${memory.matched.length} / 6 pairs · ${memory.moves} tries`)}${memory.skipped.length ? L(` · ${memory.skipped.length} pulado${memory.skipped.length === 1 ? '' : 's'}`, ` · ${memory.skipped.length} skipped`) : ''}</span>
+          <h2 id="memory-title">${L('Encontre os seis pares', 'Find the six pairs', 'Encuentra los seis pares')}</h2>
+          <span class="mt-chip ${memory.complete ? 'mt-chip--success' : ''}">${L(`${memory.matched.length} / 6 pares · ${memory.moves} tentativas`, `${memory.matched.length} / 6 pairs · ${memory.moves} tries`, `${memory.matched.length} / 6 pares · ${memory.moves} intentos`)}${memory.skipped.length ? L(` · ${memory.skipped.length} pulado${memory.skipped.length === 1 ? '' : 's'}`, ` · ${memory.skipped.length} skipped`, ` · ${memory.skipped.length} omitido${memory.skipped.length === 1 ? '' : 's'}`) : ''}</span>
         </div>
         <p id="memory-status" class="mt-feedback ${memory.complete ? 'is-success' : memory.open.length === 2 ? 'is-error' : ''}" role="status" tabindex="-1">
           ${memory.complete
-            ? L('✓ Jogo concluído! A próxima página foi liberada.', '✓ Game complete! The next page is unlocked.')
+            ? L('✓ Jogo concluído! A próxima página foi liberada.', '✓ Game complete! The next page is unlocked.', '✓ ¡Juego completado! La página siguiente está desbloqueada.')
             : memory.open.length === 2
-              ? L('Essas duas cartas não formam um par. Clique em “Virar de volta” para tentar outras.', 'These two cards are not a pair. Click “Flip back” to try others.')
-              : L('Vire duas cartas: uma imagem e a descrição que combina com ela.', 'Flip two cards: an image and the description that matches it.')}
+              ? L('Essas duas cartas não formam um par. Clique em “Virar de volta” para tentar outras.', 'These two cards are not a pair. Click “Flip back” to try others.', 'Estas dos cartas no forman un par. Pulsa en «Volver a bajar» para probar otras.')
+              : L('Vire duas cartas: uma imagem e a descrição que combina com ela.', 'Flip two cards: an image and the description that matches it.', 'Voltea dos cartas: una imagen y la descripción que combina con ella.')}
         </p>
-        <div class="mt-memory-grid" role="group" aria-label="${L('Doze cartas do jogo da memória', 'Twelve memory game cards')}">${cardHtml}</div>
+        ${howToPlay(app)}
+        <div class="mt-memory-grid" role="group" aria-label="${L('Doze cartas do jogo da memória', 'Twelve memory game cards', 'Doce cartas del juego de memoria')}">${cardHtml}</div>
         <div class="mt-card__foot mt-card__foot--center">
-          ${memory.open.length === 2 ? `<button type="button" class="mt-btn mt-btn--primary" data-action="hide-mismatch">${L('Virar de volta', 'Flip back')}</button>` : ''}
-          ${!memory.complete ? `<button type="button" class="mt-btn mt-btn--secondary" data-action="skip-memory-pair" aria-label="${L('Pular um par sem encontrá-lo. Conta como erro e mostra onde ele estava.', 'Skip a pair without finding it. It counts as a mistake and shows where it was.')}">${L('Pular par', 'Skip pair')}</button>` : ''}
-          ${!memory.complete && memory.moves > 0 ? `<button type="button" class="mt-link" data-action="reset-task" data-task="memory">${L('Embaralhar e recomeçar', 'Shuffle and restart')}</button>` : ''}
-          ${memory.complete ? `<button type="button" class="mt-btn mt-btn--primary" data-action="next-page">${L('Continuar', 'Continue')} →</button>` : ''}
+          ${memory.open.length === 2 ? `<button type="button" class="mt-btn mt-btn--primary" data-action="hide-mismatch">${L('Virar de volta', 'Flip back', 'Volver a bajar')}</button>` : ''}
+          ${!memory.complete ? `<button type="button" class="mt-btn mt-btn--secondary" data-action="skip-memory-pair" aria-label="${L('Pular um par sem encontrá-lo. Conta como erro e mostra onde ele estava.', 'Skip a pair without finding it. It counts as a mistake and shows where it was.', 'Saltar un par sin encontrarlo. Cuenta como error y muestra dónde estaba.')}">${L('Pular par', 'Skip pair', 'Saltar par')}</button>` : ''}
+          ${!memory.complete && memory.moves > 0 ? `<button type="button" class="mt-link" data-action="reset-task" data-task="memory">${L('Embaralhar e recomeçar', 'Shuffle and restart', 'Barajar y empezar de nuevo')}</button>` : ''}
+          ${memory.complete ? `<button type="button" class="mt-btn mt-btn--primary" data-action="next-page">${L('Continuar', 'Continue', 'Continuar')} →</button>` : ''}
         </div>
       </section>
       ${renderMatching(app)}
       <aside class="mt-callout mt-callout--soft">
-        ${L('<strong>Precisão histórica:</strong> as cartas de energia solar e emissão zero representam possibilidades de um sistema sustentável; não indicam que esses recursos já estejam instalados no protótipo.', '<strong>Historical accuracy:</strong> the solar energy and zero emission cards show possibilities for a sustainable system; they do not mean these features are already installed on the prototype.')}
+        ${L('<strong>Precisão histórica:</strong> as cartas de energia solar e emissão zero representam possibilidades de um sistema sustentável; não indicam que esses recursos já estejam instalados no protótipo.', '<strong>Historical accuracy:</strong> the solar energy and zero emission cards show possibilities for a sustainable system; they do not mean these features are already installed on the prototype.', '<strong>Precisión histórica:</strong> las cartas de energía solar y emisión cero representan posibilidades de un sistema sostenible; no indican que esos recursos ya estén instalados en el prototipo.')}
       </aside>
       <details class="mt-details">
-        <summary>${L('Créditos e licenças das imagens', 'Image credits and licenses')}</summary>
-        <p><strong>MaglevCobra</strong>, Cristina Indio do Brasil/Agência Brasil, CC BY 3.0 BR. <strong>YBCO-modified</strong>, Puppy8800, CC BY-SA 3.0. <strong>Magnet 4</strong>, Peter Nussbaumer, CC BY-SA 3.0. <strong>Cooling superconductor by liquid nitrogen</strong>, Ainur physicist, CC BY 4.0. ${L('Os ícones de energia solar e sustentabilidade são ilustrações vetoriais originais.', 'The solar energy and sustainability icons are original vector illustrations.')}</p>
+        <summary>${L('Créditos e licenças das imagens', 'Image credits and licenses', 'Créditos y licencias de las imágenes')}</summary>
+        <p><strong>MaglevCobra</strong>, Cristina Indio do Brasil/Agência Brasil, CC BY 3.0 BR. <strong>YBCO-modified</strong>, Puppy8800, CC BY-SA 3.0. <strong>Magnet 4</strong>, Peter Nussbaumer, CC BY-SA 3.0. <strong>Cooling superconductor by liquid nitrogen</strong>, Ainur physicist, CC BY 4.0. ${L('Os ícones de energia solar e sustentabilidade são ilustrações vetoriais originais.', 'The solar energy and sustainability icons are original vector illustrations.', 'Los iconos de energía solar y sostenibilidad son ilustraciones vectoriales originales.')}</p>
       </details>
     `;
   }
@@ -200,7 +244,7 @@
     if (memory.open.length === 1) {
       app.saveState();
       app.render({ focusSelector: '.mt-memory-grid button:not(:disabled)' });
-      app.announce(L(`Primeira carta: ${describe(cardId)}. Escolha a segunda.`, `First card: ${describe(cardId)}. Choose the second one.`));
+      app.announce(L(`Primeira carta: ${describe(cardId)}. Escolha a segunda.`, `First card: ${describe(cardId)}. Choose the second one.`, `Primera carta: ${describe(cardId)}. Elige la segunda.`));
       return;
     }
 
@@ -214,7 +258,7 @@
       if (!finishIfSettled(app)) {
         app.saveState();
         app.render({ focusSelector: '.mt-memory-grid button:not(:disabled)' });
-        app.announce(L(`Par correto: ${describe(secondId)}. ${memory.matched.length} de 6 pares.`, `Correct pair: ${describe(secondId)}. ${memory.matched.length} of 6 pairs.`));
+        app.announce(L(`Par correto: ${describe(secondId)}. ${memory.matched.length} de 6 pares.`, `Correct pair: ${describe(secondId)}. ${memory.matched.length} of 6 pairs.`, `Par correcto: ${describe(secondId)}. ${memory.matched.length} de 6 pares.`));
       }
       return;
     }
@@ -224,7 +268,7 @@
     memory.mismatches[secondPair] = Number(memory.mismatches[secondPair] || 0) + 1;
     app.saveState();
     app.render({ focusSelector: '[data-action="hide-mismatch"]' });
-    app.announce(L(`Segunda carta: ${describe(secondId)}. Não formam um par.`, `Second card: ${describe(secondId)}. They are not a pair.`));
+    app.announce(L(`Segunda carta: ${describe(secondId)}. Não formam um par.`, `Second card: ${describe(secondId)}. They are not a pair.`, `Segunda carta: ${describe(secondId)}. No forman un par.`));
   }
 
   // Ends the card game once every pair was found or skipped. Skips were
@@ -250,8 +294,9 @@
     app.render({ focusSelector: '#memory-status' });
     app.announce(memory.skipped.length
       ? L(`Jogo concluído: ${memory.matched.length} de 6 pares encontrados e ${memory.skipped.length} pulado${memory.skipped.length === 1 ? '' : 's'}. A próxima página foi liberada.`,
-        `Game complete: ${memory.matched.length} of 6 pairs found and ${memory.skipped.length} skipped. The next page is unlocked.`)
-      : L('Todos os seis pares foram encontrados! A próxima página foi liberada.', 'All six pairs were found! The next page is unlocked.'));
+        `Game complete: ${memory.matched.length} of 6 pairs found and ${memory.skipped.length} skipped. The next page is unlocked.`,
+        `Juego completado: ${memory.matched.length} de 6 pares encontrados y ${memory.skipped.length} omitido${memory.skipped.length === 1 ? '' : 's'}. La página siguiente está desbloqueada.`)
+      : L('Todos os seis pares foram encontrados! A próxima página foi liberada.', 'All six pairs were found! The next page is unlocked.', '¡Todos los seis pares se han encontrado! La página siguiente está desbloqueada.'));
     return true;
   }
 
@@ -287,7 +332,8 @@
     app.saveState();
     app.render({ focusSelector: '[data-action="skip-memory-pair"]' });
     app.announce(L(`Par pulado. Conta como erro. O par era: ${pair.shortLabel} com “${pair.label}”.`,
-      `Pair skipped. It counts as a mistake. The pair was: ${pair.shortLabel} with “${pair.label}”.`));
+      `Pair skipped. It counts as a mistake. The pair was: ${pair.shortLabel} with “${pair.label}”.`,
+      `Par omitido. Cuenta como error. El par era: ${pair.shortLabel} con “${pair.label}”.`));
   }
 
   function checkMatching(app) {
@@ -298,7 +344,7 @@
     const answers = memory.matchingAnswers;
     const missing = PAIRS.filter((pair) => !answers[pair.id]);
     if (missing.length) {
-      app.ui.matching = { checked: true, message: L(`Faltam ${missing.length} escolha${missing.length === 1 ? '' : 's'}.`, `${missing.length} choice${missing.length === 1 ? '' : 's'} missing.`) };
+      app.ui.matching = { checked: true, message: L(`Faltam ${missing.length} escolha${missing.length === 1 ? '' : 's'}.`, `${missing.length} choice${missing.length === 1 ? '' : 's'} missing.`, `Faltan ${missing.length} elección${missing.length === 1 ? '' : 'es'}.`) };
       app.render({ focusSelector: '#matching-status' });
       app.announce(app.ui.matching.message);
       return;
@@ -310,7 +356,7 @@
     const playableCorrect = playable.filter((pair) => answers[pair.id] === pair.id);
     memory.matchingTries += playable.length;
     memory.matchingHits += playableCorrect.length;
-    app.ui.matching = { checked: true, message: L(`${correct.length} de 6 associações corretas.`, `${correct.length} of 6 matches correct.`) };
+    app.ui.matching = { checked: true, message: L(`${correct.length} de 6 associações corretas.`, `${correct.length} of 6 matches correct.`, `${correct.length} de 6 asociaciones correctas.`) };
     playable.filter((pair) => answers[pair.id] !== pair.id).forEach((pair) => app.recordConceptError(pair.concept, 1));
     if (correct.length === PAIRS.length) {
       memory.complete = true;
@@ -322,7 +368,7 @@
       });
       app.saveState();
       app.render({ focusSelector: '#memory-status' });
-      app.announce(L('Seis de seis! A próxima página foi liberada.', 'Six out of six! The next page is unlocked.'));
+      app.announce(L('Seis de seis! A próxima página foi liberada.', 'Six out of six! The next page is unlocked.', '¡Seis de seis! La página siguiente está desbloqueada.'));
     } else {
       app.saveState();
       app.render({ focusSelector: '#matching-status' });
@@ -332,9 +378,9 @@
 
   const page = {
     id: 5,
-    get short() { return L('Memória', 'Memory'); },
-    get title() { return L('MagLev-Cobra: jogo da memória', 'MagLev-Cobra: memory game'); },
-    get unlockHint() { return L('Encontre os seis pares para avançar.', 'Find the six pairs to move on.'); },
+    get short() { return L('Memória', 'Memory', 'Memoria'); },
+    get title() { return L('MagLev-Cobra: jogo da memória', 'MagLev-Cobra: memory game', 'MagLev-Cobra: juego de memoria'); },
+    get unlockHint() { return L('Encontre os seis pares para avançar.', 'Find the six pairs to move on.', 'Encuentra los seis pares para avanzar.'); },
     task: 'memory',
     init,
     reset(app) {
@@ -351,7 +397,7 @@
         app.state.tasks.memory.open = [];
         app.saveState();
         app.render({ focusSelector: '.mt-memory-grid button:not(:disabled)' });
-        app.announce(L('As duas cartas que não combinaram foram viradas de volta.', 'The two cards that did not match were flipped back.'));
+        app.announce(L('As duas cartas que não combinaram foram viradas de volta.', 'The two cards that did not match were flipped back.', 'Las dos cartas que no combinaron volvieron a quedar boca abajo.'));
       },
       'check-matching': checkMatching,
       'skip-memory-pair': skipPair

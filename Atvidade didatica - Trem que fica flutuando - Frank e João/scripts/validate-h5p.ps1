@@ -156,12 +156,18 @@ try {
         $secrets += @($authoring.singleChoice | ForEach-Object { $_.explanation })
         $secrets += @($authoring.trueFalse | ForEach-Object { $_.feedback })
         $secrets += @($authoring.lab.PSObject.Properties | ForEach-Object { $_.Value.success })
-        $englishPath = Join-Path $projectRoot "authoring/banco-de-questoes.en.json"
-        if (Test-Path -LiteralPath $englishPath -PathType Leaf) {
-            $english = Get-Content -LiteralPath $englishPath -Raw -Encoding UTF8 | ConvertFrom-Json
-            $secrets += @($english.singleChoice.PSObject.Properties | ForEach-Object { $_.Value.explanation })
-            $secrets += @($english.trueFalse.PSObject.Properties | ForEach-Object { $_.Value.feedback })
-            $secrets += @($english.lab.PSObject.Properties | ForEach-Object { $_.Value.success })
+        # Traduções: explicações e feedbacks também são gabarito em texto
+        # puro e não podem vazar para nenhum JS do pacote.
+        foreach ($translationPath in @(
+            "authoring/banco-de-questoes.en.json",
+            "authoring/banco-de-questoes.es.json"
+        )) {
+            $translationFile = Join-Path $projectRoot $translationPath
+            if (-not (Test-Path -LiteralPath $translationFile -PathType Leaf)) { continue }
+            $translation = Get-Content -LiteralPath $translationFile -Raw -Encoding UTF8 | ConvertFrom-Json
+            $secrets += @($translation.singleChoice.PSObject.Properties | ForEach-Object { $_.Value.explanation })
+            $secrets += @($translation.trueFalse.PSObject.Properties | ForEach-Object { $_.Value.feedback })
+            $secrets += @($translation.lab.PSObject.Properties | ForEach-Object { $_.Value.success })
         }
         $leaks = @($secrets | Where-Object { $_ -and $allJs.Contains([string]$_) })
         if ($leaks.Count -gt 0) {

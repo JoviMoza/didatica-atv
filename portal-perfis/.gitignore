@@ -14,3 +14,12 @@ desktop.ini
 .idea/
 *.tmp
 *.log
+
+# QRs de acesso. qr-professor.png É a credencial do professor: nunca enviar ao
+# aluno, nunca republicar. Aviso importante: estes dois arquivos JÁ estão
+# rastreados neste repositório (commit de 25/09/2026), então esta regra só vale
+# para arquivos novos — o .gitignore não faz unstage o que já está versionado. Para
+# parar de versioná-los de fato seria preciso `git rm --cached`, o que tira o
+# material de entrega do repositório. O link do professor já deve ser considerado
+# exposto e regenerado: POST /p/<token>/regerar ou python gerar-qrcodes.py.
+qr-*.png

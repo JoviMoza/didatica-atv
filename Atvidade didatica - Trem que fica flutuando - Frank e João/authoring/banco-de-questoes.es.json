@@ -1,0 +1,475 @@
+{
+  "_instrucoes": [
+    "Traducción al español (es-ES) de banco-de-questoes.json. Este archivo tampoco entra en el paquete .h5p.",
+    "Las claves son los ids del archivo en portugués. «options» debe tener las alternativas EN EL MISMO ORDEN que el archivo en portugués (el índice «correct» es el de allí).",
+    "dragWords.terms: id del término -> texto en español. «sentence» tiene un elemento más que los huecos, como en el original. Los artículos (el/la) van dentro del término, para no delatar la respuesta.",
+    "Un ítem sin traducción aparece en portugués en el modo Español. Después de editar, ejecuta scripts/build-h5p.ps1 (o scripts/gerar-banco.ps1)."
+  ],
+  "dragWords": {
+    "sentence": [
+      "Todo imán tiene dos ",
+      ": norte y sur. Los polos iguales se repelen y los polos distintos se atraen. Dentro del imán, miles de millones de diminutos imanes atómicos, agrupados en ",
+      ", se orientan en la misma dirección. Alrededor del imán existe un ",
+      ", que dibujamos con líneas que salen del polo norte y entran en el polo sur. Cuando una corriente eléctrica pasa por una bobina, esta se convierte en un ",
+      ", cuya fuerza se puede ajustar. En el tren Maglev, las bobinas del raíl cambian de polo sin parar y forman un ",
+      ", que atrae y repele al tren hacia delante."
+    ],
+    "terms": {
+      "polos": "polos",
+      "dominios": "dominios magnéticos",
+      "campo": "campo magnético",
+      "eletroima": "electroimán",
+      "motor-linear": "motor lineal",
+      "atrito": "fricción",
+      "roda": "una rueda"
+    }
+  },
+  "lab": {
+    "q1": {
+      "prompt": "En la posición inicial, todos los imanes apuntan el polo N hacia arriba salvo el último, que está tumbado de lado. ¿Qué provoca eso en el dibujo del campo?",
+      "options": [
+        "El patrón se vuelve asimétrico: cerca de ese imán las líneas toman otra dirección",
+        "Las líneas de campo de todos los imanes desaparecen",
+        "No cambia nada: la orientación de un imán no afecta al campo"
+      ],
+      "success": "Eso es. El campo en cada punto es la suma vectorial de las contribuciones de todos los imanes. Girar uno de ellos cambia la suya y todo el patrón pierde la simetría.",
+      "retry": "Todavía no. Observa las líneas azules cerca del imán que está tumbado de lado y compáralas con las de los demás. Usa «Posición inicial» si ya has girado algún imán."
+    },
+    "q2": {
+      "prompt": "Ahora que todos los imanes apuntan el polo N en el mismo sentido, ¿cómo ha quedado el campo?",
+      "options": [
+        "Simétrico y ordenado: las contribuciones se suman de forma regular",
+        "Las líneas de campo han desaparecido",
+        "El campo se ha anulado en todos los puntos"
+      ],
+      "success": "¡Exacto! Con los imanes alineados, el dibujo queda espejado y la flecha del centro apunta en el mismo sentido que los imanes. En un raíl Maglev, los imanes ordenados producen un campo regular a lo largo de toda la vía.",
+      "retry": "Mira otra vez: las líneas siguen ahí. Fíjate en la simetría entre la mitad izquierda y la derecha del dibujo y en la flecha amarilla del centro."
+    }
+  },
+  "singleChoice": {
+    "sc-polos-iguais": {
+      "question": "¿Qué ocurre cuando acercamos el polo norte de un imán al polo norte de otro imán?",
+      "options": ["Se repelen", "Se atraen", "No ocurre nada", "Los dos pierden el magnetismo"],
+      "explanation": "Los polos iguales se repelen y los distintos se atraen. Esa repulsión es lo que Iberê siente al empujar un imán contra el otro."
+    },
+    "sc-quebrar": {
+      "question": "Si partes un imán de barra por la mitad, ¿qué obtienes?",
+      "options": ["Dos imanes más pequeños, cada uno con polo norte y polo sur", "Una pieza solo con polo norte y otra solo con polo sur", "Dos piezas sin magnetismo alguno", "Un imán y un trozo de hierro común"],
+      "explanation": "Los polos no se separan: cada trozo se convierte en un imán completo, con norte y sur."
+    },
+    "sc-prego": {
+      "question": "¿Por qué un clavo de hierro común no se comporta como un imán?",
+      "options": ["Sus dominios magnéticos apuntan en todas las direcciones y se cancelan", "El hierro no tiene electrones", "El hierro nunca es atraído por los imanes", "El clavo es demasiado pequeño para tener magnetismo"],
+      "explanation": "En el hierro común los dominios están desordenados y uno cancela el efecto del otro. En un imán, están alineados."
+    },
+    "sc-neodimio": {
+      "question": "¿Qué hace que un imán de neodimio sea tan fuerte?",
+      "options": ["Sus dominios magnéticos están alineados en la misma dirección", "Almacena carga eléctrica", "Está hecho de un metal más pesado", "Hay que enchufarlo a la corriente"],
+      "explanation": "La alineación de miles de millones de diminutos imanes atómicos suma sus efectos y crea polos fuertes."
+    },
+    "sc-densidade": {
+      "question": "Al mirar las líneas de campo de un imán, ¿dónde es más intenso el campo?",
+      "options": ["Donde las líneas están más juntas entre sí", "Donde las líneas están más separadas", "Muy lejos del imán", "En todos los sitios por igual"],
+      "explanation": "Las líneas más juntas indican un campo más intenso. Por eso la fuerza crece tanto cuando los imanes están muy cerca."
+    },
+    "sc-sentido": {
+      "question": "Fuera del imán, las líneas de campo magnético…",
+      "options": ["salen del polo norte y entran en el polo sur", "salen del polo sur y entran en el polo norte", "solo existen alrededor del polo norte", "no tienen una dirección definida"],
+      "explanation": "Por convención, las líneas salen del norte y entran en el sur, por fuera del imán."
+    },
+    "sc-bussola": {
+      "question": "¿Para qué sirve una brújula en un experimento con imanes?",
+      "options": ["Mostrar la dirección del campo magnético en ese punto", "Medir la temperatura del imán", "Medir la masa del imán", "Crear un nuevo campo magnético"],
+      "explanation": "La aguja de la brújula es un imán diminuto que se alinea con el campo, como en el Laboratorio de imanes."
+    },
+    "sc-equilibrio": {
+      "question": "Para que un objeto quede quieto flotando en el aire, la fuerza magnética hacia arriba debe ser…",
+      "options": ["igual en módulo al peso del objeto", "mayor que el peso", "menor que el peso", "nula"],
+      "explanation": "Quedarse quieto significa fuerza resultante nula: la fuerza magnética hacia arriba cancela el peso hacia abajo."
+    },
+    "sc-earnshaw": {
+      "question": "¿Por qué un imán colocado sobre otro, con polos iguales enfrentados, se desliza hacia un lado en lugar de flotar quieto?",
+      "options": ["Solo con imanes permanentes no existe equilibrio estable (teorema de Earnshaw)", "Porque desaparece la gravedad", "Porque los dos imanes se atraen", "Porque el aire empuja el imán de arriba"],
+      "explanation": "Samuel Earnshaw demostró que los imanes permanentes por sí solos no pueden sujetar un objeto quieto: siempre encuentra una forma de escaparse hacia un lado."
+    },
+    "sc-vantagem": {
+      "question": "¿Cuál es la gran ventaja de un electroimán frente a un imán permanente?",
+      "options": ["Su fuerza se puede ajustar o apagar cambiando la corriente eléctrica", "Nunca consume energía", "Siempre pesa menos", "No produce campo magnético"],
+      "explanation": "Al cambiar la corriente, la fuerza cambia al instante. Así es como los trenes Maglev corrigen su posición."
+    },
+    "sc-oersted": {
+      "question": "¿Qué observó Oersted en su famoso experimento?",
+      "options": ["La corriente eléctrica por un cable desvía la aguja de una brújula", "Los imanes pierden fuerza con el calor", "Los imanes atraen todos los metales", "La luz es una onda"],
+      "explanation": "Oersted descubrió que la corriente eléctrica produce un campo magnético: es el puente entre la electricidad y el magnetismo."
+    },
+    "sc-eds": {
+      "question": "En el Maglev japonés (sistema EDS), ¿qué hace que el tren se eleve?",
+      "options": ["El movimiento de los imanes del tren induce corrientes en las bobinas del raíl, que lo repelen", "Pequeños motores a reacción bajo el tren", "Ruedas muy finas", "Aire comprimido soplado por el raíl"],
+      "explanation": "El imán en movimiento induce una corriente en las bobinas (ley de Faraday). Esa corriente crea un campo que empuja el tren hacia arriba."
+    },
+    "sc-rodas": {
+      "question": "¿Por qué el Maglev japonés usa ruedas de goma al principio del viaje?",
+      "options": ["Porque solo levita después de ganar velocidad, alrededor de 100-150 km/h", "Para ahorrar energía en la estación", "Porque el raíl es de goma", "Para poder frenar"],
+      "explanation": "La corriente inducida depende del movimiento. Con el tren parado o despacio, es demasiado débil para levantarlo."
+    },
+    "sc-ems": {
+      "question": "En el tren de Shanghái (sistema EMS), ¿cómo se mantiene el tren flotando?",
+      "options": ["Los electroimanes bajo el raíl son atraídos hacia arriba y los sensores ajustan la corriente sin parar", "Los imanes empujan el raíl desde abajo hacia arriba", "El tren cuelga de cables de acero", "Una capa de aire sostiene el tren"],
+      "explanation": "Los brazos del tren abrazan el raíl por debajo. La atracción lleva el tren hacia arriba y el ordenador controla la corriente para que ni se pegue ni caiga."
+    },
+    "sc-motor": {
+      "question": "¿Cómo avanza el Maglev hacia delante sin ruedas que impulsen?",
+      "options": ["Con un motor lineal: las bobinas del raíl cambian de polo y atraen y repelen al tren", "Con una hélice en la parte trasera", "Con el viento", "Solo aprovechando las pendientes"],
+      "explanation": "La bobina de delante atrae, la de detrás repele, y esa onda magnética viaja por el raíl llevándose el tren."
+    },
+    "sc-nitrogenio": {
+      "question": "En el MagLev-Cobra, ¿para qué sirve el nitrógeno líquido?",
+      "options": ["Enfriar los superconductores para que funcionen", "Aumentar el peso del tren", "Lubricar el raíl", "Servir de combustible"],
+      "explanation": "El superconductor solo funciona muy frío. El nitrógeno líquido, a unos −196 °C, consigue ese enfriamiento."
+    },
+    "sc-supercondutor": {
+      "question": "¿Qué hace un superconductor enfriado cerca de un imán?",
+      "options": ["Expulsa parte del campo y «fija» la posición del imán, lo que permite flotar de forma estable", "Se convierte en un imán normal", "Se calienta hasta fundirse", "Atrae cualquier metal cercano"],
+      "explanation": "El superconductor expulsa el campo (efecto Meissner) y atrapa parte de él, lo que da estabilidad sin necesidad de un ordenador."
+    },
+    "sc-cobra": {
+      "question": "¿Dónde se desarrolló el MagLev-Cobra?",
+      "options": ["En la UFRJ, en Río de Janeiro", "En Japón", "En Alemania", "En China"],
+      "explanation": "El MagLev-Cobra se desarrolla en el Laboratorio de Aplicaciones de Superconductores (LASUP) de la COPPE/UFRJ."
+    },
+    "sc-polos-sul-sul": {
+      "question": "¿Qué ocurre cuando acercamos el polo sur de un imán al polo sur de otro imán?",
+      "options": ["Se repelen", "Se atraen", "Se quedan pegados y no se sueltan más", "No ocurre nada porque solo el norte tiene fuerza"],
+      "explanation": "Los polos iguales se repelen, sean dos nortes o dos sures. Es la misma regla que vale para norte con norte."
+    },
+    "sc-polos-norte-sul": {
+      "question": "¿Qué ocurre cuando acercamos el polo norte de un imán al polo sur de otro imán?",
+      "options": ["Se atraen", "Se repelen", "Los dos pierden el magnetismo", "No ocurre nada"],
+      "explanation": "Los polos distintos se atraen. Por eso un imán se pega al otro cuando giramos uno de ellos."
+    },
+    "sc-polos-onde-forca": {
+      "question": "En un imán de barra, ¿dónde es más fuerte la fuerza magnética?",
+      "options": ["Cerca de los polos, en los extremos", "En el centro de la barra", "Igual en todos los puntos", "Lejos del imán"],
+      "explanation": "Los polos son las regiones de efecto más fuerte. En el centro de la barra la fuerza es bastante menor."
+    },
+    "sc-polos-bussola-gira": {
+      "question": "Si cuelgas un imán de barra por el centro con un hilo, ¿qué hace?",
+      "options": ["Gira hasta que un polo apunte al norte geográfico", "Se queda en cualquier posición, sin moverse", "Pierde el magnetismo al instante", "Se convierte en un electroimán"],
+      "explanation": "El imán se orienta con el campo de la Tierra, como la aguja de una brújula. El polo que apunta al norte geográfico se llama polo norte."
+    },
+    "sc-esfregar-prego": {
+      "question": "¿Qué ocurre si frotas un clavo de hierro siempre en el mismo sentido con un imán?",
+      "options": ["El clavo se convierte en un imán débil", "No ocurre nada nunca", "El clavo se funde", "El imán pierde los polos"],
+      "explanation": "Frotar siempre en el mismo sentido alinea parte de los dominios del clavo, y este atrae clips durante un tiempo."
+    },
+    "sc-aquecer-ima": {
+      "question": "¿Qué ocurre si un imán se calienta mucho?",
+      "options": ["Se debilita, porque los dominios se desordenan", "Se hace más fuerte", "Se convierte en un electroimán", "No cambia nada"],
+      "explanation": "El calor agita los átomos y desalinea los dominios. Por eso los imanes no debenirse al fuego."
+    },
+    "sc-materiais-atraidos": {
+      "question": "¿Qué objeto puede atraer un imán común?",
+      "options": ["Un clavo de hierro", "Una cuchara de plástico", "Una moneda de aluminio", "Un trozo de madera"],
+      "explanation": "El imán atrae materiales ferromagnéticos, como el hierro, el níquel y el cobalto. El aluminio, el plástico y la madera no son atraídos."
+    },
+    "sc-queda-desmagnetiza": {
+      "question": "¿Por qué dejar caer un imán al suelo muchas veces es una mala idea?",
+      "options": ["Los golpes desordenan los dominios y lo debilitan", "Pierde los polos por el suelo", "Se convierte en madera", "Crea una carga eléctrica peligrosa"],
+      "explanation": "Los golpes fuertes desalinean los dominios, igual que hace el calor. El imán sigue siendo un imán, pero se debilita."
+    },
+    "sc-campo-perto-longe": {
+      "question": "Dos imanes se repelen ligeramente a cierta distancia. ¿Qué ocurre si los acercas más?",
+      "options": ["La repulsión se hace mucho más fuerte", "La repulsión desaparece", "Empiezan a atraerse", "No cambia nada"],
+      "explanation": "Cerca del imán el campo es más intenso, porque las líneas están más juntas. La fuerza crece deprisa al aproximarse."
+    },
+    "sc-campo-direcao": {
+      "question": "¿Qué muestra una brújula cuando la llevamos cerca de un imán?",
+      "options": ["La dirección del campo magnético en ese punto", "El color del campo", "El peso del imán", "La temperatura del aire"],
+      "explanation": "La aguja es un imán diminuto y se alinea con el campo local. Al cambiar de sitio, apunta en otra dirección."
+    },
+    "sc-linhas-cruzam": {
+      "question": "Sobre las líneas de campo magnético, ¿qué es correcto?",
+      "options": ["Nunca se cruzan", "Se cruzan constantemente", "Solo existen dentro del imán", "Están hechas de hierro"],
+      "explanation": "Las líneas son un dibujo del campo: en cada punto el campo tiene una sola dirección, así que las líneas no se cruzan."
+    },
+    "sc-peso-puxa": {
+      "question": "Cuando un objeto flota quieto en el aire, ¿qué fuerza lo tira hacia abajo?",
+      "options": ["El peso del objeto", "El viento", "La luz", "El sonido"],
+      "explanation": "El peso siempre tira hacia abajo. Para flotar, otra fuerza tiene que equilibrarlo."
+    },
+    "sc-resultante-zero": {
+      "question": "Un objeto está quieto flotando. ¿Cuánto vale la fuerza resultante sobre él?",
+      "options": ["Cero", "Igual al peso", "Muy grande hacia arriba", "Muy grande hacia abajo"],
+      "explanation": "Estar quieto es equilibrio: las fuerzas se cancelan. Es la primera ley de Newton."
+    },
+    "sc-forca-maior-sobe": {
+      "question": "Si la fuerza magnética hacia arriba llega a ser mayor que el peso, ¿qué ocurre?",
+      "options": ["El objeto sube", "Sigue quieto", "El objeto baja", "Pierde su peso"],
+      "explanation": "La resultante apunta hacia arriba y el objeto sube. Para quedarse quieto, las dos fuerzas deben ser iguales."
+    },
+    "sc-forca-menor-desce": {
+      "question": "Si la fuerza magnética hacia arriba llega a ser menor que el peso, ¿qué ocurre?",
+      "options": ["El objeto baja", "Sigue quieto", "El objeto sube", "Flota hacia un lado sin caer"],
+      "explanation": "La resultante apunta hacia abajo y el objeto baja. Es lo que pasa cuando el Maglev se apaga."
+    },
+    "sc-balanca-equilibrio": {
+      "question": "¿Qué situación se parece a flotar quieto en equilibrio?",
+      "options": ["Una balanza en reposo con pesos iguales en los dos lados", "Una pelota rodando cuesta abajo", "Un coche acelerando", "Una cometa arrastrada por un viento fuerte"],
+      "explanation": "En los dos casos las fuerzas se cancelan y nada se mueve. Equilibrio es fuerza resultante nula."
+    },
+    "sc-levitron-giro": {
+      "question": "¿Por qué el trompo Levitron solo flota mientras gira?",
+      "options": ["El giro impide que se voltee y escape hacia un lado", "El giro crea un viento que lo sostiene", "El giro desactiva la gravedad", "El giro calienta el imán"],
+      "explanation": "Solo con imanes quietos no hay equilibrio estable. El giro funciona como un apoyo que mantiene la posición."
+    },
+    "sc-fuga-lado": {
+      "question": "Intentas hacer flotar un imán quieto sobre otro, con polos iguales enfrentados. ¿Qué tiende a hacer?",
+      "options": ["Deslizarse hacia un lado y voltearse", "Quedarse quieto para siempre", "Pegarse hacia abajo", "Perder los polos"],
+      "explanation": "Es el teorema de Earnshaw: sin control ni giro, el imán de arriba siempre encuentra una forma de escaparse hacia un lado."
+    },
+    "sc-solucao-trens": {
+      "question": "¿Cómo resuelven los trenes Maglev el problema que señaló Earnshaw?",
+      "options": ["Usando electroimanes controlados por ordenador o superconductores", "Usando imanes más grandes y confiando en que salga bien", "Desactivando la gravedad", "Usando pegamento invisible"],
+      "explanation": "El control ajusta la fuerza en todo momento, o el superconductor fija la posición. Los imanes quietos por sí solos no bastan."
+    },
+    "sc-apoio-eixo": {
+      "question": "¿Por qué algunos juguetes que levitan tienen un eje o una guía?",
+      "options": ["Para impedir que el objeto escape hacia un lado", "Para que quede más bonito", "Para aumentar el peso", "Para esconder una pila"],
+      "explanation": "El eje hace el papel del apoyo que falta en el equilibrio con solo imanes. Sin él, el objeto se desliza."
+    },
+    "sc-earnshaw-ideia": {
+      "question": "¿Qué dice el teorema de Earnshaw, en palabras sencillas?",
+      "options": ["No se puede mantener un objeto quieto en el aire solo con imanes permanentes", "Los imanes no funcionan de día", "Todo imán pierde su fuerza en una semana", "La gravedad no existe"],
+      "explanation": "Samuel Earnshaw demostró en 1842 que los imanes permanentes por sí solos no crean un punto de equilibrio estable."
+    },
+    "sc-nucleo-ferro": {
+      "question": "¿Para qué sirve el núcleo de hierro de muchos electroimanes?",
+      "options": ["Para hacer el campo más intenso", "Para decorar la bobina", "Para enfriar el cable", "Para impedir que pase la corriente"],
+      "explanation": "El hierro concentra las líneas de campo. Con el núcleo, el mismo cable con la misma corriente atrae con más fuerza."
+    },
+    "sc-mais-corrente": {
+      "question": "¿Qué ocurre si aumentamos la corriente eléctrica en un electroimán?",
+      "options": ["La fuerza magnética aumenta", "La fuerza desaparece", "Los polos desaparecen para siempre", "Se convierte en madera"],
+      "explanation": "La fuerza del electroimán sigue a la corriente. Así ajusta el Maglev su levitación."
+    },
+    "sc-inverter-polos": {
+      "question": "¿Cómo se invierten los polos norte y sur de un electroimán?",
+      "options": ["Invirtiendo el sentido de la corriente eléctrica", "Agitando la bobina", "Pintando la bobina de otro color", "Esperando una hora"],
+      "explanation": "El sentido de la corriente define qué lado es el norte. Invertir la pila invierte los polos."
+    },
+    "sc-guindaste-solta": {
+      "question": "Una grúa con electroimán sujeta chatarra de hierro. ¿Cómo suelta la carga?",
+      "options": ["Desconectando la corriente eléctrica", "Esperando a que el hierro se funda", "Echándole agua", "Soplando"],
+      "explanation": "Sin corriente, el campo desaparece y la chatarra cae. Con un imán permanente no sería tan fácil soltarla."
+    },
+    "sc-faraday-ideia": {
+      "question": "¿Qué dice la ley de Faraday, la que usa el Maglev japonés?",
+      "options": ["Un imán en movimiento cerca de una bobina genera corriente eléctrica", "Un imán quieto genera corriente para siempre", "La corriente desaparece cuando hay movimiento", "El hierro no sufre inducción"],
+      "explanation": "El movimiento del imán cambia el campo en la bobina e induce corriente. Quieto, casi no se induce nada."
+    },
+    "sc-parado-sem-corrente": {
+      "question": "¿Por qué el Maglev japonés, parado, no induce una corriente fuerte en el raíl?",
+      "options": ["Porque la inducción necesita movimiento", "Porque las bobinas se apagan con el frío", "Porque el tren es demasiado ligero", "Porque el raíl es de goma"],
+      "explanation": "Sin variación del campo apenas hay corriente inducida. Por eso necesita ruedas hasta ganar velocidad."
+    },
+    "sc-dinamo": {
+      "question": "¿Qué objeto cotidiano funciona con el mismo principio de inducción del Maglev japonés?",
+      "options": ["El dinamo de la bicicleta, que enciende el faro al girar", "Una pila normal guardada en un cajón", "Un vaso de cristal", "Una regla de plástico"],
+      "explanation": "En el dinamo, un imán gira cerca de una bobina y genera corriente. En el Maglev, son los imanes del tren al pasar junto a las bobinas del raíl."
+    },
+    "sc-altura-eds": {
+      "question": "Cuando levita, ¿a qué altura flota el Maglev japonés (EDS)?",
+      "options": ["A unos 10 cm por encima de la vía", "Pegado al raíl, sin holgura", "A 10 metros de altura", "A 1 km de altura"],
+      "explanation": "La repulsión de la corriente inducida sostiene el tren a unos 10 cm por encima de la vía, mucho más que la holgura de 1 a 1,5 cm del tren de Shanghái."
+    },
+    "sc-abraco-trilho": {
+      "question": "En el sistema EMS (Shanghái), ¿dónde están los electroimanes que sostienen el tren?",
+      "options": ["En brazos que abrazan el raíl por debajo, tirando del tren hacia arriba", "En el techo, empujando hacia abajo", "Solo en las ruedas de goma", "Fuera del tren, en el suelo"],
+      "explanation": "Los brazos en forma de C quedan bajo el raíl. La atracción lleva el tren hacia arriba, contra su peso."
+    },
+    "sc-folga-1cm": {
+      "question": "¿Cuál es la holgura entre el tren de Shanghái y el raíl durante la levitación?",
+      "options": ["Entre 1 y 1,5 centímetros", "Unos 10 centímetros", "Unos 10 metros", "No hay medida, varía sin control"],
+      "explanation": "El ordenador mantiene una holgura de 1 a 1,5 cm. Demasiado cerca se pega, demasiado lejos cae."
+    },
+    "sc-sensor-perto": {
+      "question": "En el EMS, si el tren se acerca demasiado al raíl, ¿qué hace el ordenador?",
+      "options": ["Reduce la corriente para debilitar la atracción", "Aumenta la corriente", "Desconecta las ruedas", "Aumenta el peso del tren"],
+      "explanation": "Menos corriente, menos atracción, y el tren baja un poco. El ajuste ocurre miles de veces por segundo."
+    },
+    "sc-sensor-longe": {
+      "question": "En el EMS, si el tren empieza a alejarse del raíl, ¿qué hace el ordenador?",
+      "options": ["Aumenta la corriente para reforzar la atracción", "Reduce la corriente", "Frena con las ruedas", "Espera a que el maquinista empuje"],
+      "explanation": "Más corriente vuelve a tirar del tren hacia arriba. Es como equilibrar una escoba en la mano, corrigiendo sin parar."
+    },
+    "sc-xangai-ems-tipo": {
+      "question": "¿Qué tipo de levitación usa el tren Maglev de Shanghái?",
+      "options": ["Atracción magnética (EMS), con electroimanes tirando hacia arriba", "Repulsión por inducción como el japonés", "Flotación con aire comprimido", "Sostenimiento solo con ruedas"],
+      "explanation": "Shanghái usa EMS: atracción controlada. El japonés usa EDS: repulsión por corriente inducida."
+    },
+    "sc-frente-atrai-tras-repele": {
+      "question": "En un motor lineal, ¿qué hacen con el tren las bobinas del raíl?",
+      "options": ["La de delante atrae y la de detrás repele, empujando el tren hacia delante", "Todas repelen el tren hacia arriba", "Todas atraen el tren hacia abajo", "Nada, solo decora el raíl"],
+      "explanation": "La combinación de atraer y repelir se repite a lo largo del raíl y se lleva el tren, sin tocarlo."
+    },
+    "sc-corrente-alternada-motor": {
+      "question": "¿Por qué el motor lineal usa corriente alterna?",
+      "options": ["Para cambiar los polos de las bobinas sin parar y crear una onda que avanza", "Porque la corriente continua está prohibida", "Para encender las luces del tren", "Para calentar el raíl"],
+      "explanation": "La corriente alterna invierte los polos con el ritmo justo. Esa onda magnética arrastra el tren."
+    },
+    "sc-sem-atrito-motor": {
+      "question": "¿Cuál es la ventaja de acelerar el tren sin tocar el raíl?",
+      "options": ["Menos rozamiento, así que puede ir mucho más rápido y silencioso", "El tren pesa más", "El tren gasta más combustible", "El tren avanza más despacio"],
+      "explanation": "Sin ruedas rozando el raíl apenas hay desgaste ni ruido de fricción. Por eso el Maglev supera los 400 km/h."
+    },
+    "sc-desenrolado-motor": {
+      "question": "¿Por qué se dice que el motor lineal es un motor normal desenrollado?",
+      "options": ["Porque el giro se convirtió en un movimiento en línea recta a lo largo del raíl", "Porque está roto", "Porque no usa magnetismo", "Porque funciona con pilas"],
+      "explanation": "En un motor normal el campo gira y mueve el eje. En el lineal, el campo avanza recto y se lleva el tren."
+    },
+    "sc-onda-motor": {
+      "question": "¿Qué lleva al tren Maglev hacia delante?",
+      "options": ["Una onda magnética que viaja por el raíl", "El viento", "La pendiente del trazado", "Pasajeros empujando"],
+      "explanation": "Las bobinas se encienden y apagan en secuencia. El tren sigue esa onda como una tabla de surf sigue la ola del mar."
+    },
+    "sc-frio-necessario": {
+      "question": "¿Por qué el superconductor del MagLev-Cobra necesita estar muy frío?",
+      "options": ["Porque solo funciona como superconductor a temperaturas muy bajas", "Porque el frío deja el tren más bonito", "Porque el calor aumenta la levitación", "Porque el hielo se pega al raíl"],
+      "explanation": "Sin refrigeración, el material se convierte en una cerámica normal. El nitrógeno líquido mantiene el efecto."
+    },
+    "sc-meissner-ideia": {
+      "question": "¿Qué es el efecto Meissner, en forma sencilla?",
+      "options": ["El superconductor frío expulsa parte del campo magnético", "El superconductor calienta el imán", "El imán funde el superconductor", "El campo desaparece para siempre"],
+      "explanation": "Al expulsar el campo, el superconductor flota sobre el imán. Una parte del campo queda atrapada y da estabilidad."
+    },
+    "sc-estavel-sem-computador": {
+      "question": "¿Cuál es la ventaja del MagLev-Cobra frente al sistema de Shanghái?",
+      "options": ["Flota de forma estable sin necesitar un ordenador que lo ajuste todo", "Avanza siempre más despacio", "Necesita un raíl de goma", "No usa magnetismo"],
+      "explanation": "El superconductor fija la posición por sí solo. En Shanghái, los sensores y el ordenador corrigen la corriente sin parar."
+    },
+    "sc-guiamento": {
+      "question": "En un tren Maglev, ¿cuál es la función del sistema de guiado?",
+      "options": ["Mantener el tren alineado en la vía, sin desplazarse hacia los lados", "Empujar el tren hacia delante", "Enfriar los imanes del tren", "Frenar el tren en las estaciones"],
+      "explanation": "La levitación mantiene el tren en el aire, la propulsión lo lleva hacia delante y el guiado impide que escape hacia los lados."
+    },
+    "sc-tres-sistemas": {
+      "question": "¿Cuáles son los tres sistemas que necesita todo tren Maglev?",
+      "options": ["Levitación, guiado y propulsión", "Ruedas, frenos y motor diésel", "Hélice, alas y timón", "Caldera, pistón y chimenea"],
+      "explanation": "El tren necesita quedar suspendido (levitación), alineado en la vía (guiado) y ser llevado hacia delante (propulsión, con el motor lineal)."
+    },
+    "sc-onde-opera": {
+      "question": "Según el vídeo de la página 6, ¿en qué países hay trenes Maglev transportando pasajeros hoy?",
+      "options": ["China y Japón", "Brasil y Argentina", "Estados Unidos y Canadá", "Reino Unido y Corea del Sur"],
+      "explanation": "Solo China y Japón explotan Maglev comerciales. El Reino Unido y Corea del Sur tuvieron líneas, pero están clausuradas."
+    },
+    "sc-linhas-fechadas": {
+      "question": "¿Por qué se clausuraron las líneas Maglev del Reino Unido y de Corea del Sur?",
+      "options": ["Costes altos, falta de repuestos y poca demanda de pasajeros", "Los trenes eran demasiado lentos", "Los imanes perdieron el magnetismo", "Una ley prohibió los trenes eléctricos"],
+      "explanation": "Mantener una línea Maglev es caro. Con pocas piezas de repuesto y pocos pasajeros, las líneas dejaron de compensar."
+    },
+    "sc-desvantagem": {
+      "question": "¿Cuál de estas es una desventaja de los trenes Maglev?",
+      "options": ["La vía es muy cara y no aprovecha las vías de los ferrocarriles normales", "Hacen más ruido que un avión", "Soltan mucho humo", "Las ruedas desgastan la vía rápidamente"],
+      "explanation": "Una línea Maglev exige un control magnético de alta precisión y hay que construirla desde cero, lo que encarece mucho la obra."
+    },
+    "sc-manutencao": {
+      "question": "¿Por qué un tren Maglev necesita menos mantenimiento que un tren normal?",
+      "options": ["Porque no toca la vía, así que sus piezas casi no se desgastan", "Porque siempre va despacio", "Porque no usa electricidad", "Porque solo funciona de noche"],
+      "explanation": "Sin ruedas rozando la vía, no hay desgaste por fricción entre el tren y la vía."
+    },
+    "sc-energia": {
+      "question": "¿Por qué el Maglev gasta menos energía que un tren normal a alta velocidad?",
+      "options": ["Porque, sin rozamiento con la vía, solo tiene que vencer la resistencia del aire", "Porque no lleva pasajeros", "Porque apaga los imanes a mitad de trayecto", "Porque solo baja por pendientes"],
+      "explanation": "El rozamiento de las ruedas con la vía desaparece. Solo queda el aire que frena el tren."
+    },
+    "sc-silencio": {
+      "question": "¿Por qué el Maglev es más silencioso que los trenes tradicionales?",
+      "options": ["No hay rozamiento de ruedas en la vía y la propulsión es eléctrica", "Los coches están hechos de espuma", "El maquinista pide silencio", "Solo circula dentro de túneles"],
+      "explanation": "Gran parte del ruido de un tren viene de las ruedas sobre la vía y del motor de combustión. El Maglev no tiene ninguna de las dos cosas."
+    },
+    "sc-chuo": {
+      "question": "¿Qué está construyendo Japón con la línea Chuo Shinkansen?",
+      "options": ["Una línea Maglev entre Tokio y Nagoya, con trenes de hasta unos 500 km/h", "Un puente hacia Brasil", "Un metro con ruedas de goma", "Un aeropuerto flotante"],
+      "explanation": "Las obras empezaron en 2014. La primera etapa tendrá 286 km, casi todos en túneles, y se recorrerán en unos 40 minutos."
+    },
+    "sc-xangai-partida": {
+      "question": "A diferencia del Maglev japonés, el tren de Shanghái (EMS)…",
+      "options": ["levita desde la salida, sin usar ruedas en ningún momento", "usa ruedas hasta pasar de 100 km/h", "solo levita por encima de 600 km/h", "flota sobre aire comprimido"],
+      "explanation": "En el EMS, la atracción de los electroimanes funciona incluso con el tren parado, porque no depende de una corriente inducida por el movimiento."
+    },
+    "sc-xangai-rota": {
+      "question": "¿Qué conecta la línea Maglev de Shanghái?",
+      "options": ["El aeropuerto de Pudong con una estación de metro de la ciudad", "Shanghái con Tokio", "Dos ciudades de Brasil", "Un puerto con una mina de hierro"],
+      "explanation": "Es la única línea Maglev de alta velocidad en operación en el mundo. Ha llegado a 431 km/h y hoy circula a 300 km/h."
+    },
+    "sc-helio": {
+      "question": "En el Maglev japonés, los imanes superconductores se enfrían con…",
+      "options": ["helio líquido", "agua helada", "hielo seco", "el viento de los túneles"],
+      "explanation": "Los superconductores de niobio-titanio del tren japonés solo funcionan muy fríos. El MagLev-Cobra usa otro material, enfriado con nitrógeno líquido."
+    }
+  },
+  "trueFalse": {
+    "tf-atraem": { "statement": "Los polos magnéticos distintos (norte y sur) se atraen.", "feedback": "Verdadero. Los polos distintos se atraen; los iguales se repelen." },
+    "tf-isolar": { "statement": "Es posible conseguir un polo norte solo partiendo un imán por la mitad.", "feedback": "Falso. Cada trozo se convierte en un imán nuevo, con norte y sur." },
+    "tf-ferro": { "statement": "En un trozo de hierro común, los dominios magnéticos apuntan en todas las direcciones y sus efectos se cancelan.", "feedback": "Verdadero. Por eso el hierro común no se comporta como un imán, aunque un imán sí lo atraiga." },
+    "tf-afastadas": { "statement": "Cuanto más separadas están las líneas de campo, más fuerte es el campo magnético.", "feedback": "Falso. Es al revés: las líneas más juntas indican un campo más fuerte." },
+    "tf-norte-sul": { "statement": "Fuera del imán, las líneas de campo magnético salen del polo norte y entran en el polo sur.", "feedback": "Verdadero. Esta es la convención que se usa en los libros de texto y en el Laboratorio de imanes." },
+    "tf-soma": { "statement": "El campo magnético en un punto es la suma de los campos de todos los imanes cercanos.", "feedback": "Verdadero. Es lo que viste al girar los imanes del laboratorio." },
+    "tf-resultante": { "statement": "Para que un objeto flote quieto, la fuerza resultante sobre él debe ser nula.", "feedback": "Verdadero. La fuerza magnética hacia arriba cancela exactamente el peso." },
+    "tf-estavel": { "statement": "Solo con imanes permanentes es fácil conseguir que un objeto flote quieto y estable, sin ningún apoyo.", "feedback": "Falso. El teorema de Earnshaw demuestra que no es posible: el objeto se escapa hacia un lado." },
+    "tf-bobina": { "statement": "Una corriente eléctrica que pasa por una bobina produce un campo magnético.", "feedback": "Verdadero. Es el principio del electroimán, descubierto a partir del experimento de Oersted." },
+    "tf-fixo": { "statement": "La fuerza de un electroimán no se puede modificar.", "feedback": "Falso. Basta con cambiar la corriente eléctrica para aumentar, disminuir o apagar la fuerza." },
+    "tf-parado": { "statement": "El Maglev japonés ya flota cuando está parado en la estación.", "feedback": "Falso. Usa ruedas de goma hasta ganar velocidad, alrededor de 100-150 km/h; solo entonces la corriente inducida es lo bastante intensa." },
+    "tf-sensores": { "statement": "En el sistema EMS, los ordenadores ajustan la corriente miles de veces por segundo para que el tren ni se pegue ni caiga.", "feedback": "Verdadero. Ese control mantiene una holgura de 1 a 1,5 centímetros entre el tren y el raíl." },
+    "tf-xangai": { "statement": "El tren Maglev de Shanghái flota usando atracción magnética.", "feedback": "Verdadero. Usa el sistema EMS, en el que los electroimanes son atraídos hacia arriba, en dirección al raíl." },
+    "tf-desenrolado": { "statement": "El motor lineal es como un motor eléctrico normal «desenrollado» a lo largo del raíl.", "feedback": "Verdadero. En vez de girar un eje, el campo magnético «avanza» por el raíl y se lleva el tren." },
+    "tf-rodas-giram": { "statement": "Para ganar velocidad, el Maglev necesita ruedas girando sobre la vía.", "feedback": "Falso. Quien acelera el tren es el motor lineal, sin contacto con la vía." },
+    "tf-reage": { "statement": "El nitrógeno líquido reacciona químicamente con el superconductor para crear el campo magnético.", "feedback": "Falso. El nitrógeno solo enfría. El campo viene de los imanes de la vía." },
+    "tf-brasil": { "statement": "El MagLev-Cobra es un tren de levitación magnética desarrollado en Brasil, en la UFRJ.", "feedback": "Verdadero. Se desarrolla en el LASUP, laboratorio de la COPPE/UFRJ." },
+    "tf-poloforte-ponta": { "statement": "Los polos, en los extremos del imán, son las regiones donde el magnetismo es más intenso.", "feedback": "Verdadero. En el centro de la barra el efecto es bastante más débil." },
+    "tf-norte-aponta-norte": { "statement": "El polo norte de un imán libre para girar apunta al norte geográfico de la Tierra.", "feedback": "Verdadero. Así funciona una brújula." },
+    "tf-so-norte-atrai": { "statement": "Solo el polo norte atrae hierro; el polo sur no atrae.", "feedback": "Falso. Los dos polos atraen hierro igual. Norte y sur solo importan entre dos imanes." },
+    "tf-aluminio-nao": { "statement": "Un imán común no atrae una lata de aluminio.", "feedback": "Verdadero. El aluminio no es ferromagnético; el hierro, el níquel y el cobalto sí." },
+    "tf-quente-fraco": { "statement": "Calentar mucho un imán puede hacerlo más débil.", "feedback": "Verdadero. El calor desordena los dominios que estaban alineados." },
+    "tf-todos-materiais": { "statement": "Un imán atrae todos los metales por igual.", "feedback": "Falso. El plástico, el aluminio y la madera no son atraídos; el hierro sí." },
+    "tf-esfregar-nunca": { "statement": "Frotar un clavo con un imán, siempre en el mismo sentido, nunca cambia nada en el clavo.", "feedback": "Falso. Eso alinea parte de los dominios y el clavo se convierte en un imán débil durante un tiempo." },
+    "tf-perto-forte": { "statement": "Cuanto más cerca del imán, más intenso suele ser el campo magnético.", "feedback": "Verdadero. Las líneas más juntas indican un campo más intenso." },
+    "tf-linhas-cruzam": { "statement": "Las líneas de campo magnético pueden cruzarse entre sí.", "feedback": "Falso. En cada punto el campo tiene una sola dirección, así que las líneas nunca se cruzan." },
+    "tf-peso-baixo": { "statement": "El peso de un objeto siempre apunta hacia abajo.", "feedback": "Verdadero. Para flotar, la fuerza magnética tiene que apuntar hacia arriba." },
+    "tf-sobe-maior": { "statement": "Si la fuerza hacia arriba es mayor que el peso, el objeto sube.", "feedback": "Verdadero. La fuerza resultante apunta hacia arriba." },
+    "tf-menor-parado": { "statement": "Si la fuerza hacia arriba es menor que el peso, el objeto sigue quieto flotando.", "feedback": "Falso. Baja, porque la fuerza resultante apunta hacia abajo." },
+    "tf-dobro-peso": { "statement": "Para flotar quieto, la fuerza magnética tiene que ser el doble del peso.", "feedback": "Falso. Tiene que ser igual al peso, para que la resultante sea nula." },
+    "tf-giro-ajuda": { "statement": "El giro del trompo Levitron ayuda a mantenerlo flotando sin que se deslice hacia un lado.", "feedback": "Verdadero. El giro funciona como el apoyo que les falta a los imanes quietos." },
+    "tf-eixo-guia": { "statement": "Los juguetes de levitación usan ejes o guías para impedir que el objeto escape hacia un lado.", "feedback": "Verdadero. El apoyo mantiene la posición que los imanes por sí solos no pueden mantener." },
+    "tf-ima-grande-resolve": { "statement": "Basta con usar imanes permanentes muy grandes para conseguir una levitación estable sin control.", "feedback": "Falso. Según Earnshaw, el tamaño no lo resuelve: siempre hay escapatoria hacia un lado." },
+    "tf-earnshaw-1842": { "statement": "El teorema de Earnshaw, de 1842, dice que los imanes permanentes por sí solos no sostienen una levitación estable.", "feedback": "Verdadero. Por eso los trenes usan control electrónico o superconductores." },
+    "tf-mais-espiras": { "statement": "Enrollar más vueltas de cable en la bobina, con la misma corriente, suele hacer el electroimán más fuerte.", "feedback": "Verdadero. Más espiras suman más campo, como más dominios alineados." },
+    "tf-inverter-pilha": { "statement": "Invertir los cables de la pila en un electroimán invierte sus polos norte y sur.", "feedback": "Verdadero. El sentido de la corriente define cuáles son los polos." },
+    "tf-permanente-igual": { "statement": "Un electroimán funciona exactamente igual que un imán permanente y nunca se puede apagar.", "feedback": "Falso. Sin corriente el campo desaparece; esa es la gran ventaja del electroimán." },
+    "tf-movimento-corrente": { "statement": "Acercar y alejar un imán de una bobina genera corriente eléctrica en ella.", "feedback": "Verdadero. Es la inducción por variación del campo, la ley de Faraday." },
+    "tf-parado-nada": { "statement": "Un imán totalmente parado cerca de una bobina sigue generando una corriente fuerte sin parar.", "feedback": "Falso. Sin movimiento no hay variación del campo, así que apenas hay corriente." },
+    "tf-dinamo-bike": { "statement": "El dinamo de la bicicleta enciende el faro por inducción, cuando la rueda gira.", "feedback": "Verdadero. Es el mismo principio que el Maglev japonés, a pequeña escala." },
+    "tf-altura-10cm": { "statement": "En levitación, el Maglev japonés flota a unos 10 cm por encima de la vía.", "feedback": "Verdadero. Mucho más alto que la holgura de 1 a 1,5 cm del tren de Shanghái." },
+    "tf-abraco-c": { "statement": "En el EMS, unos brazos en forma de C abrazan el raíl por debajo y son tirados hacia arriba.", "feedback": "Verdadero. La atracción sostiene el tren contra su peso." },
+    "tf-folga-1m": { "statement": "La holgura del tren de Shanghái en levitación es de unos 1 metro.", "feedback": "Falso. Es de 1 a 1,5 centímetros, y la controla el ordenador." },
+    "tf-sem-computador-ems": { "statement": "El sistema EMS funciona bien incluso sin sensores ni ordenador.", "feedback": "Falso. Sin ajustes miles de veces por segundo, el tren se pegaría o caería." },
+    "tf-frente-puxa": { "statement": "En el motor lineal, la bobina por delante del tren lo atrae mientras la de detrás lo repele.", "feedback": "Verdadero. Ese atraer-y-repelir viaja por el raíl llevándose el tren." },
+    "tf-atrito-motor": { "statement": "El motor lineal necesita ruedas que impulsen sobre la vía para acelerar el tren.", "feedback": "Falso. La aceleración viene de la onda magnética, sin contacto con la vía." },
+    "tf-alternada-motor": { "statement": "La corriente alterna en la vía sirve para cambiar los polos de las bobinas con el ritmo justo.", "feedback": "Verdadero. Sin ese cambio no habría onda que llevara el tren." },
+    "tf-frio-super": { "statement": "El superconductor del MagLev-Cobra solo funciona cuando está muy frío.", "feedback": "Verdadero. Por eso se usa nitrógeno líquido, a unos −196 °C." },
+    "tf-nitrogenio-combustivel": { "statement": "El nitrógeno líquido sirve de combustible, que se quema para mover el tren.", "feedback": "Falso. Solo enfría; el movimiento viene del motor lineal y la levitación, del magnetismo." },
+    "tf-estavel-super": { "statement": "Enfriado, el superconductor mantiene una levitación estable sin un ordenador que lo ajuste todo.", "feedback": "Verdadero. El campo queda parcialmente atrapado y mantiene la posición (efecto Meissner)." },
+    "tf-guiamento": { "statement": "El sistema de guiado de un Maglev mantiene el tren alineado en la vía, sin desplazarse hacia los lados.", "feedback": "Verdadero. Es uno de los tres sistemas del Maglev, junto con la levitación y la propulsión." },
+    "tf-tres-sistemas": { "statement": "Un tren Maglev solo necesita levitación; el guiado y la propulsión son innecesarios.", "feedback": "Falso. Sin guiado el tren se escaparía hacia los lados y sin propulsión no avanzaría." },
+    "tf-china-japao": { "statement": "Hoy en día, hay trenes Maglev con pasajeros funcionando en China y Japón.", "feedback": "Verdadero. Otros países solo tienen líneas de prueba o proyectos de investigación." },
+    "tf-reino-unido": { "statement": "El Reino Unido y Corea del Sur siguen manteniendo líneas Maglev comerciales en servicio.", "feedback": "Falso. Ambos tuvieron líneas comerciales, pero se clausuraron por el coste alto, la falta de repuestos y la poca demanda." },
+    "tf-trilho-comum": { "statement": "Un tren Maglev puede aprovechar las vías de un ferrocarril normal que ya existe.", "feedback": "Falso. La vía del Maglev es propia, así que la línea entera hay que construirla desde cero." },
+    "tf-caro": { "statement": "Construir una línea Maglev cuesta mucho más que construir un ferrocarril normal.", "feedback": "Verdadero. El control magnético de alta precisión y la estructura propia encarecen mucho la obra." },
+    "tf-silencioso": { "statement": "Como no tiene ruedas rozando en la vía, el Maglev es más silencioso que los trenes tradicionales y que los aviones.", "feedback": "Verdadero. Sin contacto con la vía y con propulsión eléctrica, queda poco ruido." },
+    "tf-desgaste": { "statement": "Como el Maglev no toca la vía, sus piezas se desgastan más que las de un tren normal.", "feedback": "Falso. Es al revés: sin contacto, el desgaste y el mantenimiento bajan mucho." },
+    "tf-aviao": { "statement": "En viajes de media distancia, el Maglev puede ser una alternativa al avión y ayudar a descongestionar carreteras y aeropuertos.", "feedback": "Verdadero. La futura línea Tokio-Nagoya, por ejemplo, cubrirá 286 km en unos 40 minutos." },
+    "tf-xangai-rodas": { "statement": "El tren de Shanghái usa ruedas hasta ganar velocidad y solo entonces empieza a levitar.", "feedback": "Falso. El que necesita ruedas al principio es el tren japonés (EDS). El de Shanghái flota desde la salida." },
+    "tf-helio": { "statement": "Los imanes superconductores del Maglev japonés se enfrían con helio líquido.", "feedback": "Verdadero. Son superconductores de niobio-titanio, que necesitan temperaturas incluso más bajas que las del MagLev-Cobra." },
+    "tf-600": { "statement": "En pruebas, el Maglev japonés ya ha superado los 600 km/h.", "feedback": "Verdadero. En 2015, un prototipo llegó a 603 km/h." }
+  }
+}

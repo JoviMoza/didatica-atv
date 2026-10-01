@@ -83,6 +83,12 @@ $allowedExtensions = @(
     ".ppt", ".pptx", ".odt", ".ods", ".odp", ".xml", ".csv", ".diff", ".patch",
     ".swf", ".md", ".textile", ".vtt", ".webvtt", ".js", ".css"
 )
+# Timestamp gravado em cada entrada do zip. CreateEntryFromFile usaria o mtime
+# do arquivo, e o mtime muda a cada build (e a cada git checkout), entao o
+# SHA-256 publicado nunca bateria com o .h5p commitado. Um instante fixo, no
+# inicio da era do formato ZIP, torna o pacote reprodutivel: mesmas fontes =>
+# mesmo hash.
+$zipTimestamp = [System.DateTimeOffset]::new(1980, 1, 1, 0, 0, 0, [System.TimeSpan]::Zero)
 $archive = [System.IO.Compression.ZipFile]::Open(
     $temporary,
     [System.IO.Compression.ZipArchiveMode]::Create
@@ -107,12 +113,19 @@ try {
         if ($allowedExtensions -notcontains $extension) {
             throw "Extensao nao permitida no H5P (Lumi rejeita): $entryName"
         }
-        $null = [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
-            $archive,
-            $_.FullName,
-            $entryName,
-            [System.IO.Compression.CompressionLevel]::Optimal
-        )
+        $entry = $archive.CreateEntry($entryName, [System.IO.Compression.CompressionLevel]::Optimal)
+        $entry.LastWriteTime = $zipTimestamp
+        # Not $input: that is a PowerShell automatic variable and assigning to
+        # it does not create a FileStream.
+        $fileStream = [System.IO.File]::OpenRead($_.FullName)
+        $entryStream = $entry.Open()
+        try {
+            $fileStream.CopyTo($entryStream)
+        }
+        finally {
+            $entryStream.Dispose()
+            $fileStream.Dispose()
+        }
     }
 }
 finally {

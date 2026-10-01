@@ -1,0 +1,31 @@
+# Line endings are part of the deliverable, not a matter of taste.
+#
+# build-h5p.ps1 publishes the SHA-256 of the .h5p, and the package is expected to
+# be UTF-8 with LF. With core.autocrlf=true (the Windows default here), a fresh
+# checkout rewrites the sources with CRLF, those CRLF bytes go straight into the
+# zip, and the hash stops matching the committed .sha256 — silently, and only on
+# Windows. Pinning LF here is what makes the build reproducible.
+* text=auto eol=lf
+
+# Binaries: never let the text conversion above look at them.
+*.h5p   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.webm  binary
+*.mp4   binary
+*.m4a   binary
+*.mp3   binary
+*.ogg   binary
+*.wav   binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.db    binary
+*.db-*  binary
+
+# PowerShell 5.1 needs a BOM to read the accented Portuguese in these scripts.
+# The BOM is orthogonal to line endings, and text=auto keeps it.
+*.ps1   text eol=lf
